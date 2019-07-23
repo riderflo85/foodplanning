@@ -4,5 +4,5 @@ from . import views
 
 app_name = 'usercontrol'
 urlpatterns = [
-    path(),
+    path('', views.sign_in, name="sign_in"),
 ]
