@@ -3,3 +3,50 @@ body
     height: 100vh;
     background-image: linear-gradient(to bottom, #ffbf00, #ff4000);
 }
+
+.border-box
+{
+    border: 0px solid;
+    border-radius: 30px;
+}
+
+.border-img
+{
+    border: 0px solid;
+    border-radius: 30px 0px 0px 30px;
+}
+
+.content-all
+{
+    background-color: white;
+}
+
+.image-left
+{
+    width: 700px;
+}
+
+.login-forms
+{
+    width: 700px;
+}
+
+.margin-device
+{
+    margin-right: 20px;
+}
+/* Changer les bordures avec les media queries */
+@media (min-width: 200px)
+{
+    .border-img
+    {
+        border: 0px solid;
+        border-radius: 30px;
+    }
+
+    .border-box
+    {
+        border: 0px solid;
+        border-radius: 30px;
+    }
+}
