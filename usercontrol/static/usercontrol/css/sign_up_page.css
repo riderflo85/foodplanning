@@ -1,1 +1,19 @@
 /* SIGN_UP */
+
+.content-sign_up
+{
+    background-color: #19191b;
+    color: white;
+}
+
+.img-sign_up
+{
+    display: block;
+    height: 500px;
+    margin: auto;
+}
+
+.links-login
+{
+    color: whitesmoke;
+}
