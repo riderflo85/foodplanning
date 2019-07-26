@@ -11,7 +11,9 @@
         <link rel="icon" type="image/png" href="{% static 'usercontrol/img/logo.png' %}">
 
         <!-- Style CSS -->
-        <link rel="stylesheet" href="{% static 'usercontrol/css/my_style.css' %}">
+        <link rel="stylesheet" href="{% static 'usercontrol/css/header.css' %}">
+        <link rel="stylesheet" href="{% static 'usercontrol/css/sign_in_page.css' %}">
+        <link rel="stylesheet" href="{% static 'usercontrol/css/sign_up_page.css' %}">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,6 +23,12 @@
     </head>
 
     <body>
+
+        <!-- header -->
+        <header class="fixed-top text-center">
+            <h1><i class="fas fa-calendar-alt"></i> Food</h1>
+            <h1>Planning</h1>
+        </header>
         <!-- content block -->
         {% block content %} {% endblock content %}
 
