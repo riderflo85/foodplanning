@@ -1,5 +1,217 @@
 {% extends 'planning/base.html' %}
 
 {% block content %}
-<h1>Test</h1>
+<section class="define-size">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 col-lg-2 offset-9 offset-lg-10 text-center pos-button">
+                <button type="button" class="btn btn-primary">Ajouter un plannig</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid define-size-2">
+        <div class="row h-100">
+            <div class="col-12 col-lg-10 offset-lg-1 h-100">
+                <p class="lead text-white mt-5">Planning pour Florent</p>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Lundi</th>
+                            <th scope="col">Mardi</th>
+                            <th scope="col">Mercredi</th>
+                            <th scope="col">Jeudi</th>
+                            <th scope="col">Vendredi</th>
+                            <th scope="col">Samedi</th>
+                            <th scope="col">Dimanche</th>
+                            <th scope="col">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select name="Lundi" class="custom-select" id="Lundi-pl-1">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Mardi" class="custom-select" id="Mardi-pl-1">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Mercredi" class="custom-select" id="Mercredi-pl-1">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Jeudi" class="custom-select" id="Jeudi-pl-1">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Vendredi" class="custom-select" id="Vendredi-pl-1">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Samedi" class="custom-select" id="Samedi-pl-1">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Dimanche" class="custom-select" id="Dimanche-pl-1">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="d-flex-inline">
+                                    <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                    <button type="button" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td id="plat-lu-pl-1">Poulet frite <a href="#" class="badge badge-pill badge-warning text-secondary">notif</a></td>
+                            <td id="plat-ma-pl-1">Haricot champignon</td>
+                            <td id="plat-me-pl-1">Gratin <a href="#" class="badge badge-pill badge-warning text-secondary">notif</a></td>
+                            <td id="plat-je-pl-1">Quiche loraine</td>
+                            <td id="plat-ve-pl-1">Riz et langue de bouef <a href="#" class="badge badge-pill badge-warning text-secondary">notif</a></td>
+                            <td id="plat-sa-pl-1">Pizza</td>
+                            <td id="plat-di-pl-1">Frite</td>
+                            <td><button type="button" class="btn btn-warning text-white"><i class="fas fa-bell"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="lead text-white mt-5">Planning pour Océane</p>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Lundi</th>
+                            <th scope="col">Mardi</th>
+                            <th scope="col">Mercredi</th>
+                            <th scope="col">Jeudi</th>
+                            <th scope="col">Vendredi</th>
+                            <th scope="col">Samedi</th>
+                            <th scope="col">Dimanche</th>
+                            <th scope="col">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select name="Lundi" class="custom-select test-color" id="Lundi-pl-2">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Mardi" class="custom-select" id="Mardi-pl-2">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Mercredi" class="custom-select" id="Mercredi-pl-2">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Jeudi" class="custom-select" id="Jeudi-pl-2">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Vendredi" class="custom-select" id="Vendredi-pl-2">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Samedi" class="custom-select" id="Samedi-pl-2">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="Dimanche" class="custom-select" id="Dimanche-pl-2">
+                                    <option selected>Choisissez un plât</option>
+                                    <option value="croc">croc monsieur</option>
+                                    <option value="pate">pate</option>
+                                    <option value="patate">patate</option>
+                                    <option value="gratin">gratin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="d-flex-inline">
+                                    <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                    <button type="button" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td id="plat-lu-pl-2">Frite</td>
+                            <td id="plat-ma-pl-2">Frite <a href="#" class="badge badge-pill badge-warning text-secondary">notif</a></td>
+                            <td id="plat-me-pl-2">Frite <a href="#" class="badge badge-pill badge-warning text-secondary">notif</a></td>
+                            <td id="plat-je-pl-2">Frite</td>
+                            <td id="plat-ve-pl-2">Frite</td>
+                            <td id="plat-sa-pl-2">Frite <a href="#" class="badge badge-pill badge-warning text-secondary">notif</a></td>
+                            <td id="plat-di-pl-2">Frite</td>
+                            <td><button type="button" class="btn btn-warning text-white"><i class="fas fa-bell"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- end .col-12 -->
+        </div><!-- end .row -->
+    </div><!-- end .container-fluid -->
+</section>
 {% endblock content %}

@@ -1,0 +1,24 @@
+/* Style for header */
+
+ul
+{
+    margin-bottom: 0px!important;
+    height: 100%;
+}
+
+li
+{
+    list-style: none;
+}
+
+.esp-title
+{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.esp-list
+{
+    margin-right: 30px;
+    margin-top: 10px;
+}
