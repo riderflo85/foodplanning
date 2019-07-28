@@ -6,7 +6,7 @@ class LoginForm(forms.Form):
         label='user',
         max_length=100,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Pseudo ou email', 'class': 'form-control'}
+            attrs={'placeholder': 'Pseudo', 'class': 'form-control'}
             ),
     )
     password = forms.CharField(

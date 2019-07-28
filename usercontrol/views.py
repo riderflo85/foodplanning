@@ -1,8 +1,12 @@
 from django.shortcuts import render
-from .forms import SignupForm
+from .forms import SignupForm, LoginForm
 
 def sign_in(request):
-    return render(request, 'usercontrol/sign_in.html')
+    context = {}
+    form = LoginForm()
+    context['form'] = form
+
+    return render(request, 'usercontrol/sign_in.html', context)
 
 def sign_up(request):
     context = {}
