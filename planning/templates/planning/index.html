@@ -1,6 +1,7 @@
 {% extends 'planning/base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <section class="define-size">
     <div class="container-fluid">
         <div class="row">
@@ -214,4 +215,15 @@
         </div><!-- end .row -->
     </div><!-- end .container-fluid -->
 </section>
+{% else %}
+<section class="define-size">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-12 text-center h-100 d-flex justify-content-center align-items-center">
+                <h1 class="text-danger"><strong>Merci de vous <a href="{% url 'usercontrol:sign_in' %}" class="link text-warning">connectez</a> pour pouvoir avoir accès au fonctionnalitées de l'application web.</strong></h1>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 {% endblock content %}

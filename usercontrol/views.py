@@ -59,3 +59,8 @@ def sign_up(request):
     context['form'] = form
 
     return render(request, 'usercontrol/sign_up.html', context)
+
+def sign_out(request):
+    logout(request)
+
+    return redirect(reverse('usercontrol:sign_in'))

@@ -17,7 +17,8 @@
                             <h3 class="text-danger"><strong>Utilisateur incorrect ou mot de passe invalide</strong></h3>
                             {% endif %}
                             {% if user.is_authenticated %}
-                            <h3 class="text-white">Vous êtes connectez {{ user.username }}!</h3>
+                            <h3 class="text-info">Vous êtes connectez {{ user.username }}!</h3>
+                            <a href="{% url 'planning:planning' %}"> Accéder à votre planning de repas pour la semaine :-)</a>
                             {% else %}
                             <form action="{% url 'usercontrol:sign_in' %}" method='post'>
                             {% csrf_token %}
