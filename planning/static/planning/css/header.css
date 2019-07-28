@@ -19,6 +19,20 @@ li
 
 .esp-list
 {
+    border: 1px solid #ffbf00;
+    border-left: 0px;
+    border-right: 0px;
     margin-right: 30px;
     margin-top: 10px;
+}
+
+.link-menu
+{
+    color: white;
+}
+
+.link-menu:hover
+{
+    text-decoration: none;
+    color: #ff4000;
 }
