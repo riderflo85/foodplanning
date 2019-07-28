@@ -31,6 +31,7 @@ def sign_in(request):
 
 def sign_up(request):
     context = {'error': False}
+    confirm = False
 
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -51,8 +52,15 @@ def sign_up(request):
             phone_number.number = phone
             phone_number.id_user = new_user
             phone_number.save()
+            confirm = True
         else:
             context['error'] = form.errors.items()
+        
+        if confirm:
+            return redirect(reverse('usercontrol:sign_in'))
+        else:
+            pass
+
     else:
         form = SignupForm()
 
