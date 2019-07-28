@@ -13,6 +13,12 @@
                         </div>
                         <div class="login-forms margin-device">
                             <h1>Connexion</h1>
+                            {% if error %}
+                            <h3 class="text-danger"><strong>Utilisateur incorrect ou mot de passe invalide</strong></h3>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            <h3 class="text-white">Vous êtes connectez {{ user.username }}!</h3>
+                            {% else %}
                             <form action="{% url 'usercontrol:sign_in' %}" method='post'>
                             {% csrf_token %}
                                 <div class="input-group form-group">
@@ -41,6 +47,7 @@
                             <div>
                                 <a href="#">Mot de passe oublié ?</a>
                             </div>
+                            {% endif %}
                         </div><!-- .login-forms -->
                     </div><!-- end .d-flex flex-sm-column... -->
                 </div><!-- end .h-100 d-flex... -->
