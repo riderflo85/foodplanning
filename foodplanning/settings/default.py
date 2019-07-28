@@ -33,6 +33,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INSTALLED_APPS = [
     'usercontrol.apps.UsercontrolConfig',
     'planning.apps.PlanningConfig',
+    'fooddish.apps.FooddishConfig',
     'notification.apps.NotificationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
