@@ -58,6 +58,6 @@ class SignupForm(forms.Form):
         widget=forms.TextInput(
             attrs={'placeholder': 'Numéro de portable pour être notifié',
             'class': 'form-control',
-            'pattern': "[0-9]{1}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"}
+            'pattern': "[0-9]{1}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}"}
         )
     )
