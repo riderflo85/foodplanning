@@ -19,11 +19,12 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <div class="card" id="list_all_dish">
+                <!-- Card Box -->
+                <div class="card list-all-dish">
                     <div class="card-header">
                         <p class="lead">Voici la liste des plats disponibles</p>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body scroll-body">
                         {% if list_dish %}
                         <ul>
                             {% for dish in list_dish %}
@@ -32,7 +33,7 @@
                         </ul>
                         {% endif %}
                     </div>
-                </div>
+                </div><!-- end .card -->
             </div>
         </div>
     </div>
@@ -50,8 +51,10 @@
                 <form action="{% url 'fooddish:add_dish' %}" method='post'>
                     <div class="modal-body">
                     {% csrf_token %}
-                        <div class="input-group form-group">
-                            <span>Nom du plat</span>
+                        <div class="input-group my-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Nom du plat</span>
+                            </div>
                             {{ form.name_dish }}
                         </div>
                     </div>

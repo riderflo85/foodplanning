@@ -1,6 +1,11 @@
-#list_all_dish
+.list-all-dish
 {
     width: 50%;
+    height: 700px;
+}
+
+.scroll-body
+{
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
