@@ -1,4 +1,6 @@
-.test
+#list_all_dish
 {
-    color: red;
+    width: 50%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }

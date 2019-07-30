@@ -7,5 +7,61 @@
 
 
 {% block content %}
-<h1 class="test">test fooddish</h1>
+<section class="define-size">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 col-xl-2 offset-6 offset-xl-10 text-center pos-button">
+                <button type="button" class="btn btn-success mx-sm-3" id="addNewDish"><i class="fas fa-plus"></i> Ajouter un plat</button>
+                <button type="button" class="btn btn-danger" id="deleteDish"><i class="fas fa-trash-alt"></i> Supprimer un plat</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="card" id="list_all_dish">
+                    <div class="card-header">
+                        <p class="lead">Voici la liste des plats disponibles</p>
+                    </div>
+                    <div class="card-body">
+                        {% if list_dish %}
+                        <ul>
+                            {% for dish in list_dish %}
+                            <li class="my-3">{{ dish.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Box add dish-->
+    <div class="modal fade" id="modalBoxAddDish" tabindex="-1" role="dialog" aria-labelledby="addNewDish" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNewDish">Ajout d'un plat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'fooddish:add_dish' %}" method='post'>
+                    <div class="modal-body">
+                    {% csrf_token %}
+                        <div class="input-group form-group">
+                            <span>Nom du plat</span>
+                            {{ form.name_dish }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Valider">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}
