@@ -5,6 +5,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.14']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
