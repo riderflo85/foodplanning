@@ -1,4 +1,4 @@
 window.onload = function () {
     addNewDish()
-    // deleteDish()
+    deleteDish()
 }

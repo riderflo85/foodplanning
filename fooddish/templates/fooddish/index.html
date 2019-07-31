@@ -10,9 +10,11 @@
 <section class="define-size">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6 col-xl-2 offset-6 offset-xl-10 text-center pos-button">
-                <button type="button" class="btn btn-success mx-sm-3" id="addNewDish"><i class="fas fa-plus"></i> Ajouter un plat</button>
-                <button type="button" class="btn btn-danger" id="deleteDish"><i class="fas fa-trash-alt"></i> Supprimer un plat</button>
+            <div class="col-12 text-center pos-button">
+                <div class="float-right pr-3">
+                    <button type="button" class="btn btn-success mx-3" id="addNewDish"><i class="fas fa-plus"></i> Ajouter un plat</button>
+                    <button type="button" class="btn btn-danger" id="btnDeleteDish"><i class="fas fa-trash-alt"></i> Supprimer un plat</button>
+                </div>
             </div>
         </div>
     </div>
@@ -66,7 +68,42 @@
             </div>
         </div>
     </div>
+    <!-- Modal Box del dish-->
+    <div class="modal fade" id="modalBoxDeleteDish" tabindex="-1" role="dialog" aria-labelledby="deleteDish" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteDish">Suppression d'un plat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'fooddish:delete_dish' %}" method='post'>
+                    <div class="modal-body">
+                    {% csrf_token %}
+                        <div class="input-group my-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Plat à supprimer</span>
+                            </div>
+                            {{ form_select.del_dish }}
+                            {% comment %} <select name="listDish" id="deleteDish" class="custom-select">
+                                <option selected>Choisissez...</option>
+                                {% for dish in list_dish %}
+                                <option value="{{ dish.pk }}">{{ dish.name }}</option>
+                                {% endfor %}
+                            </select> {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" id="btnConfirmDelete" class="btn btn-success" value="Valider">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 <script src="{% static 'fooddish/js/addnewdish.js' %}"></script>
+<script src="{% static 'fooddish/js/deletedish.js' %}"></script>
 <script src="{% static 'fooddish/js/script.js' %}"></script>
 {% endblock content %}

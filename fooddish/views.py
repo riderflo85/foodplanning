@@ -1,16 +1,18 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Fooddish
-from.forms import AddDishForms
+from.forms import AddDishForms, DelDishForms
 
 # Create your views here.
 def index(request):
     context = {}
 
     form = AddDishForms()
+    form_select = DelDishForms()
     list_dish = Fooddish.objects.all()
     context['list_dish'] = list_dish
     context['form'] = form
+    context['form_select'] = form_select
 
     return render(request, 'fooddish/index.html', context)
 
@@ -27,5 +29,21 @@ def add_dish(request):
 
         else:
             return redirect(reverse('fooddish:liste_des_plats'))
+    else:
+        pass
+
+def delete_dish(request):
+    if request.method == 'POST':
+        form = DelDishForms(request.POST)
+
+        if form.is_valid():
+            del_dish = form.cleaned_data['del_dish']
+            dish = Fooddish.objects.get(pk=del_dish)
+            dish.delete()
+            return redirect(reverse('fooddish:liste_des_plats'))
+
+        else:
+            return redirect(reverse('fooddish:liste_des_plats'))
+
     else:
         pass
