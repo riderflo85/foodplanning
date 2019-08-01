@@ -137,19 +137,20 @@
                         <select name="listUser" class="form-control" id="listAllUser">
                             <option selected>Choisissez un utilisateur auquel associès le nouveau planning</option>
                             {% for user in users %}
-                            <option value="{{ user.pk }}">{{ user.username }}</option>
+                            <option value='{"name":"{{ user.first_name }}","pk":"{{ user.pk }}"}'>{{ user.first_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Créez le nouveau planning</button>
+                    <button type="button" class="btn btn-success" id="saveUserNewPlanning">Créez le nouveau planning</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script src="{% static 'planning/js/cls.js' %}"></script>
 <script src="{% static 'planning/js/addplanning.js' %}"></script>
 <script src="{% static 'planning/js/scripts.js' %}"></script>
 {% else %}
