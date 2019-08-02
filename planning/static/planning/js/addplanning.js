@@ -9,12 +9,14 @@ function addPlanning() {
     });
 
     btnSave.addEventListener('click', function () {
-        let test = new Planning();
-        let username = test.get_user();
-        console.log(test.get_user());
+        let planningFood = new Planning();
+        let username = planningFood.set_user_planning();
 
         var baliseTitlePlannig = "<p class='lead text-white mt-5'>Planning pour "+username+"</p>";
         $(baliseTitlePlannig).appendTo(divContent);
+        
+        planningFood.new_planning(divContent);
+
     });
 }
 
