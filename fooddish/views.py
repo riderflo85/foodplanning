@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.http import JsonResponse
 from .models import Fooddish
 from.forms import AddDishForms, DelDishForms
 
@@ -47,3 +48,13 @@ def delete_dish(request):
 
     else:
         pass
+
+def all_dish(request):
+    if request.method == 'GET':
+        list_dish = []
+        dishs = Fooddish.objects.all()
+
+        for i in dishs:
+            list_dish.append(i.name)
+    
+    return JsonResponse({'Data': list_dish})

@@ -1,5 +1,5 @@
 class Planning {
-    id_user = NaN;
+    id_user = null;
     week = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche', '#'];
 
     set_user_planning(){
@@ -17,6 +17,8 @@ class Planning {
         var trHead = `<tr id='trHead${this.id_user}'></tr>`;
         var thHead = `<th scope='col' id='thHead${this.id_user}'>`;
         var trBody = `<tr id='trBody${this.id_user}'></tr>`;
+        var dishs = this.get_all_dish();
+        console.log(dishs);
         
         $(baliseTable).appendTo(content);
 
@@ -58,13 +60,45 @@ class Planning {
                 var baliseSelect = `<select name='${this.week[i]}' class='custom-select' id='${this.week[i]}-pl-${this.id_user}'></select>`;
                 var baliseOptionDefault = `<option selected>Choisissez un plat</option>`;
                 $(baliseSelect).appendTo(td);
-
+                
                 var select = document.getElementById(`${this.week[i]}-pl-${this.id_user}`);
                 $(baliseOptionDefault).appendTo(select);
+
+                for (let i = 0; i < dishs.Data.length; i++) {
+                    var baliseDish = `<option value='${dishs.Data[i]}'>${dishs.Data[i]}</option>`;
+                    $(baliseDish).appendTo(select);
+                }
             }
             
         }
 
         return table;
+    }
+
+    get_all_dish() {
+        var csrftoken = getCookie('csrftoken');
+        var list_dish;
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $.ajax({
+            url: '/liste_des_plats/all_dish',
+            type: 'GET',
+            async: false,
+            success: function (data) {
+                list_dish = data;
+            },
+            error: function (error) {
+                console.log(error);
+                return false;
+            },
+        });
+        return list_dish;
     }
 }
