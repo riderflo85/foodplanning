@@ -21,7 +21,20 @@ body
     height: calc(100vh - (108px + 67px));
 }
 
+/* .z-index-content
+{
+    display: none;
+    position: relative;
+    z-index: 2;
+} */
+
 .pos-button
 {
     margin-top: 70px;
 }
+
+/* .z-index-block
+{
+    position: relative;
+    z-index: 3;
+} */

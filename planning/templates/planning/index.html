@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid define-size-2">
+    <div class="container-fluid define-size-2 z-index-block">
         <div class="row h-100">
             <div class="col-12 col-lg-10 offset-lg-1 h-100" id="divContent">
                 <p class="lead text-white mt-5">Planning pour Florent</p>
@@ -149,8 +149,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Box remove new plannig -->
+    <div class="modal fade" id="modalBoxRemoveNewPlanning" tabindex="-1" role="dialog" aria-labelledby="addRemovePlanning"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Suppression du planning</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Etes vous sûr de vouloir supprimez ce planning ??</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="confirmUserRemovePlanning" data-dismiss="modal">Supprimer le planning</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <script src="{% static 'planning/js/secureajax.js' %}"></script>
+<script src="{% static 'planning/js/validateplanning.js' %}"></script>
+<script src="{% static 'planning/js/editplanning.js' %}"></script>
+<script src="{% static 'planning/js/removeplanning.js' %}"></script>
 <script src="{% static 'planning/js/cls.js' %}"></script>
 <script src="{% static 'planning/js/addplanning.js' %}"></script>
 <script src="{% static 'planning/js/scripts.js' %}"></script>

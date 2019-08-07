@@ -67,7 +67,6 @@ class Planning {
 
         // Promise()
         const onSucces = data => {
-            console.log(data);
             for (let i = 0; i < this.week.length; i++) {
                 var baliseTd = `<td id='td${this.id_user}${i}'></td>`;
                 $(baliseTd).appendTo(tr_body);
@@ -78,12 +77,33 @@ class Planning {
                     $(baliseDivBtn).appendTo(td);
 
                     var divBtn = document.getElementById(`divBtn${this.id_user}`);
-                    var btnCheck = `<button type='button' class='btn btn-success' id='btnValidPlanning${this.id_user}'><i class='fas fa-check'></i></button>`;
-                    var btnEdit = `<button type='button' class='btn btn-primary' id='btnEditPlanning${this.id_user}'><i class='fas fa-pencil-alt'></i></button>`;
-                    var btnRemove = `<button type='button' class='btn btn-danger' id='btnRemovePlanning${this.id_user}'><i class='fas fa-trash-alt'></i></button>`;
-                    $(btnCheck).appendTo(divBtn);
-                    $(btnEdit).appendTo(divBtn);
-                    $(btnRemove).appendTo(divBtn);
+                    var baliseBtnCheck = `<button type='button' class='btn btn-success' id='btnValidPlanning${this.id_user}'><i class='fas fa-check'></i></button>`;
+                    var baliseBtnEdit = `<button type='button' class='btn btn-primary' id='btnEditPlanning${this.id_user}'><i class='fas fa-pencil-alt'></i></button>`;
+                    var baliseBtnRemove = `<button type='button' class='btn btn-danger' id='btnRemovePlanning${this.id_user}'><i class='fas fa-trash-alt'></i></button>`;
+                    $(baliseBtnCheck).appendTo(divBtn);
+                    $(baliseBtnEdit).appendTo(divBtn);
+                    $(baliseBtnRemove).appendTo(divBtn);
+
+                    /* ****** Gestionnaire d'événement pour les trois boutons des plannings ******  */
+                    var btnCheck = document.getElementById('btnValidPlanning' + this.id_user);
+                    var btnEdit = document.getElementById('btnEditPlanning' + this.id_user);
+                    var btnRemove = document.getElementById('btnRemovePlanning' + this.id_user);
+                    var user_id = this.id_user;
+
+                    btnCheck.addEventListener('click', function () {
+                        validatePlanning(user_id);
+                    });
+
+                    btnEdit.addEventListener('click', function () {
+                        editPlanning(user_id);
+                    });
+
+                    btnRemove.addEventListener('click', function () {
+                        removePlanning(user_id);
+                    });
+                    /* ***************************************************************************  */
+
+
                 } else {
                     var baliseSelect = `<select name='${this.week[i]}' class='custom-select' id='${this.week[i]}-pl-${this.id_user}'></select>`;
                     var baliseOptionDefault = `<option selected>Choisissez un plat</option>`;
