@@ -78,7 +78,7 @@ class Planning {
 
                     var divBtn = document.getElementById(`divBtn${this.id_user}`);
                     var baliseBtnCheck = `<button type='button' class='btn btn-success' id='btnValidPlanning${this.id_user}'><i class='fas fa-check'></i></button>`;
-                    var baliseBtnEdit = `<button type='button' class='btn btn-primary' id='btnEditPlanning${this.id_user}'><i class='fas fa-pencil-alt'></i></button>`;
+                    var baliseBtnEdit = `<button type='button' class='btn btn-primary' id='btnEditPlanning${this.id_user}' disabled><i class='fas fa-pencil-alt'></i></button>`;
                     var baliseBtnRemove = `<button type='button' class='btn btn-danger' id='btnRemovePlanning${this.id_user}'><i class='fas fa-trash-alt'></i></button>`;
                     $(baliseBtnCheck).appendTo(divBtn);
                     $(baliseBtnEdit).appendTo(divBtn);
@@ -92,6 +92,7 @@ class Planning {
 
                     btnCheck.addEventListener('click', function () {
                         validatePlanning(user_id, btnCheck);
+                        btnEdit.removeAttribute('disabled');
                     });
 
                     btnEdit.addEventListener('click', function () {
