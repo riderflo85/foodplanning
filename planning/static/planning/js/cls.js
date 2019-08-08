@@ -91,7 +91,7 @@ class Planning {
                     var user_id = this.id_user;
 
                     btnCheck.addEventListener('click', function () {
-                        validatePlanning(user_id);
+                        validatePlanning(user_id, btnCheck);
                     });
 
                     btnEdit.addEventListener('click', function () {
@@ -105,7 +105,7 @@ class Planning {
 
 
                 } else {
-                    var baliseSelect = `<select name='${this.week[i]}' class='custom-select' id='${this.week[i]}-pl-${this.id_user}'></select>`;
+                    var baliseSelect = `<select name='${this.week[i]}' class='custom-select listing-for-disabled-${this.id_user}' id='${this.week[i]}-pl-${this.id_user}'></select>`;
                     var baliseOptionDefault = `<option selected>Choisissez un plat</option>`;
                     $(baliseSelect).appendTo(td);
 
