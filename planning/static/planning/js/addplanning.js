@@ -13,7 +13,7 @@ function addPlanning() {
         let planningFood = new Planning();
         let username = planningFood.set_user_planning();
 
-        var baliseTitlePlannig = `<p class='lead text-white mt-5' id='userPlanning${planningFood.id_user}'>Planning pour ${username}</p>`;
+        var baliseTitlePlannig = `<p class='lead text-white mt-5 animated rollIn' id='userPlanning${planningFood.id_user}'>Planning pour ${username}</p>`;
         $(baliseTitlePlannig).appendTo(divContent);
         
         planningFood.new_planning(divContent);
