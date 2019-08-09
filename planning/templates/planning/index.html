@@ -185,7 +185,26 @@
                 </div>
                 <form>
                     <div class="modal-body">
-                        <div class="form-row align-items-center my-3">
+                        <div class="my-3">
+                            <label for="details">Plat à notifier</label>
+                            <div class="input-group" id="details">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Repas du</div>
+                                </div>
+                                <select class="form-control custom-select" id="selectDay">
+                                    <option selected>Choisissez un jour...<span>&darr;</span></option>
+                                    <option value="0">Lundi</option>
+                                    <option value="1">Mardi</option>
+                                    <option value="2">Mercredi</option>
+                                    <option value="3">Jeudi</option>
+                                    <option value="4">Vendredi</option>
+                                    <option value="5">Samedi</option>
+                                    <option value="6">Dimanche</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label>Date et heure du rappel</label>
+                        <div class="form-row align-items-center mb-3">
                             <div class="col-auto">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -203,8 +222,8 @@
                                 </div>
                             </div>
                         </div>
-                        <label for="messageNotif">Entrez un message pour votre rappel</label>
-                        <textarea name="message-notif" id="messageNotif" class="form-control mb-3" placeholder="Ecrivez votre message..." required></textarea>
+                        <label for="messageNotif">Message de rappel</label>
+                        <textarea name="message-notif" maxlength="159" id="messageNotif" class="form-control mb-3" placeholder="Ecrivez votre message..." required></textarea>
                     </div>
                     <div class="modal-footer bg-footer">
                         <button type="submit" class="btn btn-success" id="confirmNotification"
