@@ -171,8 +171,53 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Box add notification for the new plannig -->
+    <div class="modal fade" id="modalBoxNotification" tabindex="-1" role="dialog" aria-labelledby="notification"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Ajouter un rappel de notification par SMS.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-row align-items-center my-3">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Date</div>
+                                    </div>
+                                    <input type="date" max="2060-12-31" min="2019-01-01" name="date" class="form-control" id="dateNotif">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Heure</div>
+                                    </div>
+                                    <input type="time" name="heure" class="form-control" id="timeNotif">
+                                </div>
+                            </div>
+                        </div>
+                        <label for="messageNotif">Entrez un message pour votre rappel</label>
+                        <textarea name="message-notif" id="messageNotif" class="form-control mb-3" placeholder="Ecrivez votre message..." required></textarea>
+                    </div>
+                    <div class="modal-footer bg-footer">
+                        <button type="submit" class="btn btn-success" id="confirmNotification"
+                            data-dismiss="modal">Ajouter le rappel</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 <script src="{% static 'planning/js/secureajax.js' %}"></script>
+<script src="{% static 'planning/js/notification.js' %}"></script>
 <script src="{% static 'planning/js/validateplanning.js' %}"></script>
 <script src="{% static 'planning/js/editplanning.js' %}"></script>
 <script src="{% static 'planning/js/removeplanning.js' %}"></script>

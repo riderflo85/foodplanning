@@ -9,14 +9,18 @@ function validatePlanning(user, btn) {
     var trDish = $('#trDish'+user);
 
     for (let i = 0; i < trBodyChildren.length; i++) {
+
         if (i < 7) {
             var dish = trBodyChildren[i].childNodes[0].value;
             var baliseTd = `<td id='dish-day${i}-user${user}'>${dish}</td>`;
             $(baliseTd).appendTo(trDish);
-        }else {
+        }
+
+        else {
             var baliseBtnNotif = `<td><button type='button' class='btn btn-warning text-white' id='btnNotif${user}'><i class='fas fa-bell'></i></button></td>`;
             $(baliseBtnNotif).appendTo(trDish);
             var btnNotif = document.getElementById('btnNotif'+user);
+
             btnNotif.addEventListener('click', function () {
                 addNotification(user);
             });
