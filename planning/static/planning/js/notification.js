@@ -42,7 +42,7 @@ function addNotification(user) {
         var message = document.getElementById('messageNotif').value;
 
         const OnSucces = data => {
-            if (data === true) {
+            if (data['Response'] === true) {
                 console.log('La notification a bien été ajouter au gestionnaire de tache');
             }else{
                 console.warn("Une erreur est survenue, la notif n'a pas pu être ajoutée");
