@@ -5,7 +5,7 @@ from .tasks import send_notification
 from usercontrol.models import PhoneNumber
 
 
-def testtask(request):
+def set_notification(request):
     context = {}
 
     if request.method == 'POST':
