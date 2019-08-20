@@ -29,7 +29,8 @@ def create_planning_am(request):
     new_planning.id_user = request.user
     new_planning.save()
 
-    return JsonResponse({'ServeurResponse': True})
+    data_response = {'ServeurResponse': True, 'id_planning': new_planning.pk}
+    return JsonResponse(data_response)
 
 
 def create_planning_pm(request):
@@ -49,4 +50,13 @@ def create_planning_pm(request):
     new_planning.id_user = request.user
     new_planning.save()
 
-    return JsonResponse({'ServeurResponse': True})
+    data_response = {'ServeurResponse': True, 'id_planning': new_planning.pk}
+    return JsonResponse(data_response)
+
+def remove_planning_am(request):
+    if request.method == 'POST':
+        id_planning = request.POST['id_planning']
+        Planning.objects.get(id=int(id_planning)).delete()
+        return JsonResponse({'ServeurResponse': True})
+    else:
+        return JsonResponse({'ServeurResponse': False})        

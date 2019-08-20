@@ -57,7 +57,8 @@ function validatePlanning(user, btn) {
             'days7':dictDish[6]
         },
         success: function (data) {
-            // pass
+            var baliseIdPlanning = `<p class='d-none' id='idUserPlanning${user}'>${data['id_planning']}</p>`;
+            $(document.getElementById(`userPlanning${user}`)).after(baliseIdPlanning);
         },
         error: function (error) {
             console.log(error);
