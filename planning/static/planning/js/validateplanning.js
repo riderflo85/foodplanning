@@ -43,7 +43,6 @@ function validatePlanning(user, btn) {
         allSelect[i].setAttribute('disabled', '');
     }
 
-    console.log(dictDish);
     $.ajax({
         url: '/planning/set',
         type: 'POST',
@@ -58,7 +57,7 @@ function validatePlanning(user, btn) {
             'days7':dictDish[6]
         },
         success: function (data) {
-            console.log(data);
+            // pass
         },
         error: function (error) {
             console.log(error);
