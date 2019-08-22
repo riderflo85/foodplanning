@@ -155,7 +155,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-primary">
+                <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title">Édition du planning</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -165,7 +165,7 @@
                     <div class="modal-body">
                         <div class="my-3">
                             {% for day in days %}
-                            <div class="input-group" id="edit">
+                            <div class="input-group my-4" id="edit">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">{{ day }}</div>
                                 </div>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                     <div class="modal-footer bg-footer">
-                        <button type="submit" class="btn btn-success" id="confirmEdit" data-dismiss="modal">Confirmez la modification</button>
+                        <button type="submit" class="btn btn-primary" id="confirmEdit" data-dismiss="modal">Confirmez la modification</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
                     </div>
                 </form>
