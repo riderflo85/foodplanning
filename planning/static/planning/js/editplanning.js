@@ -1,18 +1,19 @@
 function editPlanning(user, btn) {
-    $('#trDish'+user).remove();
+    // $('#trDish'+user).remove();
     btn.setAttribute('disabled', '');
 
     $('#modalBoxEdit').modal();
 
     var btnValideEdit = document.getElementById('confirmEdit');
     btnValideEdit.addEventListener('click', function () {
-        var choiceMonday = document.getElementById(`selectLundiUser${user}`);
-        var choiceTuesday = document.getElementById(`selectMardiUser${user}`);
-        var choiceWednesday = document.getElementById(`selectMercrediUser${user}`);
-        var choiceThursday = document.getElementById(`selectJeudiUser${user}`);
-        var choiceFriday = document.getElementById(`selectVendrediUser${user}`);
-        var choiceSaturday = document.getElementById(`selectSamediUser${user}`);
-        var choiceSunday = document.getElementById(`selectDimancheUser${user}`);
+        var choiceMonday = $(`#selectLundiUser${user} option:selected`);
+        var choiceTuesday = $(`#selectMardiUser${user} option:selected`);
+        var choiceWednesday = $(`#selectMercrediUser${user} option:selected`);
+        var choiceThursday = $(`#selectJeudiUser${user} option:selected`);
+        var choiceFriday = $(`#selectVendrediUser${user} option:selected`);
+        var choiceSaturday = $(`#selectSamediUser${user} option:selected`);
+        var choiceSunday = $(`#selectDimancheUser${user} option:selected`);
+        var idPlanning = document.getElementById(`idUserPlanning${user}`);
         var csrftoken = getCookie('csrftoken');
         var listChoice = [choiceMonday, choiceTuesday, choiceWednesday, choiceThursday, choiceFriday, choiceSaturday, choiceSunday]
 
@@ -29,20 +30,22 @@ function editPlanning(user, btn) {
             type: 'POST',
             dataType: 'json',
             data: {
-                'monday': choiceMonday.value,
-                'tuesday': choiceTuesday.value,
-                'wednesday': choiceWednesday.value,
-                'thursday': choiceThursday.value,
-                'friday': choiceFriday.value,
-                'saturday': choiceSaturday.value,
-                'sunday': choiceSunday.value
+                'id': idPlanning.textContent,
+                'monday': choiceMonday.val(),
+                'tuesday': choiceTuesday.val(),
+                'wednesday': choiceWednesday.val(),
+                'thursday': choiceThursday.val(),
+                'friday': choiceFriday.val(),
+                'saturday': choiceSaturday.val(),
+                'sunday': choiceSunday.val()
             },
             success: function (data) {
-                if (data['ResponseServeur']) {
+                if (data['ServeurResponse']) {
                     var trDish = $('#trDish'+user).children();
                     for (let i = 0; i < trDish.length; i++) {
                         if (i < 7) {
-                            document.getElementById(`dish-day${i+1}-user${user}`).textContent = listChoice[i]
+                            var foo = document.getElementById(`dish-day${i}-user${user}`);
+                            foo.textContent = listChoice[i].text();
                         }else {
                             // pass
                         }

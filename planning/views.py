@@ -69,3 +69,18 @@ def remove_planning_am(request):
         return JsonResponse({'ServeurResponse': True})
     else:
         return JsonResponse({'ServeurResponse': False})        
+
+
+def update_planning_am(request):
+    if request.method == 'POST':
+        planning = Planning.objects.get(id=int(request.POST['id']))
+        planning.monday = Fooddish.objects.get(id=int(request.POST['monday'])).name
+        planning.tuesday = Fooddish.objects.get(id=int(request.POST['tuesday'])).name
+        planning.wednesday = Fooddish.objects.get(id=int(request.POST['wednesday'])).name
+        planning.thursday = Fooddish.objects.get(id=int(request.POST['thursday'])).name
+        planning.friday = Fooddish.objects.get(id=int(request.POST['friday'])).name
+        planning.saturday = Fooddish.objects.get(id=int(request.POST['saturday'])).name
+        planning.sunday = Fooddish.objects.get(id=int(request.POST['sunday'])).name
+        planning.save()
+
+        return JsonResponse({'ServeurResponse': True})
