@@ -2,12 +2,23 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from .models import Planning
+from fooddish.models import Fooddish
 
 
 def planning(request):
     context = {}
-
+    weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+    context['days'] = weeks
     context['users'] = User.objects.all()
+    dico_dishs = {}
+    all_dishs = Fooddish.objects.all()
+    count = 1
+
+    for i in all_dishs:
+        dico_dishs[count] = i
+        count += 1
+    
+    context['dishs'] = dico_dishs
 
     return render(request, 'planning/index.html', context)
 
