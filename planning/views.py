@@ -12,11 +12,9 @@ def planning(request):
     context['users'] = User.objects.all()
     dico_dishs = {}
     all_dishs = Fooddish.objects.all()
-    count = 1
 
     for i in all_dishs:
-        dico_dishs[count] = i
-        count += 1
+        dico_dishs[i.id] = i
     
     context['dishs'] = dico_dishs
 
