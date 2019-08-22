@@ -169,7 +169,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">{{ day }}</div>
                                 </div>
-                                <select class="form-control custom-select" id="selectDay{{ day }}">
+                                <select class="form-control custom-select" id="select{{ day }}User{{ user.id }}">
                                     <option selected>Choisissez un plat</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>

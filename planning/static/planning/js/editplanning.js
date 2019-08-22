@@ -1,9 +1,20 @@
 function editPlanning(user, btn) {
-    var allSelect = document.getElementsByClassName('listing-for-disabled-' + user);
     $('#trDish'+user).remove();
     btn.setAttribute('disabled', '');
 
-    for (let i = 0; i < allSelect.length; i++) {
-        allSelect[i].removeAttribute('disabled');
-    }
+    $('#modalBoxEdit').modal();
+
+    var btnValideEdit = document.getElementById('confirmEdit');
+    btnValideEdit.addEventListener('click', function () {
+        var choiceMonday = document.getElementById(`selectLundiUser${user}`).value;
+        var choiceTuesday = document.getElementById(`selectMardiUser${user}`).value;
+        var choiceWednesday = document.getElementById(`selectMercrediUser${user}`).value;
+        var choiceThursday = document.getElementById(`selectJeudiUser${user}`).value;
+        var choiceFriday = document.getElementById(`selectVendrediUser${user}`).value;
+        var choiceSaturday = document.getElementById(`selectSamediUser${user}`).value;
+        var choiceSunday = document.getElementById(`selectDimancheUser${user}`).value;
+
+        console.log(choiceMonday);
+
+    });
 }
