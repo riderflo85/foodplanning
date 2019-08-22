@@ -31,6 +31,7 @@ function removePlanning(user) {
                     table.addEventListener('animationend', function () {
                         $('#userPlanning' + user).remove();
                         $('#table' + user).remove();
+                        $('#idUserPlanning' + user).remove();
                     });
                 }
             },
