@@ -44,6 +44,9 @@ function addNotification(user) {
         const OnSucces = data => {
             if (data['Response'] === true) {
                 console.log('La notification a bien été ajouter au gestionnaire de tache');
+                var dayForBadge = document.getElementById(`dish-day${days}-user${user}`);
+                var baliseBadge = `<i class='badge badge-pill badge-warning text-white'></i>`;
+                $(baliseBadge).appendTo(dayForBadge);
             }else{
                 console.warn("Une erreur est survenue, la notif n'a pas pu être ajoutée");
             }
