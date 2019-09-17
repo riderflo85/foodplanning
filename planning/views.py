@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from .models import Planning
 from fooddish.models import Fooddish
+from .functions import check_user_planning, display_planning
 
 
 def planning(request):
@@ -17,6 +18,9 @@ def planning(request):
         dico_dishs[i.id] = i
     
     context['dishs'] = dico_dishs
+
+    planning = check_user_planning(request.user)
+    context['planning'] = display_planning(planning, request.user)
 
     return render(request, 'planning/index.html', context)
 
