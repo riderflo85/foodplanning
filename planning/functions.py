@@ -1,4 +1,5 @@
 from .models import Planning
+import htmlmin
 
 
 def check_user_planning(user):
@@ -115,4 +116,4 @@ def display_planning(planning, user):
             </div><!-- end .col-12 -->
         </div><!-- end .row -->
     </div><!-- end .container-fluid -->"""
-    return plan
+    return htmlmin.minify(plan)
