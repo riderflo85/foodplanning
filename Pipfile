@@ -12,7 +12,6 @@ psycopg2-binary = "*"
 celery = "*"
 redis = "*"
 callr = "*"
-htmlmin = "*"
 
 [requires]
 python_version = "3.7"
