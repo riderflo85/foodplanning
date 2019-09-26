@@ -8,19 +8,21 @@ from .functions import check_user_planning, display_planning
 
 def planning(request):
     context = {}
-    weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
-    context['days'] = weeks
-    context['users'] = User.objects.all()
-    dico_dishs = {}
-    all_dishs = Fooddish.objects.all()
 
-    for i in all_dishs:
-        dico_dishs[i.id] = i
-    
-    context['dishs'] = dico_dishs
+    if request.user.is_authenticated:
+        weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        context['days'] = weeks
+        context['users'] = User.objects.all()
+        dico_dishs = {}
+        all_dishs = Fooddish.objects.all()
 
-    planning = check_user_planning(request.user)
-    context['planning'] = display_planning(planning, request.user)
+        for i in all_dishs:
+            dico_dishs[i.id] = i
+        
+        context['dishs'] = dico_dishs
+
+        planning = check_user_planning(request.user)
+        context['planning'] = display_planning(planning, request.user)
 
     return render(request, 'planning/index.html', context)
 
