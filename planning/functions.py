@@ -1,5 +1,5 @@
+from django.utils.safestring import mark_safe
 from .models import Planning
-import htmlmin
 
 
 def check_user_planning(user):
@@ -102,7 +102,7 @@ def display_planning(planning, user):
                             </td>
                         </tr>
                         <tr class='text-center'>
-                            <td id='plat-lu-pl-1'{planning.monday} <a href='#' class='badge badge-pill badge-warning text-secondary'>notif</a></td>
+                            <td id='plat-lu-pl-1'>{planning.monday} <a href='#' class='badge badge-pill badge-warning text-secondary'>notif</a></td>
                             <td id='plat-ma-pl-1'>{planning.tuesday}</td>
                             <td id='plat-me-pl-1'>{planning.wednesday} <a href='#' class='badge badge-pill badge-warning text-secondary'>notif</a></td>
                             <td id='plat-je-pl-1'>{planning.thursday}</td>
@@ -116,4 +116,5 @@ def display_planning(planning, user):
             </div><!-- end .col-12 -->
         </div><!-- end .row -->
     </div><!-- end .container-fluid -->"""
-    return htmlmin.minify(plan)
+
+    return mark_safe(plan)
