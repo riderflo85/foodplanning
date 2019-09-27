@@ -13,7 +13,7 @@ before_scripts:
   - pipenv shell
 
 env:
-  - DJANGO_SETTINGS_MODULE=purbeurre_project.settings.travis
+  - DJANGO_SETTINGS_MODULE=foodplanning.settings.travis
 
 services:
   - postgresql
