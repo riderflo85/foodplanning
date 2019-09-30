@@ -25,7 +25,7 @@ class UnitaireTestCase(TestCase):
 
     def test_check_user_planning_function(self):
         rep = check_user_planning(self.user)
-        self.assertEqual(rep, self.plann)
+        self.assertEqual(rep[0], self.plann)
 
     def test_check_user_planning_function_fail(self):
         rep = check_user_planning('not_user')
