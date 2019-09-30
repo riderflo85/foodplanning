@@ -22,7 +22,9 @@ def planning(request):
         context['dishs'] = dico_dishs
 
         planning = check_user_planning(request.user)
-        context['planning'] = display_planning(planning, request.user)
+        # planning = []
+        context['planning'] = planning
+        # display_planning(planning, request.user)
 
     return render(request, 'planning/index.html', context)
 
