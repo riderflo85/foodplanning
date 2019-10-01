@@ -18,6 +18,18 @@ DATABASES = {
     }
 }
 
+# For local database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'foodplanning_db',
+#     'USER': 'florent',
+#     'PASSWORD': os.environ.get('PWDDB_LOCAL'),
+#     'HOST': '',
+#     'PORT': os.environ.get('PORT_DB'),
+#     }
+# }
+
 # celery config
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
