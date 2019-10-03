@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.db import IntegrityError
 from .models import Planning
 from fooddish.models import Fooddish
 from .functions import check_user_planning, display_planning
@@ -31,22 +32,34 @@ def planning(request):
 
 def create_planning_am(request):
     dico_dishs = {}
-    new_planning = Planning()
-    for i in request.POST:
-        dico_dishs[i] = request.POST[i]
-    
-    new_planning.monday = dico_dishs['days1']
-    new_planning.tuesday = dico_dishs['days2']
-    new_planning.wednesday = dico_dishs['days3']
-    new_planning.thursday = dico_dishs['days4']
-    new_planning.friday = dico_dishs['days5']
-    new_planning.saturday = dico_dishs['days6']
-    new_planning.sunday = dico_dishs['days7']
-    new_planning.moment_day = 'am'
-    new_planning.id_user = request.user
-    new_planning.save()
 
-    data_response = {'ServeurResponse': True, 'id_planning': new_planning.pk}
+    try:
+        new_planning = Planning()
+        for i in request.POST:
+            dico_dishs[i] = request.POST[i]
+    
+        new_planning.monday = dico_dishs['days1']
+        new_planning.tuesday = dico_dishs['days2']
+        new_planning.wednesday = dico_dishs['days3']
+        new_planning.thursday = dico_dishs['days4']
+        new_planning.friday = dico_dishs['days5']
+        new_planning.saturday = dico_dishs['days6']
+        new_planning.sunday = dico_dishs['days7']
+        new_planning.moment_day = 'am'
+        new_planning.id_user = request.user
+        new_planning.save()
+        error_db = False
+        validate = True
+
+    except IntegrityError:
+        error_db = True
+        validate = False
+
+    data_response = {
+        'ServeurResponse': validate,
+        'id_planning': new_planning.pk,
+        'error': error_db
+    }
     return JsonResponse(data_response)
 
 

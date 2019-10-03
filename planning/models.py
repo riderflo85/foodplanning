@@ -11,7 +11,7 @@ class Planning(models.Model):
     saturday = models.CharField(max_length=160)
     sunday = models.CharField(max_length=160)
     moment_day = models.CharField(max_length=2, null=False)
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     notif_mo = models.BooleanField(default=False)
     notif_tu = models.BooleanField(default=False)
     notif_we = models.BooleanField(default=False)

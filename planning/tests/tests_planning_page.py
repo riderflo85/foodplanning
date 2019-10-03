@@ -26,7 +26,16 @@ class PlanningPageTestCase(TestCase):
 class IntegrationTestCase(TestCase):
     def setUp(self):
         self.cli = Client()
-        self.user = User.objects.create_user('userTest', 'testuser@test.com', 'PwdUserTest')
+        self.user = User.objects.create_user(
+            'userTest',
+            'testuser@test.com',
+            'PwdUserTest'
+        )
+        self.user2 = User.objects.create_user(
+            'userTestNumberTwo',
+            'testusertwo@test.com',
+            'PwdUserTest'
+        )
         planning = Planning()
         planning.monday = "Plat 1"
         planning.tuesday = "Plat 2"
@@ -58,7 +67,7 @@ class IntegrationTestCase(TestCase):
             'days6': 'Plat 6',
             'days7': 'Plat 7'
             }
-        self.cli.login(username=self.user.username, password='PwdUserTest')
+        self.cli.login(username=self.user2.username, password='PwdUserTest')
         rep = self.cli.post('/planning/set', data)
         self.assertTrue(rep.json()['ServeurResponse'])
 
@@ -88,3 +97,18 @@ class IntegrationTestCase(TestCase):
 
         check = Planning.objects.get(id=self.plann.pk).monday
         self.assertEqual(check, self.food.name)
+
+    def test_duplicate_planning_database_error_for_user(self):
+        data = {
+            'days1': 'Plat 1',
+            'days2': 'Plat 2',
+            'days3': 'Plat 3',
+            'days4': 'Plat 4',
+            'days5': 'Plat 5',
+            'days6': 'Plat 6',
+            'days7': 'Plat 7'
+            }
+        self.cli.login(username=self.user.username, password='PwdUserTest')
+        rep = self.cli.post('/planning/set', data)
+        self.assertFalse(rep.json()['ServeurResponse'])
+        self.assertTrue(rep.json()['error'])
