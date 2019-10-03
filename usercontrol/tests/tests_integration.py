@@ -68,9 +68,10 @@ class UserAuthenticateTestCase(TestCase):
             'password': 'thislongpasswordforlogin',
             'phone_number': 670217836
         }
+        form = SignupForm(data)
         rep = self.cli.post('/sign_up/', data)
         # import pdb; pdb.set_trace()
-        # self.assertContains(rep.context, 'error')
+        # self.assertFormError(rep, form, 'email', 'Saisissez une adresse de courriel valide.')
 
 
 class FormTestCase(TestCase):
