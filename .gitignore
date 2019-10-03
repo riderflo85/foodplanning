@@ -1,3 +1,4 @@
 .env
 .vscode
 foodplanning/settings/settings.py
+foodplanning/__pycache__
