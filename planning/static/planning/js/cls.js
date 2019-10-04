@@ -85,24 +85,25 @@ class Planning {
                     $(baliseBtnRemove).appendTo(divBtn);
 
                     /* ****** Gestionnaire d'événement pour les trois boutons des plannings ******  */
-                    var btnCheck = document.getElementById('btnValidPlanning' + this.id_user);
-                    var btnEdit = document.getElementById('btnEditPlanning' + this.id_user);
-                    var btnRemove = document.getElementById('btnRemovePlanning' + this.id_user);
-                    var user_id = this.id_user;
+                    eventButton(this.id_user);
+                    // var btnCheck = document.getElementById('btnValidPlanning' + this.id_user);
+                    // var btnEdit = document.getElementById('btnEditPlanning' + this.id_user);
+                    // var btnRemove = document.getElementById('btnRemovePlanning' + this.id_user);
+                    // var user_id = this.id_user;
 
-                    btnCheck.addEventListener('click', function () {
-                        validatePlanning(user_id, btnCheck);
-                        btnEdit.removeAttribute('disabled');
-                    });
+                    // btnCheck.addEventListener('click', function () {
+                    //     validatePlanning(user_id, btnCheck);
+                    //     btnEdit.removeAttribute('disabled');
+                    // });
 
-                    btnEdit.addEventListener('click', function () {
-                        editPlanning(user_id, btnEdit);
-                        btnCheck.removeAttribute('disabled');
-                    });
+                    // btnEdit.addEventListener('click', function () {
+                    //     editPlanning(user_id, btnEdit);
+                    //     btnCheck.removeAttribute('disabled');
+                    // });
 
-                    btnRemove.addEventListener('click', function () {
-                        removePlanning(user_id);
-                    });
+                    // btnRemove.addEventListener('click', function () {
+                    //     removePlanning(user_id);
+                    // });
                     /* ***************************************************************************  */
 
 

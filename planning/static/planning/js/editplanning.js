@@ -1,6 +1,6 @@
 function editPlanning(user, btn) {
     // $('#trDish'+user).remove();
-    btn.setAttribute('disabled', '');
+    // btn.setAttribute('disabled', '');
 
     $('#modalBoxEdit').modal();
 

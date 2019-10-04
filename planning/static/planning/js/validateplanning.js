@@ -31,11 +31,7 @@ function validatePlanning(user, btn) {
         else {
             var baliseBtnNotif = `<td><button type='button' class='btn btn-warning text-white' id='btnNotif${user}'><i class='fas fa-bell'></i></button></td>`;
             $(baliseBtnNotif).appendTo(trDish);
-            var btnNotif = document.getElementById('btnNotif'+user);
-
-            btnNotif.addEventListener('click', function () {
-                addNotification(user);
-            });
+            addNotifWithButton(user);
         }
     }
     btn.setAttribute('disabled', '');
