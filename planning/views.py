@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.db import IntegrityError
 from .models import Planning
 from fooddish.models import Fooddish
-from .functions import check_user_planning, display_planning
+from .functions import check_user_planning
 
 
 def planning(request):
@@ -23,9 +23,7 @@ def planning(request):
         context['dishs'] = dico_dishs
 
         planning = check_user_planning(request.user)
-        # planning = []
         context['planning'] = planning
-        # display_planning(planning, request.user)
 
     return render(request, 'planning/index.html', context)
 
