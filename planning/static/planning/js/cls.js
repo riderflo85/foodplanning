@@ -98,7 +98,7 @@ class Planning {
 
                     // btnEdit.addEventListener('click', function () {
                     //     editPlanning(user_id, btnEdit);
-                    //     btnCheck.removeAttribute('disabled');
+                    //     // btnCheck.removeAttribute('disabled');
                     // });
 
                     // btnRemove.addEventListener('click', function () {

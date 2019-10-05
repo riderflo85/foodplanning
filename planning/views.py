@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db import IntegrityError
-from .models import Planning
+from .models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
 from .functions import check_user_planning
 
@@ -32,7 +32,7 @@ def create_planning_am(request):
     dico_dishs = {}
 
     try:
-        new_planning = Planning()
+        new_planning = PlanningAm()
         for i in request.POST:
             dico_dishs[i] = request.POST[i]
     
@@ -43,7 +43,6 @@ def create_planning_am(request):
         new_planning.friday = dico_dishs['days5']
         new_planning.saturday = dico_dishs['days6']
         new_planning.sunday = dico_dishs['days7']
-        new_planning.moment_day = 'am'
         new_planning.id_user = request.user
         new_planning.save()
         error_db = False
@@ -63,7 +62,7 @@ def create_planning_am(request):
 
 def create_planning_pm(request):
     dico_dishs = {}
-    new_planning = Planning()
+    new_planning = PlanningPm()
     for i in request.POST:
         dico_dishs[i] = request.POST[i]
     
@@ -74,7 +73,6 @@ def create_planning_pm(request):
     new_planning.friday = dico_dishs['days5']
     new_planning.saturday = dico_dishs['days6']
     new_planning.sunday = dico_dishs['days7']
-    new_planning.moment_day = 'pm'
     new_planning.id_user = request.user
     new_planning.save()
 
@@ -84,7 +82,7 @@ def create_planning_pm(request):
 def remove_planning_am(request):
     if request.method == 'POST':
         id_planning = request.POST['id_planning']
-        Planning.objects.get(id=int(id_planning)).delete()
+        PlanningAm.objects.get(id=int(id_planning)).delete()
         return JsonResponse({'ServeurResponse': True})
     else:
         return JsonResponse({'ServeurResponse': False})        
@@ -92,7 +90,7 @@ def remove_planning_am(request):
 
 def update_planning_am(request):
     if request.method == 'POST':
-        planning = Planning.objects.get(id=int(request.POST['id']))
+        planning = PlanningAm.objects.get(id=int(request.POST['id']))
         planning.monday = Fooddish.objects.get(id=int(request.POST['monday'])).name
         planning.tuesday = Fooddish.objects.get(id=int(request.POST['tuesday'])).name
         planning.wednesday = Fooddish.objects.get(id=int(request.POST['wednesday'])).name

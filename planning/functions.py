@@ -1,9 +1,9 @@
-from .models import Planning
+from .models import PlanningAm
 
 
 def check_user_planning(user):
     try:
-        planning = Planning.objects.filter(id_user=user.id)
+        planning = PlanningAm.objects.filter(id_user=user.id)
         return planning
     except:
         return False

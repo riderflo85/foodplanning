@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from planning.views import planning
-from planning.models import Planning
+from planning.models import PlanningAm
 from fooddish.models import Fooddish
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
@@ -36,7 +36,7 @@ class IntegrationTestCase(TestCase):
             'testusertwo@test.com',
             'PwdUserTest'
         )
-        planning = Planning()
+        planning = PlanningAm()
         planning.monday = "Plat 1"
         planning.tuesday = "Plat 2"
         planning.wednesday = "Plat 3"
@@ -95,7 +95,7 @@ class IntegrationTestCase(TestCase):
         rep = self.cli.post('/planning/update', data)
         self.assertTrue(rep.json()['ServeurResponse'])
 
-        check = Planning.objects.get(id=self.plann.pk).monday
+        check = PlanningAm.objects.get(id=self.plann.pk).monday
         self.assertEqual(check, self.food.name)
 
     def test_duplicate_planning_database_error_for_user(self):

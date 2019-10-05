@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
 from planning.functions import check_user_planning
-from planning.models import Planning
+from planning.models import PlanningAm
 
 
 class UnitaireTestCase(TestCase):
@@ -10,7 +10,7 @@ class UnitaireTestCase(TestCase):
         self.user = User.objects.create_user('userTest', 'testuser@test.com', 'PwdUserTest')
         self.user.first_name = 'test_first_name'
         self.user.save()
-        planning = Planning()
+        planning = PlanningAm()
         planning.monday = "Plat 1"
         planning.tuesday = "Plat 2"
         planning.wednesday = "Plat 3"
