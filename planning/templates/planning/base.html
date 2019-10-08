@@ -43,7 +43,7 @@
                     {% if user.is_authenticated %}
                     <li class="esp-list"><a href="{% url 'fooddish:liste_des_plats' %}" class="h3 link-menu mb-0">Mes Plats</a></li>
                     <li class="esp-list"><a href="{% url 'planning:planning' %}" class="h3 link-menu mb-0">Midi</a></li>
-                    <li class="esp-list"><a href="#" class="h3 link-menu mb-0">Soir</a></li>
+                    <li class="esp-list"><a href="{% url 'planning:pm' %}" class="h3 link-menu mb-0">Soir</a></li>
                     <li class="esp-list"><a href="{% url 'usercontrol:sign_out' %}" class="h3 link-menu mb-0">Déconnexion <i class="fas fa-sign-out-alt text-info"></i></a></li>
                     {% endif %}
                 </ul>

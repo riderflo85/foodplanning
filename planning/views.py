@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.db import IntegrityError
 from .models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
-from .functions import check_user_planning
+from .functions import check_user_planning_am, check_user_planning_pm
 
 
 def planning(request):
@@ -22,17 +22,42 @@ def planning(request):
         
         context['dishs'] = dico_dishs
 
-        planning = check_user_planning(request.user)
+        planning = check_user_planning_am(request.user)
         context['planning'] = planning
 
     return render(request, 'planning/index.html', context)
 
 
-def create_planning_am(request):
+def planning_pm(request):
+    context = {}
+
+    if request.user.is_authenticated:
+        weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        context['days'] = weeks
+        context['users'] = User.objects.all()
+        dico_dishs = {}
+        all_dishs = Fooddish.objects.all()
+
+        for i in all_dishs:
+            dico_dishs[i.id] = i
+        
+        context['dishs'] = dico_dishs
+
+        planning = check_user_planning_pm(request.user)
+        context['planning'] = planning
+
+    return render(request, 'planning/pm.html', context)
+
+
+def create_planning(request):
     dico_dishs = {}
 
     try:
-        new_planning = PlanningAm()
+        if request.POST['momentDay'] == 'am':
+            new_planning = PlanningAm()
+        elif request.POST['momentDay'] == 'pm':
+            new_planning = PlanningPm()
+
         for i in request.POST:
             dico_dishs[i] = request.POST[i]
     
@@ -59,38 +84,30 @@ def create_planning_am(request):
     }
     return JsonResponse(data_response)
 
-
-def create_planning_pm(request):
-    dico_dishs = {}
-    new_planning = PlanningPm()
-    for i in request.POST:
-        dico_dishs[i] = request.POST[i]
-    
-    new_planning.monday = dico_dishs['days1']
-    new_planning.tuesday = dico_dishs['days2']
-    new_planning.wednesday = dico_dishs['days3']
-    new_planning.thursday = dico_dishs['days4']
-    new_planning.friday = dico_dishs['days5']
-    new_planning.saturday = dico_dishs['days6']
-    new_planning.sunday = dico_dishs['days7']
-    new_planning.id_user = request.user
-    new_planning.save()
-
-    data_response = {'ServeurResponse': True, 'id_planning': new_planning.pk}
-    return JsonResponse(data_response)
-
-def remove_planning_am(request):
+def remove_planning(request):
     if request.method == 'POST':
         id_planning = request.POST['id_planning']
-        PlanningAm.objects.get(id=int(id_planning)).delete()
+        moment_day = request.POST['momentDay']
+
+        if moment_day == 'am':
+            PlanningAm.objects.get(id=int(id_planning)).delete()
+        elif moment_day == 'pm':
+            PlanningPm.objects.get(id=int(id_planning)).delete()
+
         return JsonResponse({'ServeurResponse': True})
     else:
-        return JsonResponse({'ServeurResponse': False})        
+        return JsonResponse({'ServeurResponse': False})
 
 
-def update_planning_am(request):
+def update_planning(request):
     if request.method == 'POST':
-        planning = PlanningAm.objects.get(id=int(request.POST['id']))
+        moment_day = request.POST['momentDay']
+
+        if moment_day == 'am':
+            planning = PlanningAm.objects.get(id=int(request.POST['id']))
+        elif moment_day == 'pm':
+            planning = PlanningPm.objects.get(id=int(request.POST['id']))
+
         planning.monday = Fooddish.objects.get(id=int(request.POST['monday'])).name
         planning.tuesday = Fooddish.objects.get(id=int(request.POST['tuesday'])).name
         planning.wednesday = Fooddish.objects.get(id=int(request.POST['wednesday'])).name

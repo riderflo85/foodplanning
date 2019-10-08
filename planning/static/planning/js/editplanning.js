@@ -1,6 +1,4 @@
-function editPlanning(user, btn) {
-    // $('#trDish'+user).remove();
-    // btn.setAttribute('disabled', '');
+function editPlanning(user, btn, amOrPm) {
 
     $('#modalBoxEdit').modal();
 
@@ -37,7 +35,8 @@ function editPlanning(user, btn) {
                 'thursday': choiceThursday.val(),
                 'friday': choiceFriday.val(),
                 'saturday': choiceSaturday.val(),
-                'sunday': choiceSunday.val()
+                'sunday': choiceSunday.val(),
+                'momentDay': amOrPm
             },
             success: function (data) {
                 if (data['ServeurResponse']) {

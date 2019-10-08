@@ -1,4 +1,4 @@
-function validatePlanning(user, btn) {
+function validatePlanning(user, btn, amOrPm) {
     var csrftoken = getCookie('csrftoken');
 
     $.ajaxSetup({
@@ -50,7 +50,8 @@ function validatePlanning(user, btn) {
             'days4':dictDish[3],
             'days5':dictDish[4],
             'days6':dictDish[5],
-            'days7':dictDish[6]
+            'days7':dictDish[6],
+            'momentDay': amOrPm
         },
         success: function (data) {
             var baliseIdPlanning = `<p class='d-none' id='idUserPlanning${user}'>${data['id_planning']}</p>`;

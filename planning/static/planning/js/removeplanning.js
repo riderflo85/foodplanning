@@ -1,11 +1,11 @@
-function removePlanning(user) {
+function removePlanning(user, amOrPm) {
     $('#modalBoxRemoveNewPlanning').modal();
     var btnValideRemoved = document.getElementById('confirmUserRemovePlanning');
 
     btnValideRemoved.addEventListener('click', function () {
         let user_planning = document.getElementById('userPlanning'+user);
         let table = document.getElementById('table'+user);
-        var idPlanning = document.getElementById(`idUserPlanning${user}`).textContent;
+        var idPlanning = document.getElementById('idUserPlanning').textContent;
 
         var csrftoken = getCookie('csrftoken');
 
@@ -21,7 +21,7 @@ function removePlanning(user) {
             url: '/planning/remove',
             type: 'POST',
             dataType: 'json',
-            data: {'id_planning': idPlanning},
+            data: {'id_planning': idPlanning, 'momentDay': amOrPm},
             success: function (data) {
                 if (data['ServeurResponse']) {
                     user_planning.classList.remove('rollIn');

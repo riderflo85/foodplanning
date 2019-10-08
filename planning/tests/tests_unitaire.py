@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
-from planning.functions import check_user_planning
+from planning.functions import check_user_planning_am
 from planning.models import PlanningAm
 
 
@@ -24,9 +24,9 @@ class UnitaireTestCase(TestCase):
         self.plann = planning
 
     def test_check_user_planning_function(self):
-        rep = check_user_planning(self.user)
+        rep = check_user_planning_am(self.user)
         self.assertEqual(rep[0], self.plann)
 
     def test_check_user_planning_function_fail(self):
-        rep = check_user_planning('not_user')
+        rep = check_user_planning_am('not_user')
         self.assertFalse(rep)

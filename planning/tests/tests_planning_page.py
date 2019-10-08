@@ -65,14 +65,15 @@ class IntegrationTestCase(TestCase):
             'days4': 'Plat 4',
             'days5': 'Plat 5',
             'days6': 'Plat 6',
-            'days7': 'Plat 7'
+            'days7': 'Plat 7',
+            'momentDay' : 'am'
             }
         self.cli.login(username=self.user2.username, password='PwdUserTest')
         rep = self.cli.post('/planning/set', data)
         self.assertTrue(rep.json()['ServeurResponse'])
 
     def test_remove_planning(self):
-        data = {'id_planning': self.plann.pk}
+        data = {'id_planning': self.plann.pk, 'momentDay': 'am'}
         rep = self.cli.post('/planning/remove', data)
         self.assertTrue(rep.json()['ServeurResponse'])
 
@@ -90,6 +91,7 @@ class IntegrationTestCase(TestCase):
             'friday': self.food2.id,
             'saturday': self.food.id,
             'sunday': self.food2.id,
+            'momentDay': 'am'
         }
 
         rep = self.cli.post('/planning/update', data)
@@ -106,7 +108,8 @@ class IntegrationTestCase(TestCase):
             'days4': 'Plat 4',
             'days5': 'Plat 5',
             'days6': 'Plat 6',
-            'days7': 'Plat 7'
+            'days7': 'Plat 7',
+            'momentDay': 'am'
             }
         self.cli.login(username=self.user.username, password='PwdUserTest')
         rep = self.cli.post('/planning/set', data)
