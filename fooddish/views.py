@@ -35,19 +35,12 @@ def add_dish(request):
 
 def delete_dish(request):
     if request.method == 'POST':
-        form = DelDishForms(request.POST)
-
-        if form.is_valid():
-            del_dish = form.cleaned_data['del_dish']
-            dish = Fooddish.objects.get(pk=del_dish)
-            dish.delete()
-            return redirect(reverse('fooddish:liste_des_plats'))
-
-        else:
-            return redirect(reverse('fooddish:liste_des_plats'))
+        data = request.POST['id']
+        Fooddish.objects.get(pk=int(data)).delete()
+        return JsonResponse({'removed': True})
 
     else:
-        pass
+        return JsonResponse({'removed': False})
 
 def all_dish(request):
     if request.method == 'GET':

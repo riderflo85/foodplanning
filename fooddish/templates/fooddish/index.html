@@ -30,7 +30,7 @@
                         {% if list_dish %}
                         <ul>
                             {% for dish in list_dish %}
-                            <li class="my-3">{{ dish.name }}</li>
+                            <li class="my-3" id="element{{ dish.pk }}">{{ dish.name }}</li>
                             {% endfor %}
                         </ul>
                         {% endif %}
@@ -85,17 +85,16 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Plat à supprimer</span>
                             </div>
-                            {{ form_select.del_dish }}
-                            {% comment %} <select name="listDish" id="deleteDish" class="custom-select">
+                            <select name="listDish" id="selectDeleteDish" class="custom-select">
                                 <option selected>Choisissez...</option>
                                 {% for dish in list_dish %}
-                                <option value="{{ dish.pk }}">{{ dish.name }}</option>
+                                <option value="{{ dish.pk }}" id="{{ dish.pk }}">{{ dish.name }}</option>
                                 {% endfor %}
-                            </select> {% endcomment %}
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" id="btnConfirmDelete" class="btn btn-success" value="Valider">
+                        <input type="button" id="btnConfirmDelete" class="btn btn-success" value="Valider" data-dismiss="modal">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     </div>
                 </form>
@@ -103,6 +102,7 @@
         </div>
     </div>
 </section>
+<script src="{% static 'planning/js/secureajax.js' %}"></script>
 <script src="{% static 'fooddish/js/addnewdish.js' %}"></script>
 <script src="{% static 'fooddish/js/deletedish.js' %}"></script>
 <script src="{% static 'fooddish/js/script.js' %}"></script>
