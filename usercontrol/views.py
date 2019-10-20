@@ -75,7 +75,9 @@ def sign_out(request):
 
 def account(request):
     context = {}
-
-    context['phone'] = PhoneNumber.objects.get(id_user=request.user.pk).number
+    try:
+        context['phone'] = PhoneNumber.objects.get(id_user=request.user.pk).number
+    except:
+        pass
 
     return render(request, 'usercontrol/account.html', context)
