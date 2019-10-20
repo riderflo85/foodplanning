@@ -72,3 +72,10 @@ def sign_out(request):
     logout(request)
 
     return redirect(reverse('usercontrol:sign_in'))
+
+def account(request):
+    context = {}
+
+    context['phone'] = PhoneNumber.objects.get(id_user=request.user.pk).number
+
+    return render(request, 'usercontrol/account.html', context)

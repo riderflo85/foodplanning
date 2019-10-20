@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
-from usercontrol.views import sign_in, sign_up, sign_out
+from usercontrol.views import sign_in, sign_up, sign_out, account
 
 
 class StatusCodePageTestCase(TestCase):
@@ -20,6 +20,10 @@ class StatusCodePageTestCase(TestCase):
     def test_page_sing_out(self):
         rep = self.cli.get('/sign_out/')
         self.assertEqual(rep.status_code, 302)
+
+    def test_page_account(self):
+        rep = self.cli.get('/account/')
+        self.assertEqual(rep.status_code, 200)
 
 
 class UserAuthenticateTestCase(TestCase):
@@ -110,6 +114,10 @@ class ViewsUsedTestCase(TestCase):
         rep = self.cli.get('/sign_out/')
         self.assertEqual(rep.resolver_match.func, sign_out)
 
+    def test_views_page_account(self):
+        rep = self.cli.get('/account/')
+        self.assertEqual(rep.resolver_match.func, account)
+
 
 class TemplateRenderTestCase(TestCase):
     def setUp(self):
@@ -135,3 +143,7 @@ class TemplateRenderTestCase(TestCase):
     def test_redirect_page_sign_out(self):
         rep = self.cli.get('/sign_out/')
         self.assertRedirects(rep, '/')
+
+    def test_template_page_account(self):
+        rep = self.cli.get('/account/')
+        self.assertTemplateUsed(rep, 'usercontrol/account.html')

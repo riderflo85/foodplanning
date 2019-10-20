@@ -13,4 +13,4 @@ for (const i of itemsNavMenu) {
     }
 }
 
-itemsNavMenu[0].classList.add('this-page');
+itemsNavMenu[3].classList.add('this-page');

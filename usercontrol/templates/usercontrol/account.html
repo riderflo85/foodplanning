@@ -1,0 +1,72 @@
+{% extends 'planning/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="define-size">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-4 col-lg-4 menu-link size-menu-account text-center">
+                <i class="fas fa-user-circle fa-9x" id="logo-user"></i>
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="personnal-information-list" data-toggle="list" href="#personnal-information" role="tab" aria-controls="home">Informations personnelles</a>
+                    <a class="list-group-item list-group-item-action" id="preference-list" data-toggle="list" href="#preference" role="tab" aria-controls="profile">Préférences</a>
+                    <a class="list-group-item list-group-item-action" id="init-account-list" data-toggle="list" href="#init-account" role="tab" aria-controls="messages">Réinitialiser</a>
+                    <a class="list-group-item list-group-item-action" id="remove-account-list" data-toggle="list" href="#remove-account" role="tab" aria-controls="settings">Supprimer le compte</a>
+                </div>
+            </div>
+            <div class="col-8 col-lg-8 pl-0">
+                <div class="tab-content h-100 options-account" id="nav-tabContent">
+                    <div class="text-center user-pseudo">
+                        <h3>{{ user.username }}</h3>
+                    </div>
+                    <div class="tab-pane fade show active h-100" id="personnal-information" role="tabpanel" aria-labelledby="personnal-information-list">
+                        <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                            <div class="container-fluid pl-5">
+                                <div class="row">
+                                    <div class="col-6 part-left">
+                                        <p class="lead">
+                                            <strong>Nom: </strong>
+                                        </p>
+                                        <p class="lead">
+                                            <strong>Prénom: </strong>
+                                        </p>
+                                        <p class="lead">
+                                            <strong>Pseudo: </strong>
+                                        </p>
+                                        <p class="lead">
+                                            <strong>Adresse e-mail: </strong>
+                                        </p>
+                                        <p class="lead">
+                                            <strong>Numéro de téléphone: </strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-6 part-right">
+                                        <p class="lead">{{ user.last_name }}</p>
+                                        <p class="lead">{{ user.first_name }}</p>
+                                        <p class="lead">{{ user.username }}</p>
+                                        <p class="lead">{{ user.email }}</p>
+                                        <p class="lead">0{{ phone }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="preference" role="tabpanel" aria-labelledby="preference-list">
+                        <h3>Test2</h3>
+                    </div>
+                    <div class="tab-pane fade" id="init-account" role="tabpanel" aria-labelledby="init-account-list">
+                        <h3>Test3</h3>
+                    </div>
+                    <div class="tab-pane fade" id="remove-account" role="tabpanel" aria-labelledby="remove-account-list">
+                        <h3>Test4</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script src="{% static 'usercontrol/js/navAccountSelected.js' %}"></script>
+
+{% endblock content %}

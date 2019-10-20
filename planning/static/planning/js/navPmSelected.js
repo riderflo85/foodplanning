@@ -1,7 +1,8 @@
 var itemsNavMenu = [
     document.getElementById('nav-am'),
     document.getElementById('nav-pm'),
-    document.getElementById('nav-dishs')
+    document.getElementById('nav-dishs'),
+    document.getElementById('nav-account'),
 ];
 
 for (const i of itemsNavMenu) {

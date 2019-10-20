@@ -1,0 +1,46 @@
+.size-menu-account
+{
+    height: 70vh;
+}
+
+.menu-link
+{
+    background-color: #336699;
+    border: 0px;
+    border-radius: 20px 0px 0px 20px;
+    padding: 10px 0px 0px 0px !important;
+}
+
+#logo-user
+{
+    color: #ffbf00;
+}
+
+#list-tab
+{
+    margin-top: 30px;
+}
+
+.user-pseudo
+{
+    position: absolute;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.options-account
+{
+    background-color: #ffffff;
+    border: 0px;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.part-left
+{
+    padding: 0px 0px 0px 0px;
+}
+
+.part-right
+{
+    padding: 0px 0px 0px 0px;
+}

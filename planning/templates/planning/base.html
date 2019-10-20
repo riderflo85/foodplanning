@@ -13,6 +13,7 @@
         <!-- Style CSS -->
         <link rel="stylesheet" href="{% static 'planning/css/header.css' %}">
         <link rel="stylesheet" href="{% static 'planning/css/planning.css' %}">
+        <link rel="stylesheet" href="{% static 'usercontrol/css/account.css' %}">
         {% block add_css %}{% endblock add_css %}
 
         <!-- Bootstrap CSS -->
@@ -41,6 +42,7 @@
             <div>
                 <ul class="d-inline-flex align-items-center">
                     {% if user.is_authenticated %}
+                    <li class="esp-list" id="nav-account"><a href="{% url 'usercontrol:account' %}" class="h3 link-menu mb-0">Mon compte</a></li>
                     <li class="esp-list" id="nav-dishs"><a href="{% url 'fooddish:liste_des_plats' %}" class="h3 link-menu mb-0">Mes Plats</a></li>
                     <li class="esp-list this-page" id="nav-am"><a href="{% url 'planning:planning' %}" class="h3 link-menu mb-0">Midi</a></li>
                     <li class="esp-list" id="nav-pm"><a href="{% url 'planning:pm' %}" class="h3 link-menu mb-0">Soir</a></li>
