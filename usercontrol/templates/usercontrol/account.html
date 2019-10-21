@@ -50,16 +50,64 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="pos-btn">
+                                <button class="btn btn-primary" id="changeInfosUser">Éditer vos informations <i class="fas fa-pencil-alt"></i></button>
+                            </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="preference" role="tabpanel" aria-labelledby="preference-list">
-                        <h3>Test2</h3>
+                    <div class="tab-pane fade h-100" id="preference" role="tabpanel" aria-labelledby="preference-list">
+                        <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                            <div class="container-fluid pl-5">
+                                <div class="row">
+                                    <div class="col-10 part-left">
+                                        <p class="lead mb-0">
+                                            <strong>Notification par SMS</strong>
+                                        </p>
+                                        <div class="info-SMS">Voir avec le propriétaire du serveur pour savoir si les SMS sont configurés !</div>
+                                    </div>
+                                    <div class="col-2 part-right">
+                                        <label class="switch">
+                                            <input type="checkbox" id="checkButton">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="init-account" role="tabpanel" aria-labelledby="init-account-list">
-                        <h3>Test3</h3>
+                    <div class="tab-pane fade h-100" id="init-account" role="tabpanel" aria-labelledby="init-account-list">
+                        <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                            <div class="container-fluid pl-5">
+                                <div class="row">
+                                    <div class="col-9 part-left">
+                                        <p class="lead mb-0">
+                                            <strong>Réinitialiser le compte utilisateur </strong>
+                                        </p>
+                                        <div class="info-re-init">Cela supprimera tout vos planning et remplacera votre mot de passe par un autre (aléatoire) !!</div>
+                                    </div>
+                                    <div class="col-3 part-right">
+                                        <button class="btn btn-danger" id="confirmReinit">Confirmez ?</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="remove-account" role="tabpanel" aria-labelledby="remove-account-list">
-                        <h3>Test4</h3>
+                    <div class="tab-pane fade h-100" id="remove-account" role="tabpanel" aria-labelledby="remove-account-list">
+                        <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                            <div class="container-fluid pl-5">
+                                <div class="row">
+                                    <div class="col-9 part-left">
+                                        <p class="lead mb-0">
+                                            <strong>Supprimer le compte utilisateur </strong>
+                                        </p>
+                                        <div class="info-re-init">Votre compte sera supprimer et aucune restauration ne sera possible !!</div>
+                                    </div>
+                                    <div class="col-3 part-right">
+                                        <button class="btn btn-danger" id="confirDeleteAccount">Confirmez ?</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
