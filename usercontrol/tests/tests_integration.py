@@ -2,7 +2,8 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
-from usercontrol.views import sign_in, sign_up, sign_out, account
+from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos
+from usercontrol.models import PhoneNumber
 
 
 class StatusCodePageTestCase(TestCase):
@@ -147,3 +148,38 @@ class TemplateRenderTestCase(TestCase):
     def test_template_page_account(self):
         rep = self.cli.get('/account/')
         self.assertTemplateUsed(rep, 'usercontrol/account.html')
+
+
+class ManageUserAccountTestCase(TestCase):
+    def setUp(self):
+        self.cli = Client()
+        user_test = User.objects.create_user(
+            username='testUser',
+            email='testuser@founisseur.com',
+            password='testpassword'
+        )
+        user_test.first_name = 'Tester'
+        user_test.last_name = 'FooTest'
+        user_test.save()
+        phone = PhoneNumber()
+        phone.id_user = user_test
+        phone.number = 773450857
+        phone.save()
+        self.data = {
+            'last_name': 'lastNameTest',
+            'first_name': 'firstNameTest',
+            'pseudo': 'pseudoForTest',
+            'email': 'emailtest@test.com',
+            'phone': '71235678',
+        }
+        self.user = user_test
+
+    def test_change_user_infos(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.post('/edit_infos/', self.data)
+        self.assertEqual(rep.resolver_match.func, edit_user_infos)
+        self.assertTrue(rep.json()['success'])
+
+    def test_change_user_infos_fail(self):
+        rep = self.cli.post('/edit_infos/', self.data)
+        self.assertEqual(rep.status_code, 302)

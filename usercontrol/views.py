@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
 from .models import PhoneNumber
+
 
 def sign_in(request):
     context = {'error': False,}
@@ -81,3 +83,22 @@ def account(request):
         pass
 
     return render(request, 'usercontrol/account.html', context)
+
+def edit_user_infos(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            try:
+                user = request.user
+                phone_user = PhoneNumber.objects.get(id_user=user.pk)
+                user.first_name = request.POST['first_name']
+                user.last_name = request.POST['last_name']
+                user.username = request.POST['pseudo']
+                user.email = request.POST['email']
+                phone_user.number = int(request.POST['phone'][1:])
+
+                return JsonResponse({'success': True})
+
+            except:
+                return JsonResponse({'success': False})
+    else:
+        return redirect(reverse('usercontrol:sign_in'))
