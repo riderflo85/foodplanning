@@ -24,7 +24,7 @@ class StatusCodePageTestCase(TestCase):
 
     def test_page_account(self):
         rep = self.cli.get('/account/')
-        self.assertEqual(rep.status_code, 200)
+        self.assertEqual(rep.status_code, 302)
 
 
 class UserAuthenticateTestCase(TestCase):
@@ -179,6 +179,8 @@ class ManageUserAccountTestCase(TestCase):
         rep = self.cli.post('/edit_infos/', self.data)
         self.assertEqual(rep.resolver_match.func, edit_user_infos)
         self.assertTrue(rep.json()['success'])
+        rep2 = self.cli.get('/account/')
+        self.assertEqual(rep.status_code, 200)
 
     def test_change_user_infos_fail(self):
         rep = self.cli.post('/edit_infos/', self.data)

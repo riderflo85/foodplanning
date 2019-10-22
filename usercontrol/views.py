@@ -76,13 +76,16 @@ def sign_out(request):
     return redirect(reverse('usercontrol:sign_in'))
 
 def account(request):
-    context = {}
-    try:
-        context['phone'] = PhoneNumber.objects.get(id_user=request.user.pk).number
-    except:
-        pass
+    if request.user.is_authenticated:
+        context = {}
+        try:
+            context['phone'] = PhoneNumber.objects.get(id_user=request.user.pk).number
+        except:
+            pass
 
-    return render(request, 'usercontrol/account.html', context)
+        return render(request, 'usercontrol/account.html', context)
+    else:
+        return redirect(reverse('usercontrol:sign_in'))
 
 def edit_user_infos(request):
     if request.user.is_authenticated:
