@@ -41,17 +41,40 @@
                                             <strong>Numéro de téléphone: </strong>
                                         </p>
                                     </div>
-                                    <div class="col-6 part-right">
-                                        <p class="lead">{{ user.last_name }}</p>
-                                        <p class="lead">{{ user.first_name }}</p>
-                                        <p class="lead">{{ user.username }}</p>
-                                        <p class="lead">{{ user.email }}</p>
-                                        <p class="lead">0{{ phone }}</p>
+                                    <div class="col-6 part-right" id="contentUserInfos">
+                                        <p class="d-none error-message" id="messageError">Une erreur est survenu, merci de vérifier les champs de saisie !</p>
+                                        <p class="lead" id="userLastName">{{ user.last_name }}</p>
+                                        <p class="lead" id="userFirstName">{{ user.first_name }}</p>
+                                        <p class="lead" id="userPseudo">{{ user.username }}</p>
+                                        <p class="lead" id="userEmail">{{ user.email }}</p>
+                                        <p class="lead" id="userPhone">0{{ phone }}</p>
+                                    </div>
+                                    <div class="col-6 part-right" id="contentFormUserInfos" style="display: none;">
+                                        <form action="{% url 'usercontrol:edit_user_infos' %}" method='post'>
+                                            {% csrf_token %}
+                                            <div class="input-group form-group-edit">
+                                                <input class="form-control" type="text" name="last_name" maxlength="30" id="id_last_name">
+                                            </div>
+                                            <div class="input-group form-group-edit">
+                                                <input class="form-control" type="text" name="first_name" maxlength="30" id="id_first_name">
+                                            </div>
+                                            <div class="input-group form-group-edit">
+                                                <input class="form-control" type="text" name="pseudo" maxlength="30" id="id_pseudo">
+                                            </div>
+                                            <div class="input-group form-group-edit">
+                                                <input class="form-control" type="email" name="email" id="id_email">
+                                            </div>
+                                            <div class="input-group form-group-edit">
+                                                <input class="form-control"  type="text" name="phone_number" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" maxlength="10" id="id_phone_number">
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="pos-btn">
-                                <button class="btn btn-primary" id="changeInfosUser">Éditer vos informations <i class="fas fa-pencil-alt"></i></button>
+                                <button type="button" class="btn btn-primary" id="changeInfosUser">Éditer vos informations <i class="fas fa-pencil-alt"></i></button>
+                                <button type="button" class="btn btn-secondary" id="cancel" style="display: none;">Annuler <i class="fas fa-times"></i></button>
+                                <button type="button" class="btn btn-success" id="confirmInfosUser" style="display: none;">Valider <i class="fas fa-check"></i></button>
                             </div>
                         </div>
                     </div>
@@ -115,6 +138,8 @@
     </div>
 
 </section>
+<script src="{% static 'planning/js/secureajax.js' %}"></script>
 <script src="{% static 'usercontrol/js/navAccountSelected.js' %}"></script>
+<script src="{% static 'usercontrol/js/editUserInfos.js' %}"></script>
 
 {% endblock content %}

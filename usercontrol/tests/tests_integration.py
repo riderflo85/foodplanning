@@ -170,7 +170,7 @@ class ManageUserAccountTestCase(TestCase):
             'first_name': 'firstNameTest',
             'pseudo': 'pseudoForTest',
             'email': 'emailtest@test.com',
-            'phone': '71235678',
+            'phone': '071235678',
         }
         self.user = user_test
 

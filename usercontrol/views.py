@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
 from .models import PhoneNumber
+from .comparator import comparator
 
 
 def sign_in(request):
@@ -93,12 +94,40 @@ def edit_user_infos(request):
             try:
                 user = request.user
                 phone_user = PhoneNumber.objects.get(id_user=user.pk)
-                user.first_name = request.POST['first_name']
-                user.last_name = request.POST['last_name']
-                user.username = request.POST['pseudo']
-                user.email = request.POST['email']
-                phone_user.number = int(request.POST['phone'][1:])
+                user_infos = {
+                    'first_name': user.first_name,
+                    'last_name': user.last_name,
+                    'pseudo': user.username,
+                    'email': user.email,
+                    'phone': phone_user.number
+                }
 
+                for i in request.POST:
+                    if i == 'last_name':
+                        if comparator(user_infos[i], request.POST[i]):
+                            user.last_name = request.POST['last_name']
+
+                    elif i == 'first_name':
+                        if comparator(user_infos[i], request.POST[i]):
+                            user.first_name = request.POST['first_name']
+
+                    elif i == 'pseudo':
+                        if comparator(user_infos[i], request.POST[i]):
+                            user.username = request.POST['pseudo']
+
+                    elif i == 'email':
+                        if comparator(user_infos[i], request.POST[i]):
+                            user.email = request.POST['email']
+
+                    elif i == 'phone':
+                        if comparator(user_infos[i], request.POST[i][1:]):
+                            phone_user.number = int(request.POST['phone'][1:])
+
+                    else:
+                        pass
+
+                user.save()
+                phone_user.save()
                 return JsonResponse({'success': True})
 
             except:
