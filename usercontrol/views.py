@@ -134,3 +134,18 @@ def edit_user_infos(request):
                 return JsonResponse({'success': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
+
+def changePasswd(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            try:
+                user = request.user
+                user.set_password(request.POST['new_pwd'])
+                user.save()
+                return JsonResponse({'success': True})
+
+            except:
+                return JsonResponse({'success': False})
+
+    else:
+        return redirect(reverse('usercontrol:sign_in'))

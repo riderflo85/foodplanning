@@ -82,19 +82,45 @@
                         <div class="d-flex flex-column justify-content-center align-items-center h-100">
                             <div class="container-fluid pl-5">
                                 <div class="row">
-                                    <div class="col-10 part-left">
+                                    <div class="col-7 part-left">
                                         <p class="lead mb-0">
                                             <strong>Notification par SMS</strong>
                                         </p>
                                         <div class="info-SMS">Voir avec le propriétaire du serveur pour savoir si les SMS sont configurés !</div>
+                                        <div id="partPasswd" style="display: none;">
+                                            <p class="lead" id="passwd"><strong>Nouveau mot de passe</strong></p>
+                                            <p class="lead" id="confirmPasswd"><strong>Confirmez votre mot de passe</strong></p>
+                                        </div>
                                     </div>
-                                    <div class="col-2 part-right">
-                                        <label class="switch">
-                                            <input type="checkbox" id="checkButton">
-                                            <span class="slider round"></span>
-                                        </label>
+                                    <div class="col-5 part-right">
+                                        <div class="switch-btn">
+                                            <label class="switch">
+                                                <input type="checkbox" id="checkButton">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div id="contentFormPwd" style="display: none;">
+                                            <form action="{% url 'usercontrol:change_pwd' %}" method='post'>
+                                            {% csrf_token %}
+                                                <div class="input-group form-group-edit">
+                                                    <input class="form-control" type="password" name="password" minlength="8" id="password" required>
+                                                </div>
+                                                <div class="input-group form-group-edit">
+                                                    <input class="form-control" type="password" name="confirm-password" minlength="8" id="confirmPassword" required>
+                                                </div>
+                                                <div class="d-none not-match" id="notMatchRegPwd">Le mot de passe doit contenir au minimum 8 caractères !!</div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="pos-btn">
+                                <button type="button" class="btn btn-primary" id="changePwd">Changer votre mot de passe <i
+                                        class="fas fa-pencil-alt"></i></button>
+                                <button type="button" class="btn btn-secondary" id="cancelPwd" style="display: none;">Annuler <i
+                                        class="fas fa-times"></i></button>
+                                <button type="button" class="btn btn-success" id="confirmPwd" style="display: none;">Valider <i
+                                        class="fas fa-check"></i></button>
                             </div>
                         </div>
                     </div>
@@ -141,5 +167,6 @@
 <script src="{% static 'planning/js/secureajax.js' %}"></script>
 <script src="{% static 'usercontrol/js/navAccountSelected.js' %}"></script>
 <script src="{% static 'usercontrol/js/editUserInfos.js' %}"></script>
+<script src="{% static 'usercontrol/js/changePwd.js' %}"></script>
 
 {% endblock content %}

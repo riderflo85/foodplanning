@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
-from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos
+from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, changePasswd
 from usercontrol.models import PhoneNumber
 
 
@@ -184,4 +184,14 @@ class ManageUserAccountTestCase(TestCase):
 
     def test_change_user_infos_fail(self):
         rep = self.cli.post('/edit_infos/', self.data)
+        self.assertEqual(rep.status_code, 302)
+
+    def test_change_user_password(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.post('/change_pwd/', {'new_pwd': 'newPasswordForTest'})
+        self.assertTrue(rep.json()['success'])
+        self.assertEqual(rep.resolver_match.func, changePasswd)
+
+    def test_change_user_password_fail(self):
+        rep = self.cli.post('/change_pwd/', {'new_pwd': ''})
         self.assertEqual(rep.status_code, 302)
