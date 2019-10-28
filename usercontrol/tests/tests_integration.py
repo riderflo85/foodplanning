@@ -2,8 +2,8 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
-from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, changePasswd
-from usercontrol.models import PhoneNumber
+from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, changePasswd, manage_sms
+from usercontrol.models import PhoneNumber, NotificationBySms
 
 
 class StatusCodePageTestCase(TestCase):
@@ -165,6 +165,9 @@ class ManageUserAccountTestCase(TestCase):
         phone.id_user = user_test
         phone.number = 773450857
         phone.save()
+        notif = NotificationBySms()
+        notif.id_user = user_test
+        notif.save()
         self.data = {
             'last_name': 'lastNameTest',
             'first_name': 'firstNameTest',
@@ -194,4 +197,22 @@ class ManageUserAccountTestCase(TestCase):
 
     def test_change_user_password_fail(self):
         rep = self.cli.post('/change_pwd/', {'new_pwd': ''})
+        self.assertEqual(rep.status_code, 302)
+
+    def test_active_notifiaction_sms(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.post('/manage_sms/', {'active': True})
+        self.assertEqual(rep.status_code, 200)
+        self.assertTrue(rep.json()['actived'])
+        self.assertEqual(rep.resolver_match.func, manage_sms)
+
+    def test_deactive_notifiaction_sms(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.post('/manage_sms/', {'active': False})
+        self.assertEqual(rep.status_code, 200)
+        self.assertTrue(rep.json()['actived'])
+        self.assertEqual(rep.resolver_match.func, manage_sms)
+
+    def test_active_notification_sms_fail(self):
+        rep = self.cli.post('/manage_sms/', {'active': ''})
         self.assertEqual(rep.status_code, 302)

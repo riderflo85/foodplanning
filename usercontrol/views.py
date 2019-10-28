@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
-from .models import PhoneNumber
+from .models import PhoneNumber, NotificationBySms
 from .comparator import comparator
 
 
@@ -55,6 +55,9 @@ def sign_up(request):
             phone_number.number = phone
             phone_number.id_user = new_user
             phone_number.save()
+            notification_sms = NotificationBySms()
+            notification_sms.id_user = new_user
+            notification_sms.save()
             confirm = True
         else:
             context['error'] = form.errors.items()
@@ -80,7 +83,12 @@ def account(request):
     if request.user.is_authenticated:
         context = {}
         try:
-            context['phone'] = PhoneNumber.objects.get(id_user=request.user.pk).number
+            context['phone'] = PhoneNumber.objects.get(
+                id_user=request.user.pk
+            ).number
+            context['use_sms'] = NotificationBySms.objects.get(
+                id_user=request.user.pk
+            ).use_sms
         except:
             pass
 
@@ -147,5 +155,26 @@ def changePasswd(request):
             except:
                 return JsonResponse({'success': False})
 
+    else:
+        return redirect(reverse('usercontrol:sign_in'))
+
+def manage_sms(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            try:
+                user = NotificationBySms.objects.get(id_user=request.user)
+
+                if request.POST['active'] == True:
+                    user.use_sms = True
+                    user.save()
+
+                elif request.POST['active'] == False:
+                    user.use_sms = False
+                    user.save()
+
+                return JsonResponse({'actived': True})
+
+            except:
+                return JsonResponse({'actived': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))

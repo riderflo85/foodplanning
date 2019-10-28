@@ -95,7 +95,11 @@
                                     <div class="col-5 part-right">
                                         <div class="switch-btn">
                                             <label class="switch">
+                                                {% if use_sms %}
+                                                <input type="checkbox" id="checkButton" checked>
+                                                {% else %}
                                                 <input type="checkbox" id="checkButton">
+                                                {% endif %}
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
