@@ -110,29 +110,20 @@ def edit_user_infos(request):
                     'phone': phone_user.number
                 }
 
-                for i in request.POST:
-                    if i == 'last_name':
-                        if comparator(user_infos[i], request.POST[i]):
-                            user.last_name = request.POST['last_name']
+                if comparator(user_infos['last_name'], request.POST['last_name']):
+                    user.last_name = request.POST['last_name']
 
-                    elif i == 'first_name':
-                        if comparator(user_infos[i], request.POST[i]):
-                            user.first_name = request.POST['first_name']
+                if comparator(user_infos['first_name'], request.POST['first_name']):
+                    user.first_name = request.POST['first_name']
 
-                    elif i == 'pseudo':
-                        if comparator(user_infos[i], request.POST[i]):
-                            user.username = request.POST['pseudo']
+                if comparator(user_infos['pseudo'], request.POST['pseudo']):
+                    user.username = request.POST['pseudo']
 
-                    elif i == 'email':
-                        if comparator(user_infos[i], request.POST[i]):
-                            user.email = request.POST['email']
+                if comparator(user_infos['email'], request.POST['email']):
+                    user.email = request.POST['email']
 
-                    elif i == 'phone':
-                        if comparator(user_infos[i], request.POST[i][1:]):
-                            phone_user.number = int(request.POST['phone'][1:])
-
-                    else:
-                        pass
+                if comparator(user_infos['phone'], request.POST['phone'][1:]):
+                    phone_user.number = int(request.POST['phone'][1:])
 
                 user.save()
                 phone_user.save()

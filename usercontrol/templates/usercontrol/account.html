@@ -100,7 +100,7 @@
                                                 {% else %}
                                                 <input type="checkbox" id="checkButton">
                                                 {% endif %}
-                                                <span class="slider round"></span>
+                                                <span class="slider round" id="switchButton"></span>
                                             </label>
                                         </div>
                                         <div id="contentFormPwd" style="display: none;">
@@ -169,8 +169,9 @@
 
 </section>
 <script src="{% static 'planning/js/secureajax.js' %}"></script>
+<script src="{% static 'usercontrol/js/changePwd.js' %}"></script>
+<script src="{% static 'usercontrol/js/manageSms.js' %}"></script>
 <script src="{% static 'usercontrol/js/navAccountSelected.js' %}"></script>
 <script src="{% static 'usercontrol/js/editUserInfos.js' %}"></script>
-<script src="{% static 'usercontrol/js/changePwd.js' %}"></script>
 
 {% endblock content %}
