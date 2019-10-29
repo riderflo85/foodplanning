@@ -2,6 +2,9 @@ var inputSwitch = $('#checkButton');
 var btnSwitch = document.getElementById('switchButton');
 
 btnSwitch.addEventListener('click', function() {
+    // IMPORTANT !!!!!!!!!!!
+    var csrftoken = getCookie('csrftoken');
+
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {

@@ -54,6 +54,8 @@ inputConfirmForm.addEventListener('keyup', function() {
 
 btnConfirmPwd.addEventListener('click', function() {
 
+    var csrftoken = getCookie('csrftoken');
+
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {

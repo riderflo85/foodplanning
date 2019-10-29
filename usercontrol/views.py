@@ -47,6 +47,7 @@ def sign_up(request):
             pwd = form.cleaned_data['password']
             phone = form.cleaned_data['phone_number']
 
+            # a modifier !!!!
             new_user = User.objects.create_user(pseudo, email, pwd)
             new_user.last_name = last_name
             new_user.first_name = first_name
@@ -102,27 +103,20 @@ def edit_user_infos(request):
             try:
                 user = request.user
                 phone_user = PhoneNumber.objects.get(id_user=user.pk)
-                user_infos = {
-                    'first_name': user.first_name,
-                    'last_name': user.last_name,
-                    'pseudo': user.username,
-                    'email': user.email,
-                    'phone': phone_user.number
-                }
 
-                if comparator(user_infos['last_name'], request.POST['last_name']):
+                if comparator(user.last_name, request.POST['last_name']):
                     user.last_name = request.POST['last_name']
 
-                if comparator(user_infos['first_name'], request.POST['first_name']):
+                if comparator(user.first_name, request.POST['first_name']):
                     user.first_name = request.POST['first_name']
 
-                if comparator(user_infos['pseudo'], request.POST['pseudo']):
+                if comparator(user.username, request.POST['pseudo']):
                     user.username = request.POST['pseudo']
 
-                if comparator(user_infos['email'], request.POST['email']):
+                if comparator(user.email, request.POST['email']):
                     user.email = request.POST['email']
 
-                if comparator(user_infos['phone'], request.POST['phone'][1:]):
+                if comparator(phone_user.number, request.POST['phone'][1:]):
                     phone_user.number = int(request.POST['phone'][1:])
 
                 user.save()
