@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .callr import convert_utc_datetime
 from .tasks import send_notification
-from usercontrol.models import PhoneNumber
+from usercontrol.models import User
 
 
 def set_notification(request):
@@ -13,7 +13,7 @@ def set_notification(request):
             date = request.POST['date']
             time = request.POST['time']
             msg = request.POST['message']
-            num_user = PhoneNumber.objects.get(id_user=request.user).number
+            num_user = User.objects.get(id_user=request.user).number
             comp_num = "".join(['+33', str(num_user)])
 
             result = convert_utc_datetime(time, date)

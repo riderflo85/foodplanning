@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from usercontrol.models import User
 from django.http import JsonResponse
 from django.db import IntegrityError
 from .models import PlanningAm, PlanningPm

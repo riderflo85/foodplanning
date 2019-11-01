@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from usercontrol.models import User
 
-# Create your models here.
+
 class PlanningAm(models.Model):
     monday = models.CharField(max_length=160)
     tuesday = models.CharField(max_length=160)

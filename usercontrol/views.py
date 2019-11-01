@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
-from .models import PhoneNumber, NotificationBySms
+from .models import User
 from .comparator import comparator
 
 
@@ -47,18 +46,11 @@ def sign_up(request):
             pwd = form.cleaned_data['password']
             phone = form.cleaned_data['phone_number']
 
-            # a modifier !!!!
             new_user = User.objects.create_user(pseudo, email, pwd)
             new_user.last_name = last_name
             new_user.first_name = first_name
+            new_user.number = phone
             new_user.save()
-            phone_number = PhoneNumber()
-            phone_number.number = phone
-            phone_number.id_user = new_user
-            phone_number.save()
-            notification_sms = NotificationBySms()
-            notification_sms.id_user = new_user
-            notification_sms.save()
             confirm = True
         else:
             context['error'] = form.errors.items()
@@ -84,12 +76,8 @@ def account(request):
     if request.user.is_authenticated:
         context = {}
         try:
-            context['phone'] = PhoneNumber.objects.get(
-                id_user=request.user.pk
-            ).number
-            context['use_sms'] = NotificationBySms.objects.get(
-                id_user=request.user.pk
-            ).use_sms
+            context['phone'] = request.user.number
+            context['use_sms'] = request.user.use_sms
         except:
             pass
 
@@ -102,7 +90,6 @@ def edit_user_infos(request):
         if request.method == 'POST':
             try:
                 user = request.user
-                phone_user = PhoneNumber.objects.get(id_user=user.pk)
 
                 if comparator(user.last_name, request.POST['last_name']):
                     user.last_name = request.POST['last_name']
@@ -116,11 +103,10 @@ def edit_user_infos(request):
                 if comparator(user.email, request.POST['email']):
                     user.email = request.POST['email']
 
-                if comparator(phone_user.number, request.POST['phone'][1:]):
-                    phone_user.number = int(request.POST['phone'][1:])
+                if comparator(user.number, request.POST['phone'][1:]):
+                    user.number = int(request.POST['phone'][1:])
 
                 user.save()
-                phone_user.save()
                 return JsonResponse({'success': True})
 
             except:
@@ -147,7 +133,7 @@ def manage_sms(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             try:
-                user = NotificationBySms.objects.get(id_user=request.user)
+                user = request.user.use_sms
 
                 if request.POST['active'] == True:
                     user.use_sms = True

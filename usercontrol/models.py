@@ -1,13 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
-# Create your models here.
-class PhoneNumber(models.Model):
+class User(AbstractUser):
     number = models.IntegerField(null=False)
-    id_user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-
-class NotificationBySms(models.Model):
     use_sms = models.BooleanField(default=False)
-    id_user = models.OneToOneField(User, on_delete=models.CASCADE)
