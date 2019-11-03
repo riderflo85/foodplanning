@@ -1,9 +1,8 @@
 from django.test import TestCase, Client
-from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
 from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, changePasswd, manage_sms
-from usercontrol.models import PhoneNumber, NotificationBySms
+from usercontrol.models import User
 
 
 class StatusCodePageTestCase(TestCase):
@@ -33,7 +32,8 @@ class UserAuthenticateTestCase(TestCase):
         user_test = User.objects.create_user(
             username='testUser',
             email='testuser@founisseur.com',
-            password='longpasswordtest'
+            password='longpasswordtest',
+            number=612345678
         )
         user_test.first_name = 'Tester'
         user_test.last_name = 'FooTest'
@@ -126,7 +126,8 @@ class TemplateRenderTestCase(TestCase):
         user_test = User.objects.create_user(
             username='testUser',
             email='testuser@founisseur.com',
-            password='test'
+            password='test',
+            number=612345678
         )
         user_test.first_name = 'Tester'
         user_test.last_name = 'FooTest'
@@ -156,18 +157,19 @@ class ManageUserAccountTestCase(TestCase):
         user_test = User.objects.create_user(
             username='testUser',
             email='testuser@founisseur.com',
-            password='testpassword'
+            password='testpassword',
+            number=612345678
         )
         user_test.first_name = 'Tester'
         user_test.last_name = 'FooTest'
         user_test.save()
-        phone = PhoneNumber()
-        phone.id_user = user_test
-        phone.number = 773450857
-        phone.save()
-        notif = NotificationBySms()
-        notif.id_user = user_test
-        notif.save()
+        # phone = PhoneNumber()
+        # phone.id_user = user_test
+        # phone.number = 773450857
+        # phone.save()
+        # notif = NotificationBySms()
+        # notif.id_user = user_test
+        # notif.save()
         self.data = {
             'last_name': 'lastNameTest',
             'first_name': 'firstNameTest',

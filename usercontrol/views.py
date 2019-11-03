@@ -46,10 +46,9 @@ def sign_up(request):
             pwd = form.cleaned_data['password']
             phone = form.cleaned_data['phone_number']
 
-            new_user = User.objects.create_user(pseudo, email, pwd)
+            new_user = User.objects.create_user(pseudo, email, pwd, number=phone)
             new_user.last_name = last_name
             new_user.first_name = first_name
-            new_user.number = phone
             new_user.save()
             confirm = True
         else:

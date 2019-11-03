@@ -1,9 +1,9 @@
 from django.test import TestCase, Client
+from django.contrib.auth import login, authenticate
 from planning.views import planning, planning_pm
 from planning.models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from usercontrol.models import User
 
 
 # Create your tests here.
@@ -13,7 +13,8 @@ class PlanningPageTestCase(TestCase):
         self.user = User.objects.create_user(
             'userTest',
             'testuser@test.com',
-            'PwdUserTest'
+            'PwdUserTest',
+            number=670217836
         )
         self.days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
         self.allUser = User.objects.all()
@@ -66,12 +67,14 @@ class IntegrationTestCase(TestCase):
         self.user = User.objects.create_user(
             'userTest',
             'testuser@test.com',
-            'PwdUserTest'
+            'PwdUserTest',
+            number=670217836
         )
         self.user2 = User.objects.create_user(
             'userTestNumberTwo',
             'testusertwo@test.com',
-            'PwdUserTest'
+            'PwdUserTest',
+            number=670217836
         )
         planning = PlanningAm()
         planning.monday = "Plat 1"

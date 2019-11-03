@@ -1,13 +1,18 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
+from usercontrol.models import User
 from planning.functions import check_user_planning_am
 from planning.models import PlanningAm
 
 
 class UnitaireTestCase(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user('userTest', 'testuser@test.com', 'PwdUserTest')
+        self.user = User.objects.create_user(
+            'userTest',
+            'testuser@test.com',
+            'PwdUserTest',
+            number=670217836
+        )
         self.user.first_name = 'test_first_name'
         self.user.save()
         planning = PlanningAm()
