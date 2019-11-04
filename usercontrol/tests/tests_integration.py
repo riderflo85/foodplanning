@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
-from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, changePasswd, manage_sms
+from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, change_passwd, manage_sms
 from usercontrol.models import User
 
 
@@ -195,7 +195,7 @@ class ManageUserAccountTestCase(TestCase):
         self.cli.login(username=self.user.username, password='testpassword')
         rep = self.cli.post('/change_pwd/', {'new_pwd': 'newPasswordForTest'})
         self.assertTrue(rep.json()['success'])
-        self.assertEqual(rep.resolver_match.func, changePasswd)
+        self.assertEqual(rep.resolver_match.func, change_passwd)
 
     def test_change_user_password_fail(self):
         rep = self.cli.post('/change_pwd/', {'new_pwd': ''})

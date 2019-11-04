@@ -103,7 +103,7 @@ def edit_user_infos(request):
     else:
         return redirect(reverse('usercontrol:sign_in'))
 
-def changePasswd(request):
+def change_passwd(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             try:
