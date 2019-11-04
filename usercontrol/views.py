@@ -73,43 +73,33 @@ def sign_out(request):
 
 def account(request):
     if request.user.is_authenticated:
-        context = {}
-        try:
-            context['phone'] = request.user.number
-            context['use_sms'] = request.user.use_sms
-        except:
-            pass
-
-        return render(request, 'usercontrol/account.html', context)
+        return render(request, 'usercontrol/account.html')
     else:
         return redirect(reverse('usercontrol:sign_in'))
 
 def edit_user_infos(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            try:
-                user = request.user
+            # try:
+            data = request.POST
+            user = User.objects.get(pk=request.user.pk)
+            user.username = data['username']
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+            user.email = data['email']
+            user.number = int(data['number'])
 
-                if comparator(user.last_name, request.POST['last_name']):
-                    user.last_name = request.POST['last_name']
+            # for k, v in request.POST.items():
+            #     if k == 'number':  
+            #         user.k = int(v)
+            #     else:
+            #         user.k = v
 
-                if comparator(user.first_name, request.POST['first_name']):
-                    user.first_name = request.POST['first_name']
+            user.save()
+            return JsonResponse({'success': True})
 
-                if comparator(user.username, request.POST['pseudo']):
-                    user.username = request.POST['pseudo']
-
-                if comparator(user.email, request.POST['email']):
-                    user.email = request.POST['email']
-
-                if comparator(user.number, request.POST['phone'][1:]):
-                    user.number = int(request.POST['phone'][1:])
-
-                user.save()
-                return JsonResponse({'success': True})
-
-            except:
-                return JsonResponse({'success': False})
+            # except:
+                # return JsonResponse({'success': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
 

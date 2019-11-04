@@ -54,9 +54,9 @@ btnConfirm.addEventListener('click', function () {
         data: {
             'last_name': infosUserChanged[0],
             'first_name': infosUserChanged[1],
-            'pseudo': infosUserChanged[2],
+            'username': infosUserChanged[2],
             'email': infosUserChanged[3],
-            'phone': infosUserChanged[4],
+            'number': infosUserChanged[4],
         },
         success: function(data) {
             if (data['success']) {

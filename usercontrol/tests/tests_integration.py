@@ -173,9 +173,9 @@ class ManageUserAccountTestCase(TestCase):
         self.data = {
             'last_name': 'lastNameTest',
             'first_name': 'firstNameTest',
-            'pseudo': 'pseudoForTest',
+            'username': 'pseudoForTest',
             'email': 'emailtest@test.com',
-            'phone': '071235678',
+            'number': '071235678',
         }
         self.user = user_test
 
