@@ -80,26 +80,21 @@ def account(request):
 def edit_user_infos(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            # try:
-            data = request.POST
-            user = User.objects.get(pk=request.user.pk)
-            user.username = data['username']
-            user.first_name = data['first_name']
-            user.last_name = data['last_name']
-            user.email = data['email']
-            user.number = int(data['number'])
+            try:
+                data = request.POST
+                user = User.objects.get(pk=request.user.pk)
 
-            # for k, v in request.POST.items():
-            #     if k == 'number':  
-            #         user.k = int(v)
-            #     else:
-            #         user.k = v
+                for k, v in request.POST.items():
+                    if k == 'number':  
+                        setattr(user, k, int(v))
+                    else:
+                        setattr(user, k, v)
 
-            user.save()
-            return JsonResponse({'success': True})
+                user.save()
+                return JsonResponse({'success': True})
 
-            # except:
-                # return JsonResponse({'success': False})
+            except:
+                return JsonResponse({'success': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
 
