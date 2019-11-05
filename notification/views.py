@@ -7,9 +7,11 @@ from usercontrol.models import User
 
 def set_notification(request):
     context = {}
+    req_user = request.user
+    user = User.objects.get(pk=req_user.pk)
 
     if request.method == 'POST':
-        if request.user.is_authenticated:
+        if req_user.is_authenticated and user.use_sms == True:
             date = request.POST['date']
             time = request.POST['time']
             msg = request.POST['message']
@@ -21,7 +23,7 @@ def set_notification(request):
 
             return JsonResponse({'Response': True})
         else:
-            return JsonResponse({'Response': 'Not connect'})
+            return JsonResponse({'Response': 'Notification disabled'})
 
     else:
         pass
