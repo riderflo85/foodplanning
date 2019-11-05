@@ -65,7 +65,7 @@ btnConfirmPwd.addEventListener('click', function() {
     });
 
     $.ajax({
-        url:'/change_pwd/',
+        url: '/change_pwd/',
         type: 'POST',
         dataType: 'json',
         data: {'new_pwd': newPasswd},

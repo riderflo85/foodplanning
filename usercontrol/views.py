@@ -138,3 +138,18 @@ def manage_sms(request):
                 return JsonResponse({'actived': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
+
+def remove_account(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user = User.objects.get(pk=request.user.pk)
+
+            if request.POST['confirm'] == 'true':
+                user.delete()
+                logout(request)
+                
+                return redirect(reverse('usercontrol:sign_in'))
+        else:
+            return JsonResponse({'success': False})
+    else:
+        return redirect(reverse('usercontrol:sign_in'))

@@ -153,12 +153,33 @@
                                         <div class="info-re-init">Votre compte sera supprimer et aucune restauration ne sera possible !!</div>
                                     </div>
                                     <div class="col-3 part-right">
-                                        <button class="btn btn-danger" id="confirDeleteAccount">Confirmez ?</button>
+                                        <button class="btn btn-danger" id="deleteAccount">Confirmez ?</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><!-- end .tab-pane fade h-100 #remove-account -->
+                    <!-- Modal box for confirm remove account user -->
+                    <div class="modal fade" id="modalRemoveAccount" tabindex="-1" role="dialog" aria-labelledby="modalRemoveAccount" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4>Suppression de votre compte</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div><!-- end .modal-header -->
+                                <div class="modal-body my-3">
+                                    <p class="lead text-danger">Êtes-vous sûr de vouloir supprimer votre compte?</p>
+                                    <p class="text-danger">Cette opération est irréversible !</p>
+                                </div><!-- end .modal-body -->
+                                <div class="modal-footer d-flex justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmRemoveAccount">Je souhaite supprimer mon compte</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Je garde mon compte</button>
+                                </div><!-- end .modal-footer -->
+                            </div><!-- end .modal-content -->
+                        </div><!-- end .modal-dialog -->
+                    </div><!-- end .modal fade -->
                 </div>
             </div>
         </div>
@@ -166,6 +187,7 @@
 
 </section>
 <script src="{% static 'planning/js/secureajax.js' %}"></script>
+<script src="{% static 'usercontrol/js/removeAccount.js' %}"></script>
 <script src="{% static 'usercontrol/js/changePwd.js' %}"></script>
 <script src="{% static 'usercontrol/js/manageSms.js' %}"></script>
 <script src="{% static 'usercontrol/js/navAccountSelected.js' %}"></script>

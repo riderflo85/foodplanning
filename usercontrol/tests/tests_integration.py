@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
-from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, change_passwd, manage_sms
+from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, change_passwd, manage_sms, remove_account
 from usercontrol.models import User
 
 
@@ -163,13 +163,6 @@ class ManageUserAccountTestCase(TestCase):
         user_test.first_name = 'Tester'
         user_test.last_name = 'FooTest'
         user_test.save()
-        # phone = PhoneNumber()
-        # phone.id_user = user_test
-        # phone.number = 773450857
-        # phone.save()
-        # notif = NotificationBySms()
-        # notif.id_user = user_test
-        # notif.save()
         self.data = {
             'last_name': 'lastNameTest',
             'first_name': 'firstNameTest',
@@ -198,7 +191,7 @@ class ManageUserAccountTestCase(TestCase):
         self.assertEqual(rep.resolver_match.func, change_passwd)
 
     def test_change_user_password_fail(self):
-        rep = self.cli.post('/change_pwd/', {'new_pwd': ''})
+        rep = self.cli.get('/change_pwd/')
         self.assertEqual(rep.status_code, 302)
 
     def test_active_notifiaction_sms(self):
@@ -216,5 +209,16 @@ class ManageUserAccountTestCase(TestCase):
         self.assertEqual(rep.resolver_match.func, manage_sms)
 
     def test_active_notification_sms_fail(self):
-        rep = self.cli.post('/manage_sms/', {'active': ''})
+        rep = self.cli.get('/manage_sms/')
+        self.assertEqual(rep.status_code, 302)
+
+    def test_remove_account(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.post('/remove_account/', {'confirm': 'true'})
+        self.assertEqual(rep.resolver_match.func, remove_account)
+        self.assertRedirects(rep, '/')
+        self.assertEqual(len(User.objects.all()), 0)
+
+    def test_remove_account_fail(self):
+        rep = self.cli.get('/remove_account/')
         self.assertEqual(rep.status_code, 302)
