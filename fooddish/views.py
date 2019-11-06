@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import JsonResponse
 from .models import Fooddish
-from.forms import AddDishForms, DelDishForms
+from .forms import AddDishForms, DelDishForms
 
-# Create your views here.
+
 def index(request):
     context = {}
 
@@ -31,14 +31,17 @@ def add_dish(request):
         else:
             return redirect(reverse('fooddish:liste_des_plats'))
     else:
-        pass
+        return JsonResponse({'error': True})
 
 def delete_dish(request):
     if request.method == 'POST':
         data = request.POST['id']
-        Fooddish.objects.get(pk=int(data)).delete()
-        return JsonResponse({'removed': True})
+        try:
+            Fooddish.objects.get(pk=int(data)).delete()
+            return JsonResponse({'removed': True})
 
+        except:
+            return JsonResponse({'removed': False})
     else:
         return JsonResponse({'removed': False})
 

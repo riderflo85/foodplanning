@@ -15,15 +15,15 @@ def set_notification(request):
             date = request.POST['date']
             time = request.POST['time']
             msg = request.POST['message']
-            num_user = User.objects.get(id_user=request.user).number
+            num_user = User.objects.get(pk=request.user.pk).number
             comp_num = "".join(['+33', str(num_user)])
 
             result = convert_utc_datetime(time, date)
             task = send_notification.apply_async((comp_num, msg), eta=result)
 
-            return JsonResponse({'Response': True})
+            return JsonResponse({'Success': True})
         else:
             return JsonResponse({'Response': 'Notification disabled'})
 
     else:
-        pass
+        return JsonResponse({'error': True})

@@ -20,7 +20,9 @@ def convert_utc_datetime(time, date):
         month=int(parser_date[1]),
         day=int(parser_date[2]),
         hour=int(parser_time[0]) - 2,
-        minute=int(parser_time[1])
+        minute=int(parser_time[1]),
+        second=0,
+        microsecond=0
     )
 
     return execute_at
