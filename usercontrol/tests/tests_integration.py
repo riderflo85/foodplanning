@@ -196,16 +196,18 @@ class ManageUserAccountTestCase(TestCase):
 
     def test_active_notifiaction_sms(self):
         self.cli.login(username=self.user.username, password='testpassword')
-        rep = self.cli.post('/manage_sms/', {'active': True})
+        rep = self.cli.post('/manage_sms/', {'active': 'true'})
         self.assertEqual(rep.status_code, 200)
         self.assertTrue(rep.json()['actived'])
+        self.assertTrue(User.objects.get(pk=self.user.pk).use_sms)
         self.assertEqual(rep.resolver_match.func, manage_sms)
 
     def test_deactive_notifiaction_sms(self):
         self.cli.login(username=self.user.username, password='testpassword')
-        rep = self.cli.post('/manage_sms/', {'active': False})
+        rep = self.cli.post('/manage_sms/', {'active': 'false'})
         self.assertEqual(rep.status_code, 200)
-        self.assertTrue(rep.json()['actived'])
+        self.assertFalse(rep.json()['actived'])
+        self.assertFalse(User.objects.get(pk=self.user.pk).use_sms)
         self.assertEqual(rep.resolver_match.func, manage_sms)
 
     def test_active_notification_sms_fail(self):

@@ -116,21 +116,18 @@ def change_passwd(request):
 def manage_sms(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            try:
-                user = request.user.use_sms
+            user = User.objects.get(pk=request.user.pk)
 
-                if request.POST['active'] == True:
-                    user.use_sms = True
-                    user.save()
-
-                elif request.POST['active'] == False:
-                    user.use_sms = False
-                    user.save()
-
+            if request.POST['active'] == 'true':
+                user.use_sms = True
+                user.save()
                 return JsonResponse({'actived': True})
 
-            except:
+            elif request.POST['active'] == 'false':
+                user.use_sms = False
+                user.save()
                 return JsonResponse({'actived': False})
+
     else:
         return redirect(reverse('usercontrol:sign_in'))
 

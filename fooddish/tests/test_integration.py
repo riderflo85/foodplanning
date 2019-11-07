@@ -38,7 +38,7 @@ class ManageDishDatabaseTestCase(TestCase):
         self.d1 = dish1
         self.d2 = dish2
 
-    def test_list_all_dish(self):
+    def test_list_all_dish_view(self):
         rep = self.cli.get('/liste_des_plats/all_dish/')
         data = [self.d1.name, self.d2.name]
         self.assertEqual(rep.json()['Data'], data)

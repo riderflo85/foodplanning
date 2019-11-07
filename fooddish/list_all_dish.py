@@ -3,7 +3,7 @@ from .models import Fooddish
 
 def list_all_dish():
     """ Listing all dishs in database """
-    dish_sorted = [('default', 'Choississez un plat'),]
+    dish_sorted = [('default', 'Choisissez un plat'),]
     dishs = Fooddish.objects.all()
 
     for i in dishs:
