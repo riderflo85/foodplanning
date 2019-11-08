@@ -33,7 +33,6 @@ def sign_in(request):
 
 def sign_up(request):
     context = {'error': False}
-    confirm = False
 
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -50,14 +49,9 @@ def sign_up(request):
             new_user.last_name = last_name
             new_user.first_name = first_name
             new_user.save()
-            confirm = True
-        else:
-            context['error'] = form.errors.items()
-        
-        if confirm:
             return redirect(reverse('usercontrol:sign_in'))
         else:
-            pass
+            context['error'] = form.errors.items()
 
     else:
         form = SignupForm()
@@ -80,36 +74,33 @@ def account(request):
 def edit_user_infos(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            try:
-                data = request.POST
-                user = User.objects.get(pk=request.user.pk)
+            data = request.POST
+            user = User.objects.get(pk=request.user.pk)
 
-                for k, v in request.POST.items():
-                    if k == 'number':  
-                        setattr(user, k, int(v))
-                    else:
-                        setattr(user, k, v)
+            for k, v in request.POST.items():
+                if k == 'number':  
+                    setattr(user, k, int(v))
+                else:
+                    setattr(user, k, v)
 
-                user.save()
-                return JsonResponse({'success': True})
+            user.save()
+            return JsonResponse({'success': True})
 
-            except:
-                return JsonResponse({'success': False})
+        else:
+            return JsonResponse({'success': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
 
 def change_passwd(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            try:
-                user = request.user
-                user.set_password(request.POST['new_pwd'])
-                user.save()
-                return JsonResponse({'success': True})
+            user = request.user
+            user.set_password(request.POST['new_pwd'])
+            user.save()
+            return JsonResponse({'success': True})
 
-            except:
-                return JsonResponse({'success': False})
-
+        else:
+            return JsonResponse({'success': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
 

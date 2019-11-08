@@ -40,6 +40,13 @@ class UserAuthenticateTestCase(TestCase):
         user_test.save()
         self.user = user_test
 
+    def test_user_account_not_exist(self):
+        data_no_user = {'user': 'failUser', 'password': 'notpassword'}
+        rep = self.cli.post('/', data_no_user)
+        self.assertTrue(rep.context['error'])
+        # User is not redirect because authentification is failed
+        self.assertEqual(rep.status_code, 200)
+
     def test_user_redirect_after_sign_in(self):
         data_for_login = {'user': 'testUser', 'password': 'longpasswordtest'}
         rep = self.cli.post('/', data_for_login)
@@ -180,9 +187,15 @@ class ManageUserAccountTestCase(TestCase):
         rep2 = self.cli.get('/account/')
         self.assertEqual(rep.status_code, 200)
 
-    def test_change_user_infos_fail(self):
-        rep = self.cli.post('/edit_infos/', self.data)
+    def test_permission_denied_change_user_infos(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.get('/edit_infos/')
+        self.assertFalse(rep.json()['success'])
+
+    def test_change_user_fail(self):
+        rep = self.cli.get('/edit_infos/')
         self.assertEqual(rep.status_code, 302)
+        self.assertRedirects(rep, '/')
 
     def test_change_user_password(self):
         self.cli.login(username=self.user.username, password='testpassword')
@@ -190,9 +203,15 @@ class ManageUserAccountTestCase(TestCase):
         self.assertTrue(rep.json()['success'])
         self.assertEqual(rep.resolver_match.func, change_passwd)
 
+    def test_permission_denied_change_user_password(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.get('/change_pwd/')
+        self.assertFalse(rep.json()['success'])
+
     def test_change_user_password_fail(self):
         rep = self.cli.get('/change_pwd/')
         self.assertEqual(rep.status_code, 302)
+        self.assertRedirects(rep, '/')
 
     def test_active_notifiaction_sms(self):
         self.cli.login(username=self.user.username, password='testpassword')
@@ -224,3 +243,9 @@ class ManageUserAccountTestCase(TestCase):
     def test_remove_account_fail(self):
         rep = self.cli.get('/remove_account/')
         self.assertEqual(rep.status_code, 302)
+
+    def test_remove_account_fail_with_get(self):
+        self.cli.login(username=self.user.username, password='testpassword')
+        rep = self.cli.get('/remove_account/')
+        self.assertEqual(rep.status_code, 200)
+        self.assertFalse(rep.json()['success'])
