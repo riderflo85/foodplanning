@@ -1,4 +1,6 @@
 from django.test import TestCase
+from unittest.mock import patch
+from callr import Api
 from notification.callr import convert_utc_datetime, api
 from notification.tasks import send_notification
 
@@ -12,17 +14,14 @@ class ConvertUtcDatetimeTestCase(TestCase):
         result = convert_utc_datetime(time, date)
         self.assertEqual(str(result), '2019-10-10 08:30:00')
 
-# class SendSmsTestCase(TestCase):
+class SendSmsTestCase(TestCase):
 
-#     def test_send_sms_with_callr_api(self, monkeypatch):
-#         number = '+33741259865'
-#         message = 'Sms de test'
-#         result = "DE1248FT"
+    @patch('callr.Api.call')
+    def test_send_sms_with_callr_api(self, mock_send_notification):
+        number = '+33741259865'
+        message = 'Sms de test'
 
-#         def mock_callr(method, type, num, sms, encode):
-#             return result
+        mock_send_notification.return_value = "DE1248FT"
+        id_sms = send_notification(number, message)
 
-#         monkeypatch.setattr(api, 'call', mock_callr)
-
-#         id_sms = send_notification(number, message)
-#         self.assertEqual(id_sms, result)
+        self.assertEqual(id_sms, "DE1248FT")
