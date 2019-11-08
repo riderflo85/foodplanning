@@ -40,7 +40,10 @@ class ManageDishDatabaseTestCase(TestCase):
 
     def test_list_all_dish_view(self):
         rep = self.cli.get('/liste_des_plats/all_dish/')
-        data = [self.d1.name, self.d2.name]
+        data = [
+            {'name': self.d1.name},
+            {'name': self.d2.name}
+        ]
         self.assertEqual(rep.json()['Data'], data)
 
     def test_add_dish_in_database(self):

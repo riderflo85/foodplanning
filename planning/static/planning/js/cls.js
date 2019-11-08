@@ -86,27 +86,7 @@ class Planning {
 
                     /* ****** Gestionnaire d'événement pour les trois boutons des plannings ******  */
                     eventButton(this.id_user);
-                    // var btnCheck = document.getElementById('btnValidPlanning' + this.id_user);
-                    // var btnEdit = document.getElementById('btnEditPlanning' + this.id_user);
-                    // var btnRemove = document.getElementById('btnRemovePlanning' + this.id_user);
-                    // var user_id = this.id_user;
-
-                    // btnCheck.addEventListener('click', function () {
-                    //     validatePlanning(user_id, btnCheck);
-                    //     btnEdit.removeAttribute('disabled');
-                    // });
-
-                    // btnEdit.addEventListener('click', function () {
-                    //     editPlanning(user_id, btnEdit);
-                    //     // btnCheck.removeAttribute('disabled');
-                    // });
-
-                    // btnRemove.addEventListener('click', function () {
-                    //     removePlanning(user_id);
-                    // });
                     /* ***************************************************************************  */
-
-
                 } else {
                     var baliseSelect = `<select name='${this.week[i]}' class='custom-select listing-for-disabled-${this.id_user}' id='${this.week[i]}-pl-${this.id_user}'></select>`;
                     var baliseOptionDefault = `<option selected>Choisissez un plat</option>`;
@@ -115,8 +95,8 @@ class Planning {
                     var select = document.getElementById(`${this.week[i]}-pl-${this.id_user}`);
                     $(baliseOptionDefault).appendTo(select);
 
-                    for (let i = 0; i < data.Data.length; i++) {
-                        var baliseDish = `<option value='${data.Data[i]}'>${data.Data[i]}</option>`;
+                    for (const value of data.Data){
+                        var baliseDish = `<option value='${value.name}'>${value.name}</option>`;
                         $(baliseDish).appendTo(select);
                     }
                 }

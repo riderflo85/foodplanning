@@ -47,10 +47,6 @@ def delete_dish(request):
 
 def all_dish(request):
     if request.method == 'GET':
-        list_dish = []
-        dishs = Fooddish.objects.all()
+        dishs = Fooddish.objects.all().values('name')
 
-        for i in dishs:
-            list_dish.append(i.name)
-    
-    return JsonResponse({'Data': list_dish})
+    return JsonResponse({'Data': list(dishs)})

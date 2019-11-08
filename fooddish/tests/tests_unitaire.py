@@ -15,10 +15,6 @@ class ListingAllDishInDatabaseTestCase(TestCase):
         self.d2 = dish2
 
     def test_list_all_dish_function(self):
-        data = [
-            ('default', 'Choisissez un plat'),
-            (self.d1.pk, self.d1.name),
-            (self.d2.pk, self.d2.name)
-        ]
-        result = list_all_dish()
-        self.assertEqual(result, data)
+        compare = list(Fooddish.objects.all().values('id', 'name'))
+        result = list(list_all_dish())
+        self.assertEqual(result, compare)

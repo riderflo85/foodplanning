@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.functional import lazy
 from .list_all_dish import list_all_dish
 
 
@@ -14,7 +15,7 @@ class AddDishForms(forms.Form):
 class DelDishForms(forms.Form):
     del_dish = forms.ChoiceField(
         label='delete',
-        choices=list_all_dish(),
+        choices=lazy(list_all_dish, tuple),
         widget=forms.Select(
             attrs={'class': 'form-control'}
         ),
