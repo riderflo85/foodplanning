@@ -1,4 +1,5 @@
 from .models import PlanningAm, PlanningPm
+from usercontrol.models import User, SecretKeySave
 
 
 def check_user_planning_am(user):
@@ -15,3 +16,7 @@ def check_user_planning_pm(user):
         return planning
     except:
         return False
+
+
+def list_key_save(user):
+    keys_save = SecretKeySave.objects.filter(users__id=user.id)
