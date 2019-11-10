@@ -7,13 +7,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center pos-button">
-                <div class="float-right pr-3">
-                    <button type="button" class="btn btn-primary" id="btnAddPlanning">Ajouter un plannig</button>
-                    <p class="d-none" id="momentDay">am</p>
+                <div class="d-flex justify-content-between px-3">
+                    <button type="button" class="btn btn-primary" id="btnSeeOtherPlanning">Voir le planning d'un autre utilisateur</button>
+                    <button type="button" class="btn btn-primary" id="btnAddPlanning">Ajouter un planning</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="d-none" id="momentDay">am</div>
 
     <!-- If plannig does not exist -->
     {% if planning|length < 1 %}
@@ -309,6 +310,31 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Box see another user plannning -->
+    <div class="modal fade" id="modalBoxAnotherPlanning" tabindex="-1" role="dialog" aria-labelledby="anotherUserPlanning" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Consulter le planning d'un autre utilisateur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Condition pour vérifier si l'utilisateur connecté à enregistré des clés
+                        Si oui -->
+                        <!-- afficher une liste des utilisateurs qui correspondent aux clés (sans afficher les clés) -->
+                    <!-- Si non -->
+                        <!-- afficher le formulaire pour demander la clé secrète d'un utilisateur -->
+                </div>
+                <div class="modal-footer bg-footer">
+                    <button type="button" class="btn btn-info text-white" id="confirmSeeAnotherPlanning" data-dismiss="modal">Valider</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
+                </div>
             </div>
         </div>
     </div>
