@@ -118,3 +118,5 @@ def update_planning(request):
         planning.save()
 
         return JsonResponse({'ServeurResponse': True})
+
+# Ajouter une nouvelle vue pour consulter le planning d'un autre utilisateur

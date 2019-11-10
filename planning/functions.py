@@ -20,3 +20,5 @@ def check_user_planning_pm(user):
 
 def list_key_save(user):
     keys_save = SecretKeySave.objects.filter(users__id=user.id)
+    # A tester et a finir
+    # doit retourner une liste de tuple -> (username, secret_key)
