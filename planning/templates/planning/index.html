@@ -144,14 +144,21 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="text-secondary text-center">Un seul planning par utilisateur est autorisé !!</div>
                     <div class="input-group my-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Liste des utilisateurs enregistrés</span>
                         </div>
                         <select name="listUser" class="form-control" id="listAllUser">
-                            <option selected>Choisissez un utilisateur auquel associès le nouveau planning</option>
-                            {% for user in users %}
-                            <option value='{"name":"{{ user.first_name }}","pk":"{{ user.pk }}"}'>{{ user.first_name }}</option>
+                            <option selected disabled>Choisissez un utilisateur auquel associès le nouveau planning</option>
+                            {% for u in users %}
+                            {% if user.pk == u.pk and planning|length < 1 %}
+                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}'>{{ u.first_name }}</option>
+                            {% elif user.pk == u.pk and planning|length == 1 %}
+                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}' disabled>{{ u.first_name }}</option>
+                            {% else %}
+                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}'>{{ u.first_name }}</option>
+                            {% endif %}
                             {% endfor %}
                         </select>
                     </div>
