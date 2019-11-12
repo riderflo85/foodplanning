@@ -7,28 +7,29 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.10', '192.168.1.36']
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'foodplanning_db',
-    'USER': os.environ.get('USER_DB'),
-    'PASSWORD': os.environ.get('PWD_DB'),
-    'HOST': os.environ.get('HOST_DB'),
-    'PORT': os.environ.get('PORT_DB'),
+if os.environ.get('DB_LOCAL') == 'laptopAsus':
+    # For local database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'foodplanning_db',
+        'USER': 'florent',
+        'PASSWORD': os.environ.get('PWDDB_LOCAL'),
+        'HOST': '',
+        'PORT': os.environ.get('PORT_DB'),
+        }
     }
-}
-
-# For local database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'foodplanning_db',
-#     'USER': 'florent',
-#     'PASSWORD': os.environ.get('PWDDB_LOCAL'),
-#     'HOST': '',
-#     'PORT': os.environ.get('PORT_DB'),
-#     }
-# }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'foodplanning_db',
+        'USER': os.environ.get('USER_DB'),
+        'PASSWORD': os.environ.get('PWD_DB'),
+        'HOST': os.environ.get('HOST_DB'),
+        'PORT': os.environ.get('PORT_DB'),
+        }
+    }
 
 # celery config
 CELERY_BROKER_URL = 'redis://localhost:6379'
