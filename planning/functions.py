@@ -18,7 +18,19 @@ def check_user_planning_pm(user):
         return False
 
 
-def list_key_save(user):
-    keys_save = SecretKeySave.objects.filter(users__id=user.id)
-    # A tester et a finir
-    # doit retourner une liste de tuple -> (username, secret_key)
+def all_key_save(user):
+    keys_save = []
+
+    try:
+        list_keys = SecretKeySave.objects.filter(users__id=user.id).values(
+        'secret_key_saved',
+        )
+        for k in list_keys:
+            k['username'] = User.objects.get(secret_key=k['secret_key_saved']).username
+            keys_save.append(k)
+
+    except AttributeError:
+        keys_save.append(('Error', 'Erreur'))
+
+
+    return keys_save

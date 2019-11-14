@@ -325,6 +325,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <form action="{% url 'planning:another_planning' %}" method="post">
+                    {% csrf_token %}
+                        <div class="input-group form-group">
+                            {{ form.secret_key }}
+                        </div>
+                        <div class="input-group form-group">
+                            {{ form.key_save }}
+                        </div>
+                    </form>
                     <!-- Condition pour vérifier si l'utilisateur connecté à enregistré des clés
                         Si oui -->
                         <!-- afficher une liste des utilisateurs qui correspondent aux clés (sans afficher les clés) -->
@@ -348,6 +357,7 @@
 <script src="{% static 'planning/js/removeplanning.js' %}"></script>
 <script src="{% static 'planning/js/cls.js' %}"></script>
 <script src="{% static 'planning/js/addplanning.js' %}"></script>
+<script src="{% static 'planning/js/seeAnotherPlanning.js' %}"></script>
 <script src="{% static 'planning/js/scripts.js' %}"></script>
 {% else %}
 <section class="define-size">

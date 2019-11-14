@@ -2,9 +2,10 @@ from django.shortcuts import render
 from usercontrol.models import User
 from django.http import JsonResponse
 from django.db import IntegrityError
-from .models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
+from .models import PlanningAm, PlanningPm
 from .functions import check_user_planning_am, check_user_planning_pm
+from .forms import SeeAnotherPlanningForm
 
 
 def planning(request):
@@ -16,6 +17,8 @@ def planning(request):
         context['users'] = User.objects.all()
         dico_dishs = {}
         all_dishs = Fooddish.objects.all()
+        form = SeeAnotherPlanningForm(req_user=request.user)
+        context['form'] = form
 
         for i in all_dishs:
             dico_dishs[i.id] = i
@@ -120,3 +123,13 @@ def update_planning(request):
         return JsonResponse({'ServeurResponse': True})
 
 # Ajouter une nouvelle vue pour consulter le planning d'un autre utilisateur
+def another_planning(request):
+    context = {}
+
+    form = SeeAnotherPlanningForm(request.POST)
+    setattr(form, 'user', request.user)
+
+    secret_key_user = form.cleaned_data['secret_key']
+    find_user = User.objects.get(secret_key=secret_key_user)
+    context['find_user'] = find_user
+    return render(request, 'planning/another_planning.html', context)

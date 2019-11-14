@@ -10,4 +10,4 @@ class User(AbstractUser):
 
 class SecretKeySave(models.Model):
     secret_key_saved = models.CharField(max_length=28, null=False)
-    users = models.ManyToManyField(User)
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
