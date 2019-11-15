@@ -23,8 +23,9 @@ def all_key_save(user):
 
     try:
         list_keys = SecretKeySave.objects.filter(users__id=user.id).values(
-        'secret_key_saved',
+            'secret_key_saved',
         )
+
         for k in list_keys:
             k['username'] = User.objects.get(secret_key=k['secret_key_saved']).username
             keys_save.append(k)

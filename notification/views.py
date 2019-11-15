@@ -19,7 +19,7 @@ def set_notification(request):
             comp_num = "".join(['+33', str(num_user)])
 
             result = convert_utc_datetime(time, date)
-            task = send_notification.apply_async((comp_num, msg), eta=result)
+            send_notification.apply_async((comp_num, msg), eta=result)
 
             return JsonResponse({'Success': True})
         else:
