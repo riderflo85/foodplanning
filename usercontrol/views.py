@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import Group, Permission
 from .forms import SignupForm, LoginForm
 from .models import User
-from .keygen import key_generator
 
 
 def sign_in(request):
@@ -44,16 +45,28 @@ def sign_up(request):
             email = form.cleaned_data['email']
             pwd = form.cleaned_data['password']
             phone = form.cleaned_data['phone_number']
+            group_name = form.cleaned_data['group_name']
+            # Tester si le groupe existe déjà
+            try:
+                new_group = Group.objects.get(name=group_name)
+
+            except ObjectDoesNotExist:
+                new_group = Group(name=group_name)
+                new_group.save()
+                perm1 = Permission.objects.get(codename='view_planningam')
+                perm2 = Permission.objects.get(codename='view_planningpm')
+                new_group.permissions.set([perm1, perm2])
+                new_group.save()
 
             new_user = User.objects.create_user(
                 pseudo,
                 email,
                 pwd,
-                number=phone,
-                secret_key=key_generator(),
+                number=phone
             )
             new_user.last_name = last_name
             new_user.first_name = first_name
+            new_user.groups.add(new_group)
             new_user.save()
             return redirect(reverse('usercontrol:sign_in'))
         else:

@@ -59,5 +59,15 @@ class SignupForm(forms.Form):
             attrs={'placeholder': 'Numéro de portable pour être notifié',
             'class': 'form-control',
             'pattern': "[0-9]{1}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}"}
-        )
+        ),
+    )
+    group_name = forms.CharField(
+        label='group_name',
+        max_length=45,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Nom du foyer',
+                'class': 'form-control'
+            }
+        ),
     )

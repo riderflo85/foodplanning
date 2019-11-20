@@ -66,7 +66,8 @@ class UserAuthenticateTestCase(TestCase):
             'first_name': 'UserFrech',
             'email': 'newuserfrech@frech.com',
             'password': 'thislongpasswordforlogin',
-            'phone_number': 670217836
+            'phone_number': 670217836,
+            'group_name': 'groupeTest'
         }
         rep = self.cli.post('/sign_up/', data)
         self.assertRedirects(rep, '/')
@@ -78,7 +79,8 @@ class UserAuthenticateTestCase(TestCase):
             'first_name': 'UserFrech',
             'email': 'newuserfrechFAIL',
             'password': 'thislongpasswordforlogin',
-            'phone_number': 670217836
+            'phone_number': 670217836,
+            'group_name': 'groupeTest'
         }
         rep = self.cli.post('/sign_up/', data)
         self.assertFormError(rep, 'form', 'email', 'Saisissez une adresse de courriel valide.')
@@ -92,7 +94,8 @@ class FormTestCase(TestCase):
             'first_name': 'Tester',
             'email': 'testuser@founisseur.com',
             'password': 'longpasswordtest',
-            'phone_number': '770207030'
+            'phone_number': '770207030',
+            'group_name': 'groupeTest'
         }
         form = SignupForm(data=form_data)
         self.assertTrue(form.is_valid())
@@ -176,6 +179,7 @@ class ManageUserAccountTestCase(TestCase):
             'username': 'pseudoForTest',
             'email': 'emailtest@test.com',
             'number': '071235678',
+            'group_name': 'groupeTest'
         }
         self.user = user_test
 

@@ -327,18 +327,15 @@
                 <div class="modal-body">
                     <form action="{% url 'planning:another_planning' %}" method="post">
                     {% csrf_token %}
-                        <div class="input-group form-group">
-                            {{ form.secret_key }}
-                        </div>
-                        <div class="input-group form-group">
-                            {{ form.key_save }}
-                        </div>
+                        <select name="listUser" class="form-control" id="listAllUser">
+                            <option selected disabled>Choisissez un utilisateur auquel associès le nouveau planning</option>
+                            {% for u in group_users %}
+                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}'>{{ u.username }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Envoyer</button>
+                    
                     </form>
-                    <!-- Condition pour vérifier si l'utilisateur connecté à enregistré des clés
-                        Si oui -->
-                        <!-- afficher une liste des utilisateurs qui correspondent aux clés (sans afficher les clés) -->
-                    <!-- Si non -->
-                        <!-- afficher le formulaire pour demander la clé secrète d'un utilisateur -->
                 </div>
                 <div class="modal-footer bg-footer">
                     <button type="button" class="btn btn-info text-white" id="confirmSeeAnotherPlanning" data-dismiss="modal">Valider</button>

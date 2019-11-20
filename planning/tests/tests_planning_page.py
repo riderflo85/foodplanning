@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import login, authenticate
 from planning.views import planning, planning_pm
 from planning.models import PlanningAm, PlanningPm
@@ -16,6 +17,13 @@ class PlanningPageTestCase(TestCase):
             'PwdUserTest',
             number=670217836
         )
+        new_group = Group(name="Groupe pour test")
+        new_group.save()
+        perm1 = Permission.objects.get(codename='view_planningam')
+        perm2 = Permission.objects.get(codename='view_planningpm')
+        new_group.permissions.set([perm1, perm2])
+        new_group.save()
+        self.user.groups.add(new_group)
         self.days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
         self.allUser = User.objects.all()
 

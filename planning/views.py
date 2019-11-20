@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from usercontrol.models import User
 from django.http import JsonResponse
 from django.db import IntegrityError
+from django.contrib.auth.decorators import user_passes_test
+from usercontrol.models import User
 from fooddish.models import Fooddish
 from .models import PlanningAm, PlanningPm
 from .functions import check_user_planning_am, check_user_planning_pm
-from .forms import SeeAnotherPlanningForm
 
 
 def planning(request):
@@ -13,12 +13,14 @@ def planning(request):
 
     if request.user.is_authenticated:
         weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        users = User.objects.filter(groups=request.user.groups.get())
+        group_users = users.exclude(username=request.user.username)
         context['days'] = weeks
-        context['users'] = User.objects.all()
+        context['users'] = users
+        context['group_users'] = group_users
         dico_dishs = {}
         all_dishs = Fooddish.objects.all()
-        form = SeeAnotherPlanningForm(req_user=request.user)
-        context['form'] = form
+
 
         for i in all_dishs:
             dico_dishs[i.id] = i
@@ -122,14 +124,16 @@ def update_planning(request):
 
         return JsonResponse({'ServeurResponse': True})
 
-# Ajouter une nouvelle vue pour consulter le planning d'un autre utilisateur
+def check_permission(user):
+    return user.has_perm('planning.view_planningam')
+
+@user_passes_test(check_permission)
 def another_planning(request):
-    context = {}
 
-    form = SeeAnotherPlanningForm(request.POST)
-    setattr(form, 'user', request.user)
+    # Not complet
 
-    secret_key_user = form.cleaned_data['secret_key']
-    find_user = User.objects.get(secret_key=secret_key_user)
-    context['find_user'] = find_user
-    return render(request, 'planning/another_planning.html', context)
+    # another_user = PlanningAm.objects.get(id_user=int(request.POST['id']))
+    # context = {'planning': another_planning}
+
+
+    return render(request, 'planning/another_planning.html')
