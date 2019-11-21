@@ -7,7 +7,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center pos-button">
-                <div class="float-right pr-3">
+                <div class="d-flex justify-content-between px-3">
+                    <button type="button" class="btn btn-primary" id="btnSeeOtherPlanningPm">Voir le planning d'un autre utilisateur</button>
                     <button type="button" class="btn btn-primary" id="btnAddPlanning">Ajouter un plannig</button>
                     <p class="d-none" id="momentDay">pm</p>
                 </div>
@@ -285,6 +286,35 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Box see another user plannning -->
+    <div class="modal fade" id="modalBoxAnotherPlanningPm" tabindex="-1" role="dialog" aria-labelledby="anotherUserPlanning" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Consulter le planning d'un autre utilisateur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'planning:another_planning_pm' %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <select name="selectUser" class="form-control" id="listAllUser">
+                            <option selected disabled>Choisissez un utilisateur</option>
+                            {% for u in group_users %}
+                            <option value='{{ u.pk }}'>{{ u.first_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-footer bg-footer">
+                        <button type="submit" class="btn btn-info text-white" id="confirmSeeAnotherPlanningPm">Valider</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 <script src="{% static 'planning/js/secureajax.js' %}"></script>
 <script src="{% static 'planning/js/navPmSelected.js' %}"></script>
@@ -295,6 +325,7 @@
 <script src="{% static 'planning/js/removeplanning.js' %}"></script>
 <script src="{% static 'planning/js/cls.js' %}"></script>
 <script src="{% static 'planning/js/addplanning.js' %}"></script>
+<script src="{% static 'planning/js/seeAnotherPlanning.js' %}"></script>
 <script src="{% static 'planning/js/scripts.js' %}"></script>
 {% else %}
 <section class="define-size">

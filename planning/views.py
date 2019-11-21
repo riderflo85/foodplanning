@@ -39,8 +39,11 @@ def planning_pm(request):
 
     if request.user.is_authenticated:
         weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        users = User.objects.filter(groups=request.user.groups.get())
+        group_users = users.exclude(username=request.user.username)
         context['days'] = weeks
-        context['users'] = User.objects.all()
+        context['users'] = users
+        context['group_users'] = group_users
         dico_dishs = {}
         all_dishs = Fooddish.objects.all()
 
@@ -128,6 +131,9 @@ def update_planning(request):
 def check_permission_am(user):
     return user.has_perm('planning.view_planningam')
 
+def check_permission_pm(user):
+    return user.has_perm('planning.view_planningpm')
+
 @user_passes_test(check_permission_am, login_url='/')
 def another_planning_am(request):
     try:
@@ -143,3 +149,20 @@ def another_planning_am(request):
         context = {'planning_exist': False}
 
     return render(request, 'planning/another_planning_am.html', context)
+
+
+@user_passes_test(check_permission_pm, login_url='/')
+def another_planning_pm(request):
+    try:
+        other_user = User.objects.get(pk=request.POST['selectUser'])
+        another_planning = PlanningPm.objects.get(id_user=other_user.id)
+        context = {
+            'planning': another_planning,
+            'planning_exist': True,
+            'other_user': other_user
+        }
+
+    except ObjectDoesNotExist:
+        context = {'planning_exist': False}
+
+    return render(request, 'planning/another_planning_pm.html', context)

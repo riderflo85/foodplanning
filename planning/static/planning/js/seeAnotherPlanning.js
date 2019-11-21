@@ -1,5 +1,13 @@
-var btnSeeAnotherPlanning = document.getElementById('btnSeeOtherPlanning');
+try {
+    var btnSeeAnotherPlanningAm = document.getElementById('btnSeeOtherPlanningAm');
 
-btnSeeAnotherPlanning.addEventListener('click', function() {
-    $('#modalBoxAnotherPlanning').modal()
-});
+    btnSeeAnotherPlanningAm.addEventListener('click', function() {
+        $('#modalBoxAnotherPlanningAm').modal()
+    });    
+} catch (error) {
+    var btnSeeAnotherPlanningPm = document.getElementById('btnSeeOtherPlanningPm');
+
+    btnSeeAnotherPlanningPm.addEventListener('click', function () {
+        $('#modalBoxAnotherPlanningPm').modal()
+    });
+}
