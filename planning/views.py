@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import user_passes_test
 from usercontrol.models import User
 from fooddish.models import Fooddish
@@ -129,11 +130,16 @@ def check_permission(user):
 
 @user_passes_test(check_permission)
 def another_planning(request):
+    try:
+        other_user = User.objects.get(pk=request.POST['selectUser'])
+        another_planning = PlanningAm.objects.get(id_user=other_user.id)
+        context = {
+            'planning': another_planning,
+            'planning_exist': True,
+            'other_user': other_user
+        }
 
-    # Not complet
+    except ObjectDoesNotExist:
+        context = {'planning_exist': False}
 
-    # another_user = PlanningAm.objects.get(id_user=int(request.POST['id']))
-    # context = {'planning': another_planning}
-
-
-    return render(request, 'planning/another_planning.html')
+    return render(request, 'planning/another_planning.html', context)

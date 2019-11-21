@@ -211,8 +211,8 @@
 
     <div class="d-none" id="checkUseSms">{{ user.use_sms }}</div>
 
-    <!-- Modal Box remove new plannig -->
-    <div class="modal fade" id="modalBoxRemoveNewPlanning" tabindex="-1" role="dialog" aria-labelledby="addRemovePlanning" aria-hidden="true">
+    <!-- Modal Box notification not actived -->
+    <div class="modal fade" id="modalBoxNotActived" tabindex="-1" role="dialog" aria-labelledby="addRemovePlanning" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-warning">
@@ -232,8 +232,8 @@
         </div>
     </div>
 
-    <!-- Modal Box notification not actived -->
-    <div class="modal fade" id="modalBoxNotActived" tabindex="-1" role="dialog" aria-labelledby="notificationNotActived" aria-hidden="true">
+    <!-- Modal Box remove new plannigd -->
+    <div class="modal fade" id="modalBoxRemoveNewPlanning" tabindex="-1" role="dialog" aria-labelledby="notificationNotActived" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
@@ -324,23 +324,21 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="{% url 'planning:another_planning' %}" method="post">
+                <form action="{% url 'planning:another_planning' %}" method="post">
                     {% csrf_token %}
-                        <select name="listUser" class="form-control" id="listAllUser">
-                            <option selected disabled>Choisissez un utilisateur auquel associès le nouveau planning</option>
+                    <div class="modal-body">
+                        <select name="selectUser" class="form-control" id="listAllUser">
+                            <option selected disabled>Choisissez un utilisateur</option>
                             {% for u in group_users %}
-                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}'>{{ u.username }}</option>
+                            <option value='{{ u.pk }}'>{{ u.first_name }}</option>
                             {% endfor %}
                         </select>
-                        <button type="submit">Envoyer</button>
-                    
-                    </form>
-                </div>
-                <div class="modal-footer bg-footer">
-                    <button type="button" class="btn btn-info text-white" id="confirmSeeAnotherPlanning" data-dismiss="modal">Valider</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
-                </div>
+                    </div>
+                    <div class="modal-footer bg-footer">
+                        <button type="submit" class="btn btn-info text-white" id="confirmSeeAnotherPlanning">Valider</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

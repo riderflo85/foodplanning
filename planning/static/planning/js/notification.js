@@ -33,7 +33,7 @@ function send_notification(date, time, msg) {
 
 function addNotification(user) {
     if ($('#checkUseSms')[0].textContent == 'False'){
-        $('#modalBoxRemoveNewPlanning').modal();
+        $('#modalBoxNotActived').modal();
     }else{
         $('#modalBoxNotification').modal();
         var btnNotif = document.getElementById('confirmNotification');

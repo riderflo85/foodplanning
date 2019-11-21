@@ -16,7 +16,6 @@ function removeMessageNotPlanning() {
 function addPlanning() {
     var btnAddPlanning = document.getElementById('btnAddPlanning');
     var btnSaveNew = document.getElementById('saveUserNewPlanning');
-    var btnSaveRemove = document.getElementById('saveUserRemovePlanning');
     var divContent = $('#divContent');
     
     
