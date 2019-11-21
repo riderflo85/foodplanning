@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import login, authenticate
-from planning.views import planning, planning_pm, another_planning_am
+from planning.views import planning, planning_pm, another_planning_am, another_planning_pm
 from planning.models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
 from usercontrol.models import User
@@ -77,6 +77,14 @@ class PlanningPageTestCase(TestCase):
         rep = self.cli.get('/planning/another_planning_am')
         self.assertEqual(rep.resolver_match.func, another_planning_am)
 
+    def test_status_code_page_another_planning_pm(self):
+        rep = self.cli.get('/planning/another_planning_pm')
+        self.assertEqual(rep.status_code, 302)
+
+    def test_view_another_planning_pm(self):
+        rep = self.cli.get('/planning/another_planning_pm')
+        self.assertEqual(rep.resolver_match.func, another_planning_pm)
+
 
 class IntegrationTestCase(TestCase):
     def setUp(self):
@@ -99,10 +107,11 @@ class IntegrationTestCase(TestCase):
             'PwdUserTest3',
             number=670217836
         )
-        perm = Permission.objects.get(codename='view_planningam')
+        perm1 = Permission.objects.get(codename='view_planningam')
+        perm2 = Permission.objects.get(codename='view_planningpm')
         group = Group(name="group for test")
         group.save()
-        group.permissions.add(perm)
+        group.permissions.set([perm1, perm2])
         group.save()        
         planning = PlanningAm()
         planning.monday = "Plat 1"
@@ -137,6 +146,17 @@ class IntegrationTestCase(TestCase):
         planning3.moment_day = "am"
         planning3.id_user = self.user3
         planning3.save()
+        planning4 = PlanningPm()
+        planning4.monday = "Plat 1"
+        planning4.tuesday = "Plat 2"
+        planning4.wednesday = "Plat 3"
+        planning4.thursday = "Plat 4"
+        planning4.friday = "Plat 5"
+        planning4.saturday = "Plat 6"
+        planning4.sunday = "Plat 7"
+        planning4.moment_day = "pm"
+        planning4.id_user = self.user3
+        planning4.save()
         foo = Fooddish()
         foo.name = "Tacos"
         foo.save()
@@ -150,6 +170,7 @@ class IntegrationTestCase(TestCase):
         self.plann = planning
         self.plann2 = planning2
         self.plann3 = planning3
+        self.plann4 = planning4
         self.food = foo
         self.food2 = foo2
 
@@ -263,4 +284,21 @@ class IntegrationTestCase(TestCase):
         rep = self.cli.post('/planning/another_planning_am', data)
         self.assertEqual(rep.status_code, 200)
         self.assertTemplateUsed(rep, 'planning/another_planning_am.html')
+        self.assertFalse(rep.context['planning_exist'])
+
+    def test_another_planning_pm(self):
+        self.cli.login(username=self.user.username, password='PwdUserTest')
+        data = {'selectUser': self.user3.id}
+        rep = self.cli.post('/planning/another_planning_pm', data)
+        self.assertEqual(rep.status_code, 200)
+        self.assertTemplateUsed(rep, 'planning/another_planning_pm.html')
+        self.assertEqual(rep.context['planning'], self.plann4)
+        self.assertTrue(rep.context['planning_exist'])
+
+    def test_another_planning_pm_fail(self):
+        self.cli.login(username=self.user.username, password='PwdUserTest')
+        data = {'selectUser': 4}
+        rep = self.cli.post('/planning/another_planning_pm', data)
+        self.assertEqual(rep.status_code, 200)
+        self.assertTemplateUsed(rep, 'planning/another_planning_pm.html')
         self.assertFalse(rep.context['planning_exist'])
