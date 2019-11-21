@@ -128,7 +128,7 @@ def update_planning(request):
 def check_permission(user):
     return user.has_perm('planning.view_planningam')
 
-@user_passes_test(check_permission)
+@user_passes_test(check_permission, login_url='/')
 def another_planning(request):
     try:
         other_user = User.objects.get(pk=request.POST['selectUser'])
