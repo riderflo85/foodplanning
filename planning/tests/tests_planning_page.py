@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import login, authenticate
-from planning.views import planning, planning_pm
+from planning.views import planning, planning_pm, another_planning
 from planning.models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
 from usercontrol.models import User
@@ -69,6 +69,11 @@ class PlanningPageTestCase(TestCase):
         rep = self.cli.get('/planning/pm')
         self.assertEqual(rep.resolver_match.func, planning_pm)
 
+    def test_view_another_planning(self):
+        rep = self.cli.get('/planning/another_planning')
+        self.assertEqual(rep.status_code, 302)
+
+
 class IntegrationTestCase(TestCase):
     def setUp(self):
         self.cli = Client()
@@ -84,6 +89,17 @@ class IntegrationTestCase(TestCase):
             'PwdUserTest',
             number=670217836
         )
+        self.user3 = User.objects.create_user(
+            'userTest3',
+            'testuser3@test.com',
+            'PwdUserTest3',
+            number=670217836
+        )
+        perm = Permission.objects.get(codename='view_planningam')
+        group = Group(name="group for test")
+        group.save()
+        group.permissions.add(perm)
+        group.save()        
         planning = PlanningAm()
         planning.monday = "Plat 1"
         planning.tuesday = "Plat 2"
@@ -106,14 +122,30 @@ class IntegrationTestCase(TestCase):
         planning2.moment_day = "am"
         planning2.id_user = self.user
         planning2.save()
+        planning3 = PlanningAm()
+        planning3.monday = "Plat 1"
+        planning3.tuesday = "Plat 2"
+        planning3.wednesday = "Plat 3"
+        planning3.thursday = "Plat 4"
+        planning3.friday = "Plat 5"
+        planning3.saturday = "Plat 6"
+        planning3.sunday = "Plat 7"
+        planning3.moment_day = "am"
+        planning3.id_user = self.user3
+        planning3.save()
         foo = Fooddish()
         foo.name = "Tacos"
         foo.save()
         foo2 = Fooddish()
         foo2.name = "Burger"
         foo2.save()
+        self.user.groups.add(group)
+        self.user.save()
+        self.user2.groups.add(group)
+        self.user2.save()
         self.plann = planning
         self.plann2 = planning2
+        self.plann3 = planning3
         self.food = foo
         self.food2 = foo2
 
@@ -211,3 +243,20 @@ class IntegrationTestCase(TestCase):
         rep = self.cli.post('/planning/set', data)
         self.assertFalse(rep.json()['ServeurResponse'])
         self.assertTrue(rep.json()['error'])
+
+    def test_another_planning(self):
+        self.cli.login(username=self.user.username, password='PwdUserTest')
+        data = {'selectUser': self.user3.id}
+        rep = self.cli.post('/planning/another_planning', data)
+        self.assertEqual(rep.status_code, 200)
+        self.assertTemplateUsed(rep, 'planning/another_planning.html')
+        self.assertEqual(rep.context['planning'], self.plann3)
+        self.assertTrue(rep.context['planning_exist'])
+
+    def test_another_planning_fail(self):
+        self.cli.login(username=self.user.username, password='PwdUserTest')
+        data = {'selectUser': 4}
+        rep = self.cli.post('/planning/another_planning', data)
+        self.assertEqual(rep.status_code, 200)
+        self.assertTemplateUsed(rep, 'planning/another_planning.html')
+        self.assertFalse(rep.context['planning_exist'])
