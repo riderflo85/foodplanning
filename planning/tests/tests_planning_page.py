@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import login, authenticate
-from planning.views import planning, planning_pm, another_planning
+from planning.views import planning, planning_pm, another_planning_am
 from planning.models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
 from usercontrol.models import User
@@ -69,9 +69,13 @@ class PlanningPageTestCase(TestCase):
         rep = self.cli.get('/planning/pm')
         self.assertEqual(rep.resolver_match.func, planning_pm)
 
-    def test_view_another_planning(self):
-        rep = self.cli.get('/planning/another_planning')
+    def test_status_code_page_another_planning_am(self):
+        rep = self.cli.get('/planning/another_planning_am')
         self.assertEqual(rep.status_code, 302)
+
+    def test_view_another_planning_am(self):
+        rep = self.cli.get('/planning/another_planning_am')
+        self.assertEqual(rep.resolver_match.func, another_planning_am)
 
 
 class IntegrationTestCase(TestCase):
@@ -244,19 +248,19 @@ class IntegrationTestCase(TestCase):
         self.assertFalse(rep.json()['ServeurResponse'])
         self.assertTrue(rep.json()['error'])
 
-    def test_another_planning(self):
+    def test_another_planning_am(self):
         self.cli.login(username=self.user.username, password='PwdUserTest')
         data = {'selectUser': self.user3.id}
-        rep = self.cli.post('/planning/another_planning', data)
+        rep = self.cli.post('/planning/another_planning_am', data)
         self.assertEqual(rep.status_code, 200)
-        self.assertTemplateUsed(rep, 'planning/another_planning.html')
+        self.assertTemplateUsed(rep, 'planning/another_planning_am.html')
         self.assertEqual(rep.context['planning'], self.plann3)
         self.assertTrue(rep.context['planning_exist'])
 
-    def test_another_planning_fail(self):
+    def test_another_planning_am_fail(self):
         self.cli.login(username=self.user.username, password='PwdUserTest')
         data = {'selectUser': 4}
-        rep = self.cli.post('/planning/another_planning', data)
+        rep = self.cli.post('/planning/another_planning_am', data)
         self.assertEqual(rep.status_code, 200)
-        self.assertTemplateUsed(rep, 'planning/another_planning.html')
+        self.assertTemplateUsed(rep, 'planning/another_planning_am.html')
         self.assertFalse(rep.context['planning_exist'])

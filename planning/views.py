@@ -125,11 +125,11 @@ def update_planning(request):
 
         return JsonResponse({'ServeurResponse': True})
 
-def check_permission(user):
+def check_permission_am(user):
     return user.has_perm('planning.view_planningam')
 
-@user_passes_test(check_permission, login_url='/')
-def another_planning(request):
+@user_passes_test(check_permission_am, login_url='/')
+def another_planning_am(request):
     try:
         other_user = User.objects.get(pk=request.POST['selectUser'])
         another_planning = PlanningAm.objects.get(id_user=other_user.id)
@@ -142,4 +142,4 @@ def another_planning(request):
     except ObjectDoesNotExist:
         context = {'planning_exist': False}
 
-    return render(request, 'planning/another_planning.html', context)
+    return render(request, 'planning/another_planning_am.html', context)

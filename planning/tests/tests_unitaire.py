@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import Group, Permission
 from usercontrol.models import User
 from planning.functions import check_user_planning_am, check_user_planning_pm
-from planning.views import check_permission
+from planning.views import check_permission_am
 from planning.models import PlanningAm, PlanningPm
 
 
@@ -74,6 +74,6 @@ class CheckUserPermissionGroupTestCase(TestCase):
         self.user.groups.add(group)
         self.user.save()
 
-    def test_check_permission_user(self):
-        rep = check_permission(self.user)
+    def test_check_permission_am_user(self):
+        rep = check_permission_am(self.user)
         self.assertTrue(rep)

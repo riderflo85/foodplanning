@@ -324,7 +324,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{% url 'planning:another_planning' %}" method="post">
+                <form action="{% url 'planning:another_planning_am' %}" method="post">
                     {% csrf_token %}
                     <div class="modal-body">
                         <select name="selectUser" class="form-control" id="listAllUser">

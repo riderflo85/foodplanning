@@ -9,5 +9,5 @@ urlpatterns = [
     path('set', views.create_planning, name="create_planning"),
     path('remove', views.remove_planning, name="remove_planning"),
     path('update', views.update_planning, name="update_planning"),
-    path('another_planning', views.another_planning, name="another_planning"),
+    path('another_planning_am', views.another_planning_am, name="another_planning_am"),
 ]
