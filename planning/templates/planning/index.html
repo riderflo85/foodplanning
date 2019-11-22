@@ -17,7 +17,7 @@
     <div class="d-none" id="momentDay">am</div>
 
     <!-- If plannig does not exist -->
-    {% if planning.id_user == user.id %}
+    {% if not planning %}
     <var class="d-none" id="varCheck">false</var>
     <div class="container-fluid define-size-2 z-index-block" id="notPlanning">
         <div class="row h-100">
