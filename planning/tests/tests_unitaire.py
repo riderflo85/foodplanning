@@ -43,7 +43,7 @@ class CheckUserPlanningTestCase(TestCase):
 
     def test_check_user_planning_am_function(self):
         rep = check_user_planning_am(self.user)
-        self.assertEqual(rep[0], self.plann_am)
+        self.assertEqual(rep, self.plann_am)
 
     def test_check_user_planning_am_function_fail(self):
         rep = check_user_planning_am('not_user')
@@ -51,7 +51,7 @@ class CheckUserPlanningTestCase(TestCase):
 
     def test_check_user_planning_pm_function(self):
         rep = check_user_planning_pm(self.user)
-        self.assertEqual(rep[0], self.plann_pm)
+        self.assertEqual(rep, self.plann_pm)
 
     def test_check_user_planning_pm_function_fail(self):
         rep = check_user_planning_pm('not_user')

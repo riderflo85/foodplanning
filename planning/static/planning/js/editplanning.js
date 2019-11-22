@@ -11,7 +11,7 @@ function editPlanning(user, btn, amOrPm) {
         var choiceFriday = $(`#selectVendrediUser${user} option:selected`);
         var choiceSaturday = $(`#selectSamediUser${user} option:selected`);
         var choiceSunday = $(`#selectDimancheUser${user} option:selected`);
-        var idPlanning = document.getElementById(`idUserPlanning${user}`);
+        var idPlanning = document.getElementById(`idUserPlanning`);
         var csrftoken = getCookie('csrftoken');
         var listChoice = [choiceMonday, choiceTuesday, choiceWednesday, choiceThursday, choiceFriday, choiceSaturday, choiceSunday]
 
@@ -29,6 +29,7 @@ function editPlanning(user, btn, amOrPm) {
             dataType: 'json',
             data: {
                 'id': idPlanning.textContent,
+                'momentDay': amOrPm,
                 'monday': choiceMonday.val(),
                 'tuesday': choiceTuesday.val(),
                 'wednesday': choiceWednesday.val(),
@@ -36,19 +37,20 @@ function editPlanning(user, btn, amOrPm) {
                 'friday': choiceFriday.val(),
                 'saturday': choiceSaturday.val(),
                 'sunday': choiceSunday.val(),
-                'momentDay': amOrPm
             },
             success: function (data) {
-                if (data['ServeurResponse']) {
+                if (data['ServeurResponse'] == true) {
                     var trDish = $('#trDish'+user).children();
                     for (let i = 0; i < trDish.length; i++) {
                         if (i < 7) {
-                            var foo = document.getElementById(`dish-day${i}-user${user}`);
-                            foo.textContent = listChoice[i].text();
+                            if (listChoice[i].text().startsWith('Plat actuel:')) {
+                                // pass
+                            } else {
+                                trDish[i].textContent = listChoice[i].text();
+                            }
                         }else {
                             // pass
                         }
-
                     }
                 }
             },

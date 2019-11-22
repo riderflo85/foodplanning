@@ -117,13 +117,16 @@ def update_planning(request):
         elif moment_day == 'pm':
             planning = PlanningPm.objects.get(id=int(request.POST['id']))
 
-        planning.monday = Fooddish.objects.get(id=int(request.POST['monday'])).name
-        planning.tuesday = Fooddish.objects.get(id=int(request.POST['tuesday'])).name
-        planning.wednesday = Fooddish.objects.get(id=int(request.POST['wednesday'])).name
-        planning.thursday = Fooddish.objects.get(id=int(request.POST['thursday'])).name
-        planning.friday = Fooddish.objects.get(id=int(request.POST['friday'])).name
-        planning.saturday = Fooddish.objects.get(id=int(request.POST['saturday'])).name
-        planning.sunday = Fooddish.objects.get(id=int(request.POST['sunday'])).name
+        for key in request.POST:
+            if key == "momentDay" or key == "id":
+                pass
+            else:
+                if not request.POST[key].startswith('Plat actuel:'):
+                    setattr(
+                        planning,
+                        key,
+                        Fooddish.objects.get(id=int(request.POST[key])).name
+                    )
         planning.save()
 
         return JsonResponse({'ServeurResponse': True})

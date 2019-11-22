@@ -7,7 +7,6 @@ from fooddish.models import Fooddish
 from usercontrol.models import User
 
 
-# Create your tests here.
 class PlanningPageTestCase(TestCase):
     def setUp(self):
         self.cli = Client()
@@ -46,7 +45,7 @@ class PlanningPageTestCase(TestCase):
         self.assertEqual(len(rep.context['users']), len(self.allUser))
         self.assertEqual(rep.context['users'][0].id, self.allUser[0].id)
         self.assertEqual(rep.context['dishs'], {})
-        self.assertEqual(len(rep.context['planning']), len(PlanningAm.objects.all()))
+        self.assertFalse(rep.context['planning'])
 
     def test_context_page_planning_pm(self):
         self.cli.login(username=self.user.username, password='PwdUserTest')
@@ -55,7 +54,7 @@ class PlanningPageTestCase(TestCase):
         self.assertEqual(len(rep.context['users']), len(self.allUser))
         self.assertEqual(rep.context['users'][0].id, self.allUser[0].id)
         self.assertEqual(rep.context['dishs'], {})
-        self.assertEqual(len(rep.context['planning']), len(PlanningPm.objects.all()))
+        self.assertFalse(rep.context['planning'])
 
     def test_status_code_page_planning_pm(self):
         rep = self.cli.get('/planning/pm')
