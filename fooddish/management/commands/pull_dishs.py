@@ -4,11 +4,18 @@ from fooddish.models import Fooddish
 
 
 class Command(BaseCommand):
+    """
+    Add manage.py command
+    The new command takes the name of the file
+    """
+
     help = "Ajout de plusieurs plats dans la base de données"
 
     def handle(self, *args, **options):
+        #---------- select .json file ---------------#
         directory = os.path.dirname(__file__)
         json_file = os.path.join(directory, "../..", "dishs_base.json")
+        #--------------------------------------------#
 
         try:
             with open(json_file, 'r') as file:
