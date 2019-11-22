@@ -33,10 +33,10 @@
     <div class="container-fluid define-size-2 z-index-block">
         <div class="row h-100">
             <div class="col-12 col-lg-10 offset-lg-1 h-100" id="divContent">
-                <p class="lead text-white mt-5 animated rollIn" id="userPlanning{{ user.id }}">Planning pour {{user.first_name}}</p>
-                <p class="d-none animated rollIn" id="idUserDb">{{ user.id }}</p>
-                <p class="d-none animated rollIn" id="idUserPlanning">{{ planning.id }}</p>
-                <table class="table table-striped table-dark animated rollIn" id="table{{ user.id }}">
+                <p class="lead text-white mt-5 animated fadeIn" id="userPlanning{{ user.id }}">Planning pour {{user.first_name}}</p>
+                <p class="d-none animated fadeIn" id="idUserDb">{{ user.id }}</p>
+                <p class="d-none animated fadeIn" id="idUserPlanning">{{ planning.id }}</p>
+                <table class="table table-striped table-dark animated fadeIn" id="table{{ user.id }}">
                     <thead>
                         <tr>
                             <th scope="col">Lundi</th>
@@ -183,7 +183,6 @@
                 <form>
                     <div class="modal-body">
                         <div class="my-3">
-                            {% comment %} {% for day in days %} {% endcomment %}
                             <div class="input-group my-4" id="edit">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">Lundi</div>
@@ -256,7 +255,6 @@
                                     {% endfor %}
                                 </select>
                             </div>
-                            {% comment %} {% endfor %} {% endcomment %}
                         </div>
                     </div>
                     <div class="modal-footer bg-footer">

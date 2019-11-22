@@ -24,7 +24,11 @@ function validatePlanning(user, btn, amOrPm) {
         if (i < 7) {
             var dish = trBodyChildren[i].childNodes[0].value;
             dictDish.push(dish);
-            var baliseTd = `<td id='dish-day${i}-user${user}'>${dish}</td>`;
+            if (dish === "Choisissez un plat"){
+                var baliseTd = `<td id='dish-day${i}-user${user}'>???</td>`;
+            } else {
+                var baliseTd = `<td id='dish-day${i}-user${user}'>${dish}</td>`;
+            }
             $(baliseTd).appendTo(trDish);
         }
 
@@ -44,14 +48,14 @@ function validatePlanning(user, btn, amOrPm) {
         type: 'POST',
         dataType: 'json',
         data: {
-            'days1':dictDish[0],
-            'days2':dictDish[1],
-            'days3':dictDish[2],
-            'days4':dictDish[3],
-            'days5':dictDish[4],
-            'days6':dictDish[5],
-            'days7':dictDish[6],
-            'momentDay': amOrPm
+            'momentDay': amOrPm,
+            'monday':dictDish[0],
+            'tuesday':dictDish[1],
+            'wednesday':dictDish[2],
+            'thursday':dictDish[3],
+            'friday':dictDish[4],
+            'saturday':dictDish[5],
+            'sunday':dictDish[6],
         },
         success: function (data) {
             var baliseIdPlanning = `<p class='d-none' id='idUserPlanning${user}'>${data['id_planning']}</p>`;

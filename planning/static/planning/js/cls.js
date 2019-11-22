@@ -38,7 +38,7 @@ class Planning {
     }
 
     new_planning(content) {
-        var baliseTable = `<table class='table table-striped table-dark animated rollIn' id='table${this.id_user}'></table>`;
+        var baliseTable = `<table class='table table-striped table-dark animated fadeIn' id='table${this.id_user}'></table>`;
         var headTable = `<thead id='thead${this.id_user}'></thead>`;
         var bodyTable = `<tbody id='tBody${this.id_user}'></tbody>`;
         var trHead = `<tr id='trHead${this.id_user}'></tr>`;

@@ -24,10 +24,10 @@ function removePlanning(user, amOrPm) {
             data: {'id_planning': idPlanning, 'momentDay': amOrPm},
             success: function (data) {
                 if (data['ServeurResponse']) {
-                    user_planning.classList.remove('rollIn');
-                    table.classList.remove('rollIn');
-                    user_planning.classList.add('rollOut');
-                    table.classList.add('rollOut');
+                    user_planning.classList.remove('fadeIn');
+                    table.classList.remove('fadeIn');
+                    user_planning.classList.add('fadeOut');
+                    table.classList.add('fadeOut');
                     table.addEventListener('animationend', function () {
                         $('#userPlanning' + user).remove();
                         $('#table' + user).remove();

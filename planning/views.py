@@ -59,24 +59,21 @@ def planning_pm(request):
 
 
 def create_planning(request):
-    dico_dishs = {}
-
     try:
         if request.POST['momentDay'] == 'am':
             new_planning = PlanningAm()
         elif request.POST['momentDay'] == 'pm':
             new_planning = PlanningPm()
 
-        for i in request.POST:
-            dico_dishs[i] = request.POST[i]
-    
-        new_planning.monday = dico_dishs['days1']
-        new_planning.tuesday = dico_dishs['days2']
-        new_planning.wednesday = dico_dishs['days3']
-        new_planning.thursday = dico_dishs['days4']
-        new_planning.friday = dico_dishs['days5']
-        new_planning.saturday = dico_dishs['days6']
-        new_planning.sunday = dico_dishs['days7']
+        for key in request.POST:
+            if key == 'momentDay':
+                pass
+            else:
+                if request.POST[key] == 'Choisissez un plat':
+                    setattr(new_planning, key, "???")
+                else:
+                    setattr(new_planning, key, request.POST[key])
+
         new_planning.id_user = request.user
         new_planning.save()
         error_db = False
