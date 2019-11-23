@@ -188,7 +188,7 @@
                                     <div class="input-group-text">Lundi</div>
                                 </div>
                                 <select class="form-control custom-select" id="selectLundiUser{{ user.id }}">
-                                    <option selected disabled>Plat actuel: {{ planning.monday }}</option>
+                                    <option selected disabled id="defautDishMonday">Plat actuel: {{ planning.monday }}</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>
                                     {% endfor %}
@@ -199,7 +199,7 @@
                                     <div class="input-group-text">Mardi</div>
                                 </div>
                                 <select class="form-control custom-select" id="selectMardiUser{{ user.id }}">
-                                    <option selected disabled>Plat actuel: {{ planning.tuesday }}</option>
+                                    <option selected disabled id="defautDishTuesday">Plat actuel: {{ planning.tuesday }}</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>
                                     {% endfor %}
@@ -209,7 +209,7 @@
                                     <div class="input-group-text">Mercredi</div>
                                 </div>
                                 <select class="form-control custom-select" id="selectMercrediUser{{ user.id }}">
-                                    <option selected disabled>Plat actuel: {{ planning.wednesday }}</option>
+                                    <option selected disabled id="defautDishWednesday">Plat actuel: {{ planning.wednesday }}</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>
                                     {% endfor %}
@@ -219,7 +219,7 @@
                                     <div class="input-group-text">Jeudi</div>
                                 </div>
                                 <select class="form-control custom-select" id="selectJeudiUser{{ user.id }}">
-                                    <option selected disabled>Plat actuel: {{ planning.thursday }}</option>
+                                    <option selected disabled id="defautDishThursday">Plat actuel: {{ planning.thursday }}</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>
                                     {% endfor %}
@@ -229,7 +229,7 @@
                                     <div class="input-group-text">Vendredi</div>
                                 </div>
                                 <select class="form-control custom-select" id="selectVendrediUser{{ user.id }}">
-                                    <option selected disabled>Plat actuel: {{ planning.friday }}</option>
+                                    <option selected disabled id="defautDishFriday">Plat actuel: {{ planning.friday }}</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>
                                     {% endfor %}
@@ -239,7 +239,7 @@
                                     <div class="input-group-text">Samedi</div>
                                 </div>
                                 <select class="form-control custom-select" id="selectSamediUser{{ user.id }}">
-                                    <option selected disabled>Plat actuel: {{ planning.saturday }}</option>
+                                    <option selected disabled id="defautDishSaturday">Plat actuel: {{ planning.saturday }}</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>
                                     {% endfor %}
@@ -249,7 +249,7 @@
                                     <div class="input-group-text">Dimanche</div>
                                 </div>
                                 <select class="form-control custom-select" id="selectDimancheUser{{ user.id }}">
-                                    <option selected disabled>Plat actuel: {{ planning.sunday }}</option>
+                                    <option selected disabled id="defautDishSunday">Plat actuel: {{ planning.sunday }}</option>
                                     {% for key, value in dishs.items %}
                                     <option value={{ key }}>{{ value }}</option>
                                     {% endfor %}

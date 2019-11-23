@@ -18,16 +18,19 @@ function validatePlanning(user, btn, amOrPm) {
     
     var trDish = $('#trDish'+user);
     var dictDish = [];
+    var idOptionSelectBalise = ["defautDishMonday", "defautDishTuesday", "defautDishWednesday", "defautDishThursday", "defautDishFriday", "defautDishSaturday", "defautDishSunday"];
 
     for (let i = 0; i < trBodyChildren.length; i++) {
 
         if (i < 7) {
             var dish = trBodyChildren[i].childNodes[0].value;
-            dictDish.push(dish);
             if (dish === "Choisissez un plat"){
-                var baliseTd = `<td id='dish-day${i}-user${user}'>???</td>`;
+                var baliseTd = `<td id='dish-day${i}-user${user}'>Plat libre</td>`;
+                dictDish.push('Plat libre');
+
             } else {
                 var baliseTd = `<td id='dish-day${i}-user${user}'>${dish}</td>`;
+                dictDish.push(dish);
             }
             $(baliseTd).appendTo(trDish);
         }
@@ -41,6 +44,11 @@ function validatePlanning(user, btn, amOrPm) {
     btn.setAttribute('disabled', '');
     for (let i = 0; i < allSelect.length; i++) {
         allSelect[i].setAttribute('disabled', '');
+    }
+
+    for (let i = 0; i < idOptionSelectBalise.length; i++) {
+        var el = document.getElementById(idOptionSelectBalise[i]);
+        el.innerHTML = `Plat actuel: ${dictDish[i]}`;
     }
 
     $.ajax({

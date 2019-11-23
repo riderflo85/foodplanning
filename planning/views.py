@@ -69,10 +69,7 @@ def create_planning(request):
             if key == 'momentDay':
                 pass
             else:
-                if request.POST[key] == 'Choisissez un plat':
-                    setattr(new_planning, key, "???")
-                else:
-                    setattr(new_planning, key, request.POST[key])
+                setattr(new_planning, key, request.POST[key])
 
         new_planning.id_user = request.user
         new_planning.save()

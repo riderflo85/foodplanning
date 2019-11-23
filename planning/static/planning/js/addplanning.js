@@ -29,8 +29,10 @@ function addPlanning() {
             let planningFood = new Planning();
             let username = planningFood.set_user_planning();
     
-            var baliseTitlePlannig = `<p class='lead text-white mt-5 animated fadeIn' id='userPlanning${planningFood.id_user}'>Planning pour ${username}</p>`;
-            $(baliseTitlePlannig).appendTo(divContent);
+            var baliseTitlePlanning = `<p class='lead text-white mt-5 animated fadeIn' id='userPlanning${planningFood.id_user}'>Planning pour ${username}</p>`;
+            var baliseIdPlanningUser = `<p class="d-none animated fadeIn" id="idUserPlanning">${planningFood.id_user}</p>`;
+            $(baliseTitlePlanning).appendTo(divContent);
+            $(baliseIdPlanningUser).appendTo(divContent);
             
             planningFood.new_planning(divContent);
         } else {
