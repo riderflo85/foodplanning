@@ -86,7 +86,7 @@
                                 <span class="input-group-text">Plat à supprimer</span>
                             </div>
                             <select name="listDish" id="selectDeleteDish" class="custom-select">
-                                <option selected>Choisissez...</option>
+                                <option selected disabled>Choisissez...</option>
                                 {% for dish in list_dish %}
                                 <option value="{{ dish.pk }}" id="{{ dish.pk }}">{{ dish.name }}</option>
                                 {% endfor %}
