@@ -22,7 +22,10 @@ class Command(BaseCommand):
                 data = json.load(file)
 
                 for i in data['name']:
-                    Fooddish(name=i).save()
+                    if "'" in i:
+                        Fooddish(name=i.replace("'", " ")).save()
+                    else:
+                        Fooddish(name=i).save()
 
                     self.stdout.write(
                         f"{self.style.SUCCESS(i)} ajouté à la base de données"
