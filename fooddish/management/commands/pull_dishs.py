@@ -25,7 +25,7 @@ class Command(BaseCommand):
                     Fooddish(name=i).save()
 
                     self.stdout.write(
-                        f"{self.style.SUCESS(i)} ajouté à la base de données"
+                        f"{self.style.SUCCESS(i)} ajouté à la base de données"
                     )
 
             self.stdout.write(self.style.SUCCESS('Les plats ont correctement \
