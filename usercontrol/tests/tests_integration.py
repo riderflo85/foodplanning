@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
-from django.contrib.auth.hashers import check_password
 from usercontrol.forms import SignupForm, LoginForm
-from usercontrol.views import sign_in, sign_up, sign_out, account, edit_user_infos, change_passwd, manage_sms, remove_account
+from usercontrol.views import sign_in, sign_up, sign_out, account,\
+    edit_user_infos, change_passwd, manage_sms, remove_account
 from usercontrol.models import User
 
 
@@ -53,7 +53,8 @@ class UserAuthenticateTestCase(TestCase):
         self.assertEqual(rep.status_code, 302)
 
     def test_user_sign_out(self):
-        self.cli.login(username=self.user.username,
+        self.cli.login(
+            username=self.user.username,
             password='longpasswordtest'
         )
         rep = self.cli.get('/sign_out/')
@@ -83,7 +84,12 @@ class UserAuthenticateTestCase(TestCase):
             'group_name': 'groupeTest'
         }
         rep = self.cli.post('/sign_up/', data)
-        self.assertFormError(rep, 'form', 'email', 'Saisissez une adresse de courriel valide.')
+        self.assertFormError(
+            rep,
+            'form',
+            'email',
+            'Saisissez une adresse de courriel valide.'
+        )
 
 
 class FormTestCase(TestCase):
@@ -188,7 +194,6 @@ class ManageUserAccountTestCase(TestCase):
         rep = self.cli.post('/edit_infos/', self.data)
         self.assertEqual(rep.resolver_match.func, edit_user_infos)
         self.assertTrue(rep.json()['success'])
-        rep2 = self.cli.get('/account/')
         self.assertEqual(rep.status_code, 200)
 
     def test_permission_denied_change_user_infos(self):

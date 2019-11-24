@@ -29,7 +29,7 @@ class SignupForm(forms.Form):
         label='nom',
         max_length=30,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Nom', 'class':'form-control'}
+            attrs={'placeholder': 'Nom', 'class': 'form-control'}
         ),
     )
     first_name = forms.CharField(
@@ -56,9 +56,11 @@ class SignupForm(forms.Form):
         label='phone_number',
         max_length=9,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Numéro de portable pour être notifié',
-            'class': 'form-control',
-            'pattern': "[0-9]{1}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}"}
+            attrs={
+                'placeholder': 'Numéro de portable pour être notifié',
+                'class': 'form-control',
+                'pattern': "[0-9]{1}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}"
+            }
         ),
     )
     group_name = forms.CharField(

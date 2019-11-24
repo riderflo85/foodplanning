@@ -14,6 +14,7 @@ class AddDishForms(forms.Form):
         ),
     )
 
+
 class DelDishForms(forms.Form):
     """ Form used for user to delete a dish in the database """
 

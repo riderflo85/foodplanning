@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import Group, Permission
-from django.contrib.auth import login, authenticate
-from planning.views import planning, planning_pm, another_planning_am, another_planning_pm
+from planning.views import planning, planning_pm, another_planning_am,\
+    another_planning_pm
 from planning.models import PlanningAm, PlanningPm
 from fooddish.models import Fooddish
 from usercontrol.models import User
@@ -23,7 +23,15 @@ class PlanningPageTestCase(TestCase):
         new_group.permissions.set([perm1, perm2])
         new_group.save()
         self.user.groups.add(new_group)
-        self.days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        self.days = [
+            'Lundi',
+            'Mardi',
+            'Mercredi',
+            'Jeudi',
+            'Vendredi',
+            'Samedi',
+            'Dimanche'
+        ]
         self.allUser = User.objects.all()
 
     def test_status_code_page_planning(self):
@@ -32,7 +40,7 @@ class PlanningPageTestCase(TestCase):
 
     def test_template_page_planning(self):
         rep = self.cli.get('/planning/')
-        self.assertTemplateUsed('planning/index.html')
+        self.assertTemplateUsed(rep, 'planning/index.html')
 
     def test_view_page_planning(self):
         rep = self.cli.get('/planning/')
@@ -62,7 +70,7 @@ class PlanningPageTestCase(TestCase):
 
     def test_template_page_planning_pm(self):
         rep = self.cli.get('/planning/pm')
-        self.assertTemplateUsed('planning/pm.html')
+        self.assertTemplateUsed(rep, 'planning/pm.html')
 
     def test_view_page_planning_pm(self):
         rep = self.cli.get('/planning/pm')
@@ -111,7 +119,7 @@ class IntegrationTestCase(TestCase):
         group = Group(name="group for test")
         group.save()
         group.permissions.set([perm1, perm2])
-        group.save()        
+        group.save()
         planning = PlanningAm()
         planning.monday = "Plat 1"
         planning.tuesday = "Plat 2"
@@ -182,7 +190,7 @@ class IntegrationTestCase(TestCase):
             'days5': 'Plat 5',
             'days6': 'Plat 6',
             'days7': 'Plat 7',
-            'momentDay' : 'am'
+            'momentDay': 'am'
             }
         data2 = {
             'days1': 'Plat 1',
@@ -192,7 +200,7 @@ class IntegrationTestCase(TestCase):
             'days5': 'Plat 5',
             'days6': 'Plat 6',
             'days7': 'Plat 7',
-            'momentDay' : 'pm'
+            'momentDay': 'pm'
             }
         self.cli.login(username=self.user2.username, password='PwdUserTest')
         rep1 = self.cli.post('/planning/set', data1)

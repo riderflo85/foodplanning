@@ -1,8 +1,8 @@
 from django.test import TestCase
 from unittest.mock import patch
-from callr import Api
-from notification.callr import convert_utc_datetime, api
+from notification.callr import convert_utc_datetime
 from notification.tasks import send_notification
+
 
 class ConvertUtcDatetimeTestCase(TestCase):
 
@@ -13,6 +13,7 @@ class ConvertUtcDatetimeTestCase(TestCase):
         time = '10:30'
         result = convert_utc_datetime(time, date)
         self.assertEqual(str(result), '2019-10-10 08:30:00')
+
 
 class SendSmsTestCase(TestCase):
 

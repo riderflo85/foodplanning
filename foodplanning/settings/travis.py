@@ -5,11 +5,11 @@ SECRET_KEY = "sdbdfbjdfDsvsfdbfdsEJZH03"
 
 DATABASES = {
     'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': '',
-    'USER': 'postgres',
-    'PASSWORD': '',
-    'HOST': '',
-    'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     },
 }

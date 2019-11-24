@@ -13,7 +13,15 @@ def planning(request):
     context = {}
 
     if request.user.is_authenticated:
-        weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        weeks = [
+            'Lundi',
+            'Mardi',
+            'Mercredi',
+            'Jeudi',
+            'Vendredi',
+            'Samedi',
+            'Dimanche'
+        ]
         users = User.objects.filter(groups=request.user.groups.get())
         group_users = users.exclude(username=request.user.username)
         context['days'] = weeks
@@ -22,10 +30,9 @@ def planning(request):
         dico_dishs = {}
         all_dishs = Fooddish.objects.all()
 
-
         for i in all_dishs:
             dico_dishs[i.id] = i
-        
+
         context['dishs'] = dico_dishs
 
         planning = check_user_planning_am(request.user)
@@ -38,7 +45,15 @@ def planning_pm(request):
     context = {}
 
     if request.user.is_authenticated:
-        weeks = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        weeks = [
+            'Lundi',
+            'Mardi',
+            'Mercredi',
+            'Jeudi',
+            'Vendredi',
+            'Samedi',
+            'Dimanche'
+        ]
         users = User.objects.filter(groups=request.user.groups.get())
         group_users = users.exclude(username=request.user.username)
         context['days'] = weeks
@@ -49,7 +64,7 @@ def planning_pm(request):
 
         for i in all_dishs:
             dico_dishs[i.id] = i
-        
+
         context['dishs'] = dico_dishs
 
         planning = check_user_planning_pm(request.user)
@@ -86,6 +101,7 @@ def create_planning(request):
         'error': error_db
     }
     return JsonResponse(data_response)
+
 
 def remove_planning(request):
     if request.method == 'POST':
@@ -125,11 +141,14 @@ def update_planning(request):
 
         return JsonResponse({'ServeurResponse': True})
 
+
 def check_permission_am(user):
     return user.has_perm('planning.view_planningam')
 
+
 def check_permission_pm(user):
     return user.has_perm('planning.view_planningpm')
+
 
 @user_passes_test(check_permission_am, login_url='/')
 def another_planning_am(request):

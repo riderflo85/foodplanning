@@ -17,6 +17,7 @@ def index(request):
 
     return render(request, 'fooddish/index.html', context)
 
+
 def add_dish(request):
     if request.method == 'POST':
         form = AddDishForms(request.POST)
@@ -33,6 +34,7 @@ def add_dish(request):
     else:
         return JsonResponse({'error': True})
 
+
 def delete_dish(request):
     if request.method == 'POST':
         data = request.POST['id']
@@ -44,6 +46,7 @@ def delete_dish(request):
             return JsonResponse({'removed': False})
     else:
         return JsonResponse({'removed': False})
+
 
 def all_dish(request):
     if request.method == 'GET':

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 from .callr import convert_utc_datetime
 from .tasks import send_notification
@@ -6,12 +5,11 @@ from usercontrol.models import User
 
 
 def set_notification(request):
-    context = {}
     req_user = request.user
     user = User.objects.get(pk=req_user.pk)
 
     if request.method == 'POST':
-        if req_user.is_authenticated and user.use_sms == True:
+        if req_user.is_authenticated is True and user.use_sms is True:
             date = request.POST['date']
             time = request.POST['time']
             msg = request.POST['message']

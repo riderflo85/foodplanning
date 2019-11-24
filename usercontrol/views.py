@@ -9,7 +9,7 @@ from .models import User
 
 
 def sign_in(request):
-    context = {'error': False,}
+    context = {'error': False}
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -31,6 +31,7 @@ def sign_in(request):
     context['form'] = form
 
     return render(request, 'usercontrol/sign_in.html', context)
+
 
 def sign_up(request):
     context = {'error': False}
@@ -79,10 +80,12 @@ def sign_up(request):
 
     return render(request, 'usercontrol/sign_up.html', context)
 
+
 def sign_out(request):
     logout(request)
 
     return redirect(reverse('usercontrol:sign_in'))
+
 
 def account(request):
     if request.user.is_authenticated:
@@ -90,14 +93,14 @@ def account(request):
     else:
         return redirect(reverse('usercontrol:sign_in'))
 
+
 def edit_user_infos(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            data = request.POST
             user = User.objects.get(pk=request.user.pk)
 
             for k, v in request.POST.items():
-                if k == 'number':  
+                if k == 'number':
                     setattr(user, k, int(v))
                 else:
                     setattr(user, k, v)
@@ -109,6 +112,7 @@ def edit_user_infos(request):
             return JsonResponse({'success': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
+
 
 def change_passwd(request):
     if request.user.is_authenticated:
@@ -122,6 +126,7 @@ def change_passwd(request):
             return JsonResponse({'success': False})
     else:
         return redirect(reverse('usercontrol:sign_in'))
+
 
 def manage_sms(request):
     if request.user.is_authenticated:
@@ -141,6 +146,7 @@ def manage_sms(request):
     else:
         return redirect(reverse('usercontrol:sign_in'))
 
+
 def remove_account(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -149,7 +155,7 @@ def remove_account(request):
             if request.POST['confirm'] == 'true':
                 user.delete()
                 logout(request)
-                
+
                 return redirect(reverse('usercontrol:sign_in'))
         else:
             return JsonResponse({'success': False})

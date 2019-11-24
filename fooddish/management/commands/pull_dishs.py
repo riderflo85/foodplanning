@@ -1,4 +1,5 @@
-import os, json
+import os
+import json
 from django.core.management.base import BaseCommand
 from fooddish.models import Fooddish
 
@@ -12,10 +13,10 @@ class Command(BaseCommand):
     help = "Ajout de plusieurs plats dans la base de données"
 
     def handle(self, *args, **options):
-        #---------- select .json file ---------------#
+        # ---------- select .json file --------------- #
         directory = os.path.dirname(__file__)
         json_file = os.path.join(directory, "../..", "dishs_base.json")
-        #--------------------------------------------#
+        # -------------------------------------------- #
 
         try:
             with open(json_file, 'r') as file:

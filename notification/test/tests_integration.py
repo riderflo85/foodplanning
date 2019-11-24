@@ -36,14 +36,3 @@ class SetNotificationForUserTestCase(TestCase):
             'message': 'Sortir le poulet du congélateur'
         })
         self.assertEqual(rep.json()['Response'], 'Notification disabled')
-
-    # def test_request_post_data_for_set_notification(self):
-    #     user = User.objects.get(pk=self.user.pk)
-    #     user.use_sms = True
-    #     user.save()
-    #     rep = self.cli.post('/notif/set', {
-    #         'date': '2019-10-10',
-    #         'time': '10:30',
-    #         'message': 'Sortir le poulet du congélateur'
-    #     })
-    #     self.assertTrue(rep.json()['Success'])
