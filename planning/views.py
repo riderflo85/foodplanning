@@ -10,6 +10,8 @@ from .functions import check_user_planning_am, check_user_planning_pm
 
 
 def planning(request):
+    """ Display the AM planning of the user """
+
     context = {}
 
     if request.user.is_authenticated:
@@ -42,6 +44,8 @@ def planning(request):
 
 
 def planning_pm(request):
+    """ Display the PM planning of the user """
+
     context = {}
 
     if request.user.is_authenticated:
@@ -74,6 +78,8 @@ def planning_pm(request):
 
 
 def create_planning(request):
+    """ Created the AM or PM planning for the user """
+
     try:
         if request.POST['momentDay'] == 'am':
             new_planning = PlanningAm()
@@ -104,6 +110,8 @@ def create_planning(request):
 
 
 def remove_planning(request):
+    """ Deleted the planning of the user """
+
     if request.method == 'POST':
         id_planning = request.POST['id_planning']
         moment_day = request.POST['momentDay']
@@ -119,6 +127,8 @@ def remove_planning(request):
 
 
 def update_planning(request):
+    """ Updated the planning of the user """
+
     if request.method == 'POST':
         moment_day = request.POST['momentDay']
 
@@ -143,15 +153,21 @@ def update_planning(request):
 
 
 def check_permission_am(user):
+    """ Checks that the user has the required permissions """
+
     return user.has_perm('planning.view_planningam')
 
 
 def check_permission_pm(user):
+    """ Checks that the user has the required permissions """
+
     return user.has_perm('planning.view_planningpm')
 
 
 @user_passes_test(check_permission_am, login_url='/')
 def another_planning_am(request):
+    """ Display the another AM planning of the user """
+
     try:
         other_user = User.objects.get(pk=request.POST['selectUser'])
         another_planning = PlanningAm.objects.get(id_user=other_user.id)
@@ -169,6 +185,8 @@ def another_planning_am(request):
 
 @user_passes_test(check_permission_pm, login_url='/')
 def another_planning_pm(request):
+    """ Display the another PM planning of the user """
+
     try:
         other_user = User.objects.get(pk=request.POST['selectUser'])
         another_planning = PlanningPm.objects.get(id_user=other_user.id)

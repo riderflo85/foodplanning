@@ -5,6 +5,8 @@ from usercontrol.models import User
 
 
 def set_notification(request):
+    """ Added a send sms task """
+
     req_user = request.user
     user = User.objects.get(pk=req_user.pk)
 

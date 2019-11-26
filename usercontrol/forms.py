@@ -2,6 +2,8 @@ from django import forms
 
 
 class LoginForm(forms.Form):
+    """ Login form """
+
     user = forms.CharField(
         label='user',
         max_length=100,
@@ -18,6 +20,8 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.Form):
+    """ Register form """
+
     pseudo = forms.CharField(
         label='pseudo',
         max_length=30,

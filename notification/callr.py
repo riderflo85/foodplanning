@@ -11,6 +11,7 @@ api = callr.Api(username, password)
 
 def convert_utc_datetime(time, date):
     """ Convert local datetime on utc datetime """
+
     parser_time = time.split(':')
     parser_date = date.split('-')
 
