@@ -39,7 +39,7 @@ def sign_up(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
 
-        if form.is_valid():
+        if form.is_valid() and form.cleaned_data['password'] == form.cleaned_data['confirm_pwd']:
             pseudo = form.cleaned_data['pseudo']
             last_name = form.cleaned_data['last_name']
             first_name = form.cleaned_data['first_name']
