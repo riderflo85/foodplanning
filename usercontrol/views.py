@@ -9,6 +9,8 @@ from .models import User
 
 
 def sign_in(request):
+    """ Connect a user """
+
     context = {'error': False}
 
     if request.method == 'POST':
@@ -34,12 +36,14 @@ def sign_in(request):
 
 
 def sign_up(request):
+    """ Register a user """
+
     context = {'error': False}
 
     if request.method == 'POST':
         form = SignupForm(request.POST)
 
-        if form.is_valid():
+        if form.is_valid() and form.cleaned_data['password'] == form.cleaned_data['confirm_pwd']:
             pseudo = form.cleaned_data['pseudo']
             last_name = form.cleaned_data['last_name']
             first_name = form.cleaned_data['first_name']
@@ -82,12 +86,16 @@ def sign_up(request):
 
 
 def sign_out(request):
+    """ Signout a user """
+
     logout(request)
 
     return redirect(reverse('usercontrol:sign_in'))
 
 
 def account(request):
+    """ Display all user informations """
+
     if request.user.is_authenticated:
         return render(request, 'usercontrol/account.html')
     else:
@@ -95,6 +103,8 @@ def account(request):
 
 
 def edit_user_infos(request):
+    """ Update user informations """
+
     if request.user.is_authenticated:
         if request.method == 'POST':
             user = User.objects.get(pk=request.user.pk)
@@ -115,6 +125,8 @@ def edit_user_infos(request):
 
 
 def change_passwd(request):
+    """ Allows the user to change the password """
+
     if request.user.is_authenticated:
         if request.method == 'POST':
             user = request.user
@@ -129,6 +141,8 @@ def change_passwd(request):
 
 
 def manage_sms(request):
+    """ Allow the user to activate or deactive the SMS notification """
+
     if request.user.is_authenticated:
         if request.method == 'POST':
             user = User.objects.get(pk=request.user.pk)
@@ -148,6 +162,8 @@ def manage_sms(request):
 
 
 def remove_account(request):
+    """ Deleting the user account """
+
     if request.user.is_authenticated:
         if request.method == 'POST':
             user = User.objects.get(pk=request.user.pk)

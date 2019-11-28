@@ -67,6 +67,7 @@ class UserAuthenticateTestCase(TestCase):
             'first_name': 'UserFrech',
             'email': 'newuserfrech@frech.com',
             'password': 'thislongpasswordforlogin',
+            'confirm_pwd': 'thislongpasswordforlogin',
             'phone_number': 670217836,
             'group_name': 'groupeTest'
         }
@@ -80,6 +81,7 @@ class UserAuthenticateTestCase(TestCase):
             'first_name': 'UserFrech',
             'email': 'newuserfrechFAIL',
             'password': 'thislongpasswordforlogin',
+            'confirm_pwd': 'thislongpasswordforlogin',
             'phone_number': 670217836,
             'group_name': 'groupeTest'
         }
@@ -100,7 +102,8 @@ class FormTestCase(TestCase):
             'first_name': 'Tester',
             'email': 'testuser@founisseur.com',
             'password': 'longpasswordtest',
-            'phone_number': '770207030',
+            'confirm_pwd': 'longpasswordtest',
+            'phone_number': 770207030,
             'group_name': 'groupeTest'
         }
         form = SignupForm(data=form_data)
@@ -184,7 +187,7 @@ class ManageUserAccountTestCase(TestCase):
             'first_name': 'firstNameTest',
             'username': 'pseudoForTest',
             'email': 'emailtest@test.com',
-            'number': '071235678',
+            'number': 271235678,
             'group_name': 'groupeTest'
         }
         self.user = user_test

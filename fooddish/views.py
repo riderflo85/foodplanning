@@ -6,6 +6,8 @@ from .forms import AddDishForms, DelDishForms
 
 
 def index(request):
+    """ Display all dishes of the database """
+
     context = {}
 
     form = AddDishForms()
@@ -19,6 +21,8 @@ def index(request):
 
 
 def add_dish(request):
+    """ Added new dish in the database """
+
     if request.method == 'POST':
         form = AddDishForms(request.POST)
 
@@ -36,6 +40,8 @@ def add_dish(request):
 
 
 def delete_dish(request):
+    """ Deleted dish in the database """
+
     if request.method == 'POST':
         data = request.POST['id']
         try:
@@ -49,7 +55,9 @@ def delete_dish(request):
 
 
 def all_dish(request):
-    if request.method == 'GET':
-        dishs = Fooddish.objects.all().values('name')
+    """ Return a list that contains all dishes of the database """
 
-    return JsonResponse({'Data': list(dishs)})
+    if request.method == 'GET':
+        dishes = Fooddish.objects.all().values('name')
+
+    return JsonResponse({'Data': list(dishes)})
