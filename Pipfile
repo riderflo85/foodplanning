@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 celery = "*"
 redis = "*"
 callr = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
