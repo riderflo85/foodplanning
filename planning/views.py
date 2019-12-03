@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import JsonResponse
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
@@ -177,6 +178,9 @@ def another_planning_am(request):
             'other_user': other_user
         }
 
+    except KeyError:
+        return redirect(reverse('planning:planning'))
+
     except ObjectDoesNotExist:
         context = {'planning_exist': False}
 
@@ -195,6 +199,9 @@ def another_planning_pm(request):
             'planning_exist': True,
             'other_user': other_user
         }
+
+    except KeyError:
+        return redirect(reverse('planning:pm'))
 
     except ObjectDoesNotExist:
         context = {'planning_exist': False}

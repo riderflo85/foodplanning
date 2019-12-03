@@ -293,6 +293,13 @@ class IntegrationTestCase(TestCase):
         self.assertTemplateUsed(rep, 'planning/another_planning_am.html')
         self.assertFalse(rep.context['planning_exist'])
 
+    def test_another_planning_am_fail_not_data(self):
+        self.cli.login(username=self.user.username, password='PwdUserTest')
+        data = {}
+        rep = self.cli.post('/planning/another_planning_am', data)
+        self.assertEqual(rep.status_code, 302)
+        self.assertRedirects(rep, '/planning/')
+
     def test_another_planning_pm(self):
         self.cli.login(username=self.user.username, password='PwdUserTest')
         data = {'selectUser': self.user3.id}
@@ -309,3 +316,10 @@ class IntegrationTestCase(TestCase):
         self.assertEqual(rep.status_code, 200)
         self.assertTemplateUsed(rep, 'planning/another_planning_pm.html')
         self.assertFalse(rep.context['planning_exist'])
+
+    def test_another_planning_pm_fail_not_data(self):
+        self.cli.login(username=self.user.username, password='PwdUserTest')
+        data = {}
+        rep = self.cli.post('/planning/another_planning_pm', data)
+        self.assertEqual(rep.status_code, 302)
+        self.assertRedirects(rep, '/planning/pm')
