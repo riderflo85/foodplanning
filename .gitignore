@@ -1,4 +1,11 @@
 .env
 .vscode
+fooddish/__pycache__
+foodplanning/settings/staticfiles
+foodplanning/settings/__pycache__
 foodplanning/settings/settings.py
 foodplanning/__pycache__
+notification/__pycache__
+planning/__pycache__
+usercontrol/__pycache__
+
