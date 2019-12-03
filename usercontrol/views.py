@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import JsonResponse
@@ -96,8 +97,9 @@ def sign_out(request):
 def account(request):
     """ Display all user informations """
 
+    context = {'sms_configurated': os.environ.get('SMS_CONFIG')}
     if request.user.is_authenticated:
-        return render(request, 'usercontrol/account.html')
+        return render(request, 'usercontrol/account.html', context)
     else:
         return redirect(reverse('usercontrol:sign_in'))
 

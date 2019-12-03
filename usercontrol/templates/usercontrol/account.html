@@ -82,7 +82,11 @@
                                         <p class="lead mb-0">
                                             <strong>Notification par SMS</strong>
                                         </p>
+                                        {% if sms_configurated == 'yes' %}
                                         <div class="info-SMS">Voir avec le propriétaire du serveur pour savoir si les SMS sont configurés !</div>
+                                        {% else %}
+                                        <div class="info-SMS">Le propriétaire du serveur n'a pas configuré les notifications par SMS !</div>
+                                        {% endif %}
                                         <div id="partPasswd" style="display: none;">
                                             <p class="lead" id="passwd"><strong>Nouveau mot de passe</strong></p>
                                             <p class="lead" id="confirmPasswd"><strong>Confirmez votre mot de passe</strong></p>
@@ -94,7 +98,11 @@
                                                 {% if user.use_sms %}
                                                 <input type="checkbox" id="checkButton" checked>
                                                 {% else %}
+                                                {% if sms_configurated == 'yes' %}
                                                 <input type="checkbox" id="checkButton">
+                                                {% else %}
+                                                <input type="checkbox" id="checkButton" disabled>
+                                                {% endif %}
                                                 {% endif %}
                                                 <span class="slider round" id="switchButton"></span>
                                             </label>
