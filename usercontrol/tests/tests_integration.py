@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.contrib.auth.models import Group, Permission
 from usercontrol.forms import SignupForm, LoginForm
 from usercontrol.views import sign_in, sign_up, sign_out, account,\
     edit_user_infos, change_passwd, manage_sms, remove_account
@@ -261,3 +262,22 @@ class ManageUserAccountTestCase(TestCase):
         rep = self.cli.get('/remove_account/')
         self.assertEqual(rep.status_code, 200)
         self.assertFalse(rep.json()['success'])
+
+
+class MethodUserModelTestCase(TestCase):
+
+    def test_get_group_user_method(self):
+        self.user = User.objects.create_user(
+            'testOne',
+            'emailTest@test.com',
+            'testpassword',
+            number=271235678
+        )
+        new_group = Group(name="Groupe pour test")
+        new_group.save()
+        perm1 = Permission.objects.get(codename='view_planningam')
+        perm2 = Permission.objects.get(codename='view_planningpm')
+        new_group.permissions.set([perm1, perm2])
+        new_group.save()
+        self.user.groups.add(new_group)
+        self.assertEqual(self.user.get_group(), 'Groupe pour test')

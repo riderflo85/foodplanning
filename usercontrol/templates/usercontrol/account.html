@@ -39,6 +39,9 @@
                                         <p class="lead">
                                             <strong>Numéro de téléphone: </strong>
                                         </p>
+                                        <p class="lead">
+                                            <strong>Nom du foyer: </strong>
+                                        </p>
                                     </div>
                                     <div class="col-6 part-right" id="contentUserInfos">
                                         <p class="d-none error-message" id="messageError">Une erreur est survenu, merci de vérifier les champs de saisie !</p>
@@ -47,6 +50,7 @@
                                         <p class="lead" id="userPseudo">{{ user.username }}</p>
                                         <p class="lead" id="userEmail">{{ user.email }}</p>
                                         <p class="lead" id="userPhone">0{{ user.number }}</p>
+                                        <p class="lead" id="userGroup">{{ user.get_group }}</p>
                                     </div>
                                     <div class="col-6 part-right" id="contentFormUserInfos" style="display: none;">
                                         <div class="input-group form-group-edit">
