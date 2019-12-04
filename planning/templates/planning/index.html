@@ -9,12 +9,18 @@
             <div class="col-12 text-center pos-button">
                 <div class="d-flex justify-content-between px-3">
                     <button type="button" class="btn btn-primary" id="btnSeeOtherPlanningAm">Voir le planning d'un autre utilisateur</button>
+                    {% if not planning %}
                     <button type="button" class="btn btn-primary" id="btnAddPlanning">Ajouter un planning</button>
+                    {% else %}
+                    <button type="button" class="btn btn-primary" id="btnAddPlanning" disabled>Ajouter un planning</button>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
     <div class="d-none" id="momentDay">am</div>
+    <div class="d-none" id="userFirstName">{{ user.first_name }}</div>
+    <div class="d-none" id="userId">{{ user.pk }}</div>
 
     <!-- If plannig does not exist -->
     {% if not planning %}
@@ -131,44 +137,6 @@
         </div> <!-- end .row -->
     </div> <!-- end .container-fluid -->
     {% endif %}
-
-    <!-- Modal Box add new plannig -->
-    <div class="modal fade" id="modalBoxAddNewPlanning" tabindex="-1" role="dialog" aria-labelledby="addNewPlanning" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Nouveau planning</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-secondary text-center">Un seul planning par utilisateur est autorisé !!</div>
-                    <div class="input-group my-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Liste des utilisateurs enregistrés</span>
-                        </div>
-                        <select name="listUser" class="form-control" id="listAllUser">
-                            <option selected disabled>Choisissez un utilisateur auquel associès le nouveau planning</option>
-                            {% for u in users %}
-                            {% if user.pk == u.pk and planning|length < 1 %}
-                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}'>{{ u.first_name }}</option>
-                            {% elif user.pk == u.pk and planning|length == 1 %}
-                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}' disabled>{{ u.first_name }}</option>
-                            {% else %}
-                            <option value='{"name":"{{ u.first_name }}","pk":"{{ u.pk }}"}'>{{ u.first_name }}</option>
-                            {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="saveUserNewPlanning" data-dismiss="modal">Créez le nouveau planning</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Box edit planning -->
     <div class="modal fade" id="modalBoxEdit" tabindex="-1" role="dialog" aria-labelledby="notification" aria-hidden="true">

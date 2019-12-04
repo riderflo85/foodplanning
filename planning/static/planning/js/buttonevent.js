@@ -3,6 +3,7 @@ function eventButton(id_user) {
     var btnEdit = document.getElementById('btnEditPlanning' + id_user);
     var btnRemove = document.getElementById('btnRemovePlanning' + id_user);
     var amOrPm = document.getElementById('momentDay').innerText;
+    var btnNewPlanning = document.getElementById('btnAddPlanning');
 
     btnCheck.addEventListener('click', function () {
         validatePlanning(id_user, btnCheck, amOrPm);
@@ -11,11 +12,11 @@ function eventButton(id_user) {
 
     btnEdit.addEventListener('click', function () {
         editPlanning(id_user, btnEdit, amOrPm);
-        // btnCheck.removeAttribute('disabled');
     });
 
     btnRemove.addEventListener('click', function () {
         removePlanning(id_user, amOrPm);
+        btnNewPlanning.removeAttribute('disabled');
     });
 }
 

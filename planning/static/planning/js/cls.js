@@ -3,11 +3,9 @@ class Planning {
     week = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche', '#'];
 
     set_user_planning(){
-        var User = $('#listAllUser')[0].value;
-        var dictUser = JSON.parse(User);
-        var nameUser = dictUser.name;
-        this.id_user = Number(dictUser.pk);
-        return nameUser;
+        var user = $('#userFirstName')[0].innerText;
+        this.id_user = Number($('#userId')[0].innerText);
+        return user;
     }
 
     get_all_dish() {

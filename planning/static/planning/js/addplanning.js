@@ -15,15 +15,15 @@ function removeMessageNotPlanning() {
 
 function addPlanning() {
     var btnAddPlanning = document.getElementById('btnAddPlanning');
-    var btnSaveNew = document.getElementById('saveUserNewPlanning');
+    // var btnSaveNew = document.getElementById('saveUserNewPlanning');
     var divContent = $('#divContent');
     
     
-    btnAddPlanning.addEventListener('click', function () {
-        $('#modalBoxAddNewPlanning').modal();
-    });
+    // btnAddPlanning.addEventListener('click', function () {
+    //     $('#modalBoxAddNewPlanning').modal();
+    // });
     
-    btnSaveNew.addEventListener('click', function () {
+    btnAddPlanning.addEventListener('click', function () {
         var check = removeMessageNotPlanning();
         if (check) {
             let planningFood = new Planning();
@@ -35,6 +35,7 @@ function addPlanning() {
             $(baliseIdPlanningUser).appendTo(divContent);
             
             planningFood.new_planning(divContent);
+            btnAddPlanning.setAttribute('disabled', 'true');
         } else {
             console.warning(check);
         }
