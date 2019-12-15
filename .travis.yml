@@ -6,6 +6,7 @@ python:
 branches:
   only:
     - master
+    - endpoint_API
   
 before_scripts:
   - pip3 install pipenv
