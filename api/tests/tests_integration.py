@@ -44,7 +44,6 @@ class EndpointApiTestCase(TestCase):
             "amOrPm": "am"
         }
         rep = self.cli.post('/api/v1/dish', data)
-        print(rep.json()["dish"])
         self.assertEqual(rep.status_code, 200)
         self.assertEqual(rep.resolver_match.func, get_dish)
         self.assertEqual(rep.json()['dish'], self.planning_am.monday)
@@ -56,7 +55,6 @@ class EndpointApiTestCase(TestCase):
             "amOrPm": "pm"
         }
         rep = self.cli.post('/api/v1/dish', data)
-        print(rep.json()["dish"])
         self.assertEqual(rep.status_code, 200)
         self.assertEqual(rep.resolver_match.func, get_dish)
         self.assertEqual(rep.json()['dish'], self.planning_pm.monday)
