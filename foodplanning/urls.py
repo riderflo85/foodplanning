@@ -22,5 +22,6 @@ urlpatterns = [
     path('planning/', include('planning.urls')),
     path('liste_des_plats/', include('fooddish.urls')),
     path('notif/', include('notification.urls')),
+    path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
 ]
