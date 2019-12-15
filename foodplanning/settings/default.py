@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'planning.apps.PlanningConfig',
     'fooddish.apps.FooddishConfig',
     'notification.apps.NotificationConfig',
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
